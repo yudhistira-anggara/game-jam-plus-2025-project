@@ -22,7 +22,6 @@ jobs:
           # Must match the names in export_presets.cfg
           presets_to_export: |
             Windows
-            HTML5
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
