@@ -16,13 +16,10 @@ jobs:
       - name: Export using Godot Export Action (v7)
         uses: firebelley/godot-export@v7.0.0
         with:
-          # Godot Editor (Mono) 4.5.1 download
           godot_executable_download_url: "https://downloads.tuxfamily.org/godotengine/4.5.1/mono/Godot_v4.5.1-stable_mono_linux.x86_64.zip"
-
-          # Export Templates (Mono) 4.5.1 download
           godot_export_templates_download_url: "https://downloads.tuxfamily.org/godotengine/4.5.1/mono/Godot_v4.5.1-stable_mono_export_templates.tpz"
 
-          # Export your presets by name (must match your export_presets.cfg)
+          # Must match the names in export_presets.cfg
           presets_to_export: |
             Windows
             HTML5
@@ -31,4 +28,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: builds
-          path: build/
+          path: exports/
