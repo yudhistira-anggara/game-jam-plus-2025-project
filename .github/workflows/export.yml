@@ -1,0 +1,35 @@
+name: Export
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: firebelley/godot-export@v5
+        with:
+          godot-version: "4.3"
+          export-templates: "true"
+
+      - name: Export Windows
+        run: godot --headless --export-release "Windows" build/game-win.exe
+
+      - name: Export Linux
+        run: godot --headless --export-release "Linux" build/game-linux.x86_64
+
+      - name: Export HTML5
+        run: godot --headless --export-release "HTML5" build/html5/index.html
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-builds
+          path: build/
