@@ -18,7 +18,6 @@ jobs:
         with:
           godot_executable_download_url: "https://downloads.godotengine.org/?version=4.5.1&flavor=stable&slug=mono_linux_x86_64.zip&platform=linux.64"
           godot_export_templates_download_url: "https://downloads.godotengine.org/?version=4.5.1&flavor=stable&slug=mono_export_templates.tpz&platform=templates"
-
           presets_to_export: |
             Windows
 
@@ -26,7 +25,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: builds
-          path: exports/GameJamPlus2025Project.exe
+          path: /home/runner/.local/share/godot/builds/Windows/GameJamPlus2025Project.exe
 
       - name: Install butler
         run: |
@@ -37,7 +36,6 @@ jobs:
 
       - name: Upload Windows build to itch.io
         run: |
-          # Push the entire exported Windows folder
-          butler push exports yudhistira-anggara/game-jam-plus-2025-project:windows
+          butler push /home/runner/.local/share/godot/builds/Windows yudhistira-anggara/game-jam-plus-2025-project:windows
         env:
           BUTLER_API_KEY: ${{ secrets.ITCH_API_KEY }}
