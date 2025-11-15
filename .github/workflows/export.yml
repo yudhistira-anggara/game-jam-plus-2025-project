@@ -26,7 +26,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: builds
-          path: exports/
+          path: exports/GameJamPlus2025Project.exe
 
       - name: Install butler
         run: |
