@@ -1,6 +1,10 @@
 using Godot;
 using System;
 
-public partial class Main : Node
+namespace GameJam
 {
+    public partial class Main : Node
+    {
+        //
+    }
 }
