@@ -38,6 +38,6 @@ jobs:
       - name: Upload Windows build to itch.io
         run: |
           # Push the entire exported Windows folder
-          butler push exports/Windows yudhistira-anggara/game-jam-plus-2025-project:windows
+          butler push exports yudhistira-anggara/game-jam-plus-2025-project:windows
         env:
           BUTLER_API_KEY: ${{ secrets.ITCH_API_KEY }}
