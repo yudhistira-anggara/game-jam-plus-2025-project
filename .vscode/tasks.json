@@ -12,7 +12,7 @@
         },
         {
             "label": "echo",
-            "command": "echo ${env:GODOT}",
+            "command": "echo ${env:GODOT451}",
             "type": "shell"
         }
     ]
