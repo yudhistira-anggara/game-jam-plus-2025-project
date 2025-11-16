@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://eyrjn666ekxx"]
+
+[ext_resource type="Script" uid="uid://bwun20nc4yb5" path="res://Scripts/Dialogue/DialoguePanel.cs" id="1_7i6wu"]
+
+[node name="DialoguePanel" type="Control" node_paths=PackedStringArray("LineLabel", "NextButton")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 636.0
+script = ExtResource("1_7i6wu")
+LineLabel = NodePath("LineLabel")
+NextButton = NodePath("NextButton")
+
+[node name="LineLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 463.0
+offset_right = 1152.0
+offset_bottom = 648.0
+bbcode_enabled = true
+
+[node name="NextButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 592.0
+offset_right = 1131.0
+offset_bottom = 632.0
+text = "Next"

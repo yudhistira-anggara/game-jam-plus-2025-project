@@ -1,10 +1,10 @@
 using Godot;
-using System;
 
-namespace GameJam
+public partial class Main : Node
 {
-    public partial class Main : Node
-    {
-        //
-    }
+	public override void _Ready()
+	{
+		var controller = GetNode<DialogueSystem>("DialogueSystem");
+		controller.StartDialogueFile("res://dialogue/dialogue.json");
+	}
 }
