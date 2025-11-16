@@ -1,0 +1,72 @@
+[
+    {
+        "id": "test_dialogue_01",
+        "contents": [
+            {
+                "type": "dialogue",
+                "style": {
+                    "name": "Person A",
+                    "portrait": "portrait_person_a.png",
+                    "voice": "voice_person_a.wav",
+                    "script": "",
+                    "text": "Hello, world!"
+                }
+            },
+            {
+                "type": "dialogue",
+                "style": {
+                    "name": "Person B",
+                    "portrait": "portrait_person_b.png",
+                    "voice": "voice_person_b.wav",
+                    "script": "",
+                    "text": "Hi, Person A!"
+                }
+            },
+            {
+                "type": "selection",
+                "options": [
+                    {
+                        "text": "Hello, Person B.",
+                        "script": "",
+                        "next": "test_dialogue_01a"
+                    },
+                    {
+                        "text": "[Ignore Person B]",
+                        "script": "",
+                        "next": "test_dialogue_01b"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "test_dialogue_01a",
+        "contents": [
+            {
+                "type": "dialogue",
+                "style": {
+                    "name": "Person B",
+                    "portrait": "portrait_person_b.png",
+                    "voice": "voice_person_b.wav",
+                    "script": "",
+                    "text": "What's up, Person A?"
+                }
+            }
+        ]
+    },
+    {
+        "id": "test_dialogue_01b",
+        "contents": [
+            {
+                "type": "dialogue",
+                "style": {
+                    "name": "Person B",
+                    "portrait": "portrait_person_b.png",
+                    "voice": "voice_person_b.wav",
+                    "script": "",
+                    "text": "What's wrong, Person A?"
+                }
+            }
+        ]
+    }
+]

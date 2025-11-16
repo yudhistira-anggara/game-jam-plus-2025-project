@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://dlv3aj87e5mqj"]
 
 [node name="DialogueTest" type="Node2D"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 386.0
+offset_top = 159.0
+offset_right = 426.0
+offset_bottom = 199.0

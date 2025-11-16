@@ -31,57 +31,70 @@ Example dialogue .json file format
 	}
 ]
 */
-public partial class DialogueSystem : Node
+
+namespace GameJam
 {
-	[Signal] public delegate void LineChangedEventHandler(string text);
-	[Signal] public delegate void DialogueFinishedEventHandler();
-
-	private JsonElement _data;
-	private int _index;
-
-	public override void _Ready() 
+	public partial class DialogueSystem : Node
 	{
-		_index = 0;
-	}
+		[Signal] public delegate void LineChangedEventHandler(string text);
+		[Signal] public delegate void DialogueFinishedEventHandler();
 
-	public void LoadDialogue(string path)
-	{
-		var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-		var json = file.GetAsText();
-		file.Close();
+		private JsonElement _data;
+		private int _index;
 
-		var doc = JsonDocument.Parse(json);
-		_data = doc.RootElement;
-	}
-
-	public void StartDialogue()
-	{
-		_index = 0;
-		ShowLine();
-	}
-
-	public void StartDialogueFile(string path)
-	{
-		LoadDialogue(path);
-		StartDialogue();
-	}
-
-	public void Next()
-	{
-		_index++;
-
-		if (_index >= _data.GetProperty("lines").GetArrayLength())
+		public override void _Ready()
 		{
-			EmitSignal(SignalName.DialogueFinished);
-			return;
+			_index = 0;
 		}
 
-		ShowLine();
-	}
+		public void LoadDialogue(string path)
+		{
+			var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+			var json = file.GetAsText();
+			file.Close();
 
-	private void ShowLine()
-	{
-		var line = _data.GetProperty("lines")[_index].GetString();
-		EmitSignal(SignalName.LineChanged, line);
+			var doc = JsonDocument.Parse(json);
+			_data = doc.RootElement;
+		}
+
+		public void StartDialogue()
+		{
+			_index = 0;
+			ShowLine();
+		}
+
+		public void StartDialogueFile(string path)
+		{
+			LoadDialogue(path);
+			StartDialogue();
+		}
+
+		public void Next()
+		{
+			_index++;
+
+			if (_index >= _data.GetProperty("lines").GetArrayLength())
+			{
+				EmitSignal(SignalName.DialogueFinished);
+				return;
+			}
+
+			ShowLine();
+		}
+
+		private void ShowLine()
+		{
+			var line = _data.GetProperty("lines")[_index].GetString();
+			EmitSignal(SignalName.LineChanged, line);
+		}
+
+		/*
+			Parser for .json dialogue files
+		*/
+
+		public partial class JsonDialogueParser
+		{
+			//
+		}
 	}
 }
