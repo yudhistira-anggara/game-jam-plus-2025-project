@@ -13,7 +13,7 @@ namespace GameJam
         [Export(PropertyHint.ResourceType, "Image")]
         public Image Portrait { get; set; }
         [Export(PropertyHint.ResourceType, "AudioStream")]
-        public Resource Voice { get; set; }
+        public AudioStream Voice { get; set; }
         [Export(PropertyHint.ResourceType, "Script")]
         public Script Script { get; set; }
         [Export(PropertyHint.MultilineText)]

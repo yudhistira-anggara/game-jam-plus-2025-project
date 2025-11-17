@@ -2,6 +2,9 @@ using Godot;
 using Godot.Collections;
 using System;
 using GameJam;
+using GameJam.Utils;
+using System.Text.Json;
+using System.Collections.Generic;
 
 namespace GameJam
 {
@@ -32,10 +35,16 @@ namespace GameJam
 
         [ExportToolButton("Save Dialogue to .JSON", Icon = "New")]
         public Callable SaveAsJSONButton => Callable.From(SaveAsJSON);
+
         public void SaveAsJSON()
         {
-            var json = new Json();
-            GD.Print(Json.Stringify(Dialogue));
+            var dialogueFile = new List<DialogueSerializeable>();
+            foreach (var e in Dialogue)
+            {
+                dialogueFile.Add(new DialogueSerializeable(e));
+            }
+            
+            // GD.Print(JsonSerializer.Serialize(dialogueFile));
         }
     }
 }

@@ -2,6 +2,8 @@ using Godot;
 using Godot.Collections;
 using System;
 using GameJam;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace GameJam
 {
@@ -16,7 +18,7 @@ namespace GameJam
     public partial class Dialogue : Resource
     {
         [Export]
-        public string ID { get; set; }
+        public string ID { get; set; } = "";
         [Export]
         public Array<DialogueContents> Contents { get; set; } =
         [

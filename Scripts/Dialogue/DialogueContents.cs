@@ -2,6 +2,8 @@ using Godot;
 using Godot.Collections;
 using System;
 using GameJam;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace GameJam
 {
@@ -49,7 +51,9 @@ namespace GameJam
                     properties.Add(new Dictionary()
                     {
                         {"name", $"Option"},
-                        {"type", (int)Variant.Type.Array}
+                        {"type", (int)Variant.Type.Array},
+                        {"hint", (int)PropertyHint.ResourceType},
+                        {"hint_string", $"DialogueOption"}
                     });
                 }
             }
