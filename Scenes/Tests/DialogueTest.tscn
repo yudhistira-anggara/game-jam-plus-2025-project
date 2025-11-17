@@ -1,9 +1,45 @@
-[gd_scene format=3 uid="uid://dlv3aj87e5mqj"]
+[gd_scene load_steps=13 format=3 uid="uid://dlv3aj87e5mqj"]
+
+[ext_resource type="Script" uid="uid://dyu43e6lmsump" path="res://Scripts/Dialogue/DialogueSystem.cs" id="1_3hykj"]
+[ext_resource type="Script" uid="uid://nh3h5gf8xxub" path="res://Scripts/Dialogue/Dialogue.cs" id="2_pjicy"]
+[ext_resource type="Script" uid="uid://c8rcr7dk07xm0" path="res://Scripts/Dialogue/DialogueContents.cs" id="3_e8evi"]
+[ext_resource type="Script" uid="uid://rqqwr6wgyfco" path="res://Scripts/Dialogue/DialogueStyle.cs" id="4_r6p1b"]
+[ext_resource type="Script" uid="uid://bluhgptdmt75g" path="res://Scripts/Dialogue/DialogueFile.cs" id="5_yrsyt"]
+
+[sub_resource type="Resource" id="Resource_fy1f5"]
+script = ExtResource("4_r6p1b")
+
+[sub_resource type="Resource" id="Resource_62ehe"]
+script = ExtResource("3_e8evi")
+Style = SubResource("Resource_fy1f5")
+
+[sub_resource type="Resource" id="Resource_qhfcl"]
+script = ExtResource("2_pjicy")
+Contents = Array[ExtResource("3_e8evi")]([SubResource("Resource_62ehe")])
+
+[sub_resource type="Resource" id="Resource_id26m"]
+script = ExtResource("4_r6p1b")
+
+[sub_resource type="Resource" id="Resource_h1d67"]
+script = ExtResource("3_e8evi")
+Style = SubResource("Resource_id26m")
+
+[sub_resource type="Resource" id="Resource_n0p2p"]
+script = ExtResource("2_pjicy")
+Contents = Array[ExtResource("3_e8evi")]([SubResource("Resource_h1d67")])
+metadata/_custom_type_script = "uid://nh3h5gf8xxub"
+
+[sub_resource type="Resource" id="Resource_pglbc"]
+script = ExtResource("5_yrsyt")
+Dialogue = Array[ExtResource("2_pjicy")]([SubResource("Resource_qhfcl"), SubResource("Resource_n0p2p")])
 
 [node name="DialogueTest" type="Node2D"]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 386.0
-offset_top = 159.0
-offset_right = 426.0
-offset_bottom = 199.0
+[node name="DialogueSystem" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3hykj")
+SourceType = 1
+Lines = SubResource("Resource_pglbc")

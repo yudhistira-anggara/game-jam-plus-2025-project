@@ -1,43 +1,71 @@
 using Godot;
+using Godot.Collections;
+using GameJam;
+using System;
 using System.Text.Json;
-
-/*
-Example dialogue .json file format
-[
-	{
-		"id": "test_dialogue_01",
-		"contents": [
-			{
-				"name": "Person A",
-				"options": {
-					"voice": "person_a_talk.wav",
-					"script": "", // for dialogue requiring special scripting, if required (can be empty)
-				},
-				"text": "Hello, world!"
-			},
-			{
-				"name": "Person B",
-				"script": "",
-				"text": "Hi, Person A!"
-			}
-		]
-	},
-	{
-		"id": "test_dialogue_02",
-		"contents": [
-			{
-			}
-		]
-	}
-]
-*/
 
 namespace GameJam
 {
-	public partial class DialogueSystem : Node
+	[Tool]
+	public partial class DialogueSystem : Control
 	{
-		[Signal] public delegate void LineChangedEventHandler(string text);
-		[Signal] public delegate void DialogueFinishedEventHandler();
+		private int _sourceType;
+
+		[Export]
+		public Control Displayer { get; set; }
+
+		[ExportGroup("Dialogue")]
+		[Export(PropertyHint.Enum, ".JSON File, Manual")]
+		public int SourceType
+		{
+			get => _sourceType;
+			set
+			{
+				_sourceType = value;
+				NotifyPropertyListChanged();
+			}
+		}
+
+		public Resource Path { get; set; }
+		public DialogueFile Lines { get; set; } = new DialogueFile();
+
+		[Signal]
+		public delegate void LineChangedEventHandler();
+		[Signal]
+		public delegate void DialogueFinishedEventHandler();
+
+		public override Godot.Collections.Array<Godot.Collections.Dictionary> _GetPropertyList()
+		{
+			Godot.Collections.Array<Godot.Collections.Dictionary> properties = [];
+
+			if (Engine.IsEditorHint())
+			{
+				if (SourceType == 0)
+				{
+					properties.Add(new Godot.Collections.Dictionary()
+					{
+						{"name", $"Path"},
+						{"type", (int)Variant.Type.String},
+						{"hint", (int)PropertyHint.FilePath},
+						{"hint_string", $"*.json"}
+					});
+				}
+				else
+				{
+					properties.Add(new Godot.Collections.Dictionary()
+					{
+						{"name", $"Lines"},
+						{"type", (int)Variant.Type.Object},
+						{"hint", (int)PropertyHint.ResourceType},
+						{"hint_string", $"DialogueFile"}
+					});
+				}
+			}
+
+			return properties;
+		}
+
+		/*
 
 		private JsonElement _data;
 		private int _index;
@@ -87,14 +115,15 @@ namespace GameJam
 			var line = _data.GetProperty("lines")[_index].GetString();
 			EmitSignal(SignalName.LineChanged, line);
 		}
-
-		/*
-			Parser for .json dialogue files
 		*/
+	}
 
-		public partial class JsonDialogueParser
-		{
-			//
-		}
+	/*
+	Parser for .json dialogue files
+	*/
+
+	public partial class JsonDialogueParser
+	{
+		//
 	}
 }
