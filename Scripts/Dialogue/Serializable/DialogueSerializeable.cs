@@ -8,7 +8,7 @@ namespace GameJam
     public partial class DialogueSerializeable
     {
         public string ID { get; set; }
-        public List<DialogueContentsSerializable> Contents { get; set; } = [];
+        public List<DialogueContentsSerializable> Contents { get; set; }
 
         public DialogueSerializeable()
         {

@@ -2,8 +2,6 @@ using Godot;
 using Godot.Collections;
 using System;
 using GameJam;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace GameJam
 {

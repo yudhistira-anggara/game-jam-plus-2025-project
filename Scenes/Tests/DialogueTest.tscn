@@ -1,68 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://dlv3aj87e5mqj"]
+[gd_scene load_steps=2 format=3 uid="uid://dlv3aj87e5mqj"]
 
 [ext_resource type="Script" uid="uid://dyu43e6lmsump" path="res://Scripts/Dialogue/DialogueSystem.cs" id="1_3hykj"]
-[ext_resource type="Script" uid="uid://nh3h5gf8xxub" path="res://Scripts/Dialogue/Dialogue.cs" id="2_pjicy"]
-[ext_resource type="Script" uid="uid://c8rcr7dk07xm0" path="res://Scripts/Dialogue/DialogueContents.cs" id="3_e8evi"]
-[ext_resource type="Script" uid="uid://cf8hy65furbv3" path="res://Scripts/Dialogue/DialogueOption.cs" id="4_e8evi"]
-[ext_resource type="Script" uid="uid://rqqwr6wgyfco" path="res://Scripts/Dialogue/DialogueStyle.cs" id="4_r6p1b"]
-[ext_resource type="Script" uid="uid://bluhgptdmt75g" path="res://Scripts/Dialogue/DialogueFile.cs" id="5_yrsyt"]
-
-[sub_resource type="Resource" id="Resource_e8evi"]
-script = ExtResource("4_r6p1b")
-
-[sub_resource type="Resource" id="Resource_r6p1b"]
-script = ExtResource("3_e8evi")
-Style = SubResource("Resource_e8evi")
-
-[sub_resource type="Resource" id="Resource_yrsyt"]
-script = ExtResource("4_r6p1b")
-
-[sub_resource type="Resource" id="Resource_fy1f5"]
-script = ExtResource("3_e8evi")
-Style = SubResource("Resource_yrsyt")
-metadata/_custom_type_script = "uid://c8rcr7dk07xm0"
-
-[sub_resource type="Resource" id="Resource_62ehe"]
-script = ExtResource("4_e8evi")
-
-[sub_resource type="Resource" id="Resource_id26m"]
-script = ExtResource("3_e8evi")
-Type = 1
-Option = Array[ExtResource("4_e8evi")]([SubResource("Resource_62ehe")])
-metadata/_custom_type_script = "uid://c8rcr7dk07xm0"
-
-[sub_resource type="Resource" id="Resource_h1d67"]
-script = ExtResource("2_pjicy")
-Contents = Array[ExtResource("3_e8evi")]([SubResource("Resource_r6p1b"), SubResource("Resource_fy1f5"), SubResource("Resource_id26m")])
-
-[sub_resource type="Resource" id="Resource_qhfcl"]
-script = ExtResource("4_r6p1b")
-
-[sub_resource type="Resource" id="Resource_h11a5"]
-script = ExtResource("3_e8evi")
-Style = SubResource("Resource_qhfcl")
-
-[sub_resource type="Resource" id="Resource_65u0i"]
-script = ExtResource("2_pjicy")
-Contents = Array[ExtResource("3_e8evi")]([SubResource("Resource_h11a5")])
-metadata/_custom_type_script = "uid://nh3h5gf8xxub"
-
-[sub_resource type="Resource" id="Resource_pglbc"]
-script = ExtResource("4_r6p1b")
-
-[sub_resource type="Resource" id="Resource_pupn0"]
-script = ExtResource("3_e8evi")
-Style = SubResource("Resource_pglbc")
-
-[sub_resource type="Resource" id="Resource_prrau"]
-script = ExtResource("2_pjicy")
-Contents = Array[ExtResource("3_e8evi")]([SubResource("Resource_pupn0")])
-metadata/_custom_type_script = "uid://nh3h5gf8xxub"
-
-[sub_resource type="Resource" id="Resource_n0p2p"]
-script = ExtResource("5_yrsyt")
-Dialogue = Array[ExtResource("2_pjicy")]([SubResource("Resource_h1d67"), SubResource("Resource_65u0i"), SubResource("Resource_prrau")])
-metadata/_custom_type_script = "uid://bluhgptdmt75g"
 
 [node name="DialogueTest" type="Node2D"]
 
@@ -72,5 +10,4 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_3hykj")
-SourceType = 1
-Lines = SubResource("Resource_n0p2p")
+Path = "res://Resources/Dialogue/example_dialogue_demo.json"

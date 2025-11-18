@@ -36,6 +36,7 @@ namespace GameJam
         public void SaveAsJSON()
         {
             var dialogueFile = new System.Collections.Generic.List<DialogueSerializeable>();
+
             foreach (var e in Dialogue)
             {
                 dialogueFile.Add(new DialogueSerializeable(e));

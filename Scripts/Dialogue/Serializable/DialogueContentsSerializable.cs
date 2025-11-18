@@ -12,7 +12,7 @@ namespace GameJam
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DialogueStyleSerializable Style { get; set; } = new DialogueStyleSerializable();
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public List<DialogueOptionSerializable> Options { get; set; } = [];
+        public List<DialogueOptionSerializable> Options { get; set; }
 
         public DialogueContentsSerializable()
         {

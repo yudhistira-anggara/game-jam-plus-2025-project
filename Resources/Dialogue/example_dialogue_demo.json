@@ -1,70 +1,70 @@
 [
     {
-        "id": "test_dialogue_01",
-        "contents": [
+        "ID": "test_dialogue_01",
+        "Contents": [
             {
-                "type": "dialogue",
-                "style": {
-                    "name": "Person A",
-                    "portrait": "portrait_person_a.png",
-                    "voice": "voice_person_a.wav",
-                    "script": "",
-                    "text": "Hello, world!"
+                "Type": "Talk",
+                "Style": {
+                    "Name": "Person A",
+                    "Portrait": "Portrait_person_a.png",
+                    "Voice": "Voice_person_a.wav",
+                    "Script": "",
+                    "Text": "Hello, world!"
                 }
             },
             {
-                "type": "dialogue",
-                "style": {
-                    "name": "Person B",
-                    "portrait": "portrait_person_b.png",
-                    "voice": "voice_person_b.wav",
-                    "script": "",
-                    "text": "Hi, Person A!"
+                "Type": "Talk",
+                "Style": {
+                    "Name": "Person B",
+                    "Portrait": "Portrait_person_b.png",
+                    "Voice": "Voice_person_b.wav",
+                    "Script": "",
+                    "Text": "Hi, Person A!"
                 }
             },
             {
-                "type": "selection",
-                "options": [
+                "Type": "Selection",
+                "Options": [
                     {
-                        "text": "Hello, Person B.",
-                        "script": "",
-                        "next": "test_dialogue_01a"
+                        "Text": "Hello, Person B.",
+                        "Script": "",
+                        "Next": "test_dialogue_01a"
                     },
                     {
-                        "text": "[Ignore Person B]",
-                        "script": "",
-                        "next": "test_dialogue_01b"
+                        "Text": "[Ignore Person B]",
+                        "Script": "",
+                        "Next": "test_dialogue_01b"
                     }
                 ]
             }
         ]
     },
     {
-        "id": "test_dialogue_01a",
-        "contents": [
+        "ID": "test_dialogue_01a",
+        "Contents": [
             {
-                "type": "dialogue",
-                "style": {
-                    "name": "Person B",
-                    "portrait": "portrait_person_b.png",
-                    "voice": "voice_person_b.wav",
-                    "script": "",
-                    "text": "What's up, Person A?"
+                "Type": "Talk",
+                "Style": {
+                    "Name": "Person B",
+                    "Portrait": "Portrait_person_b.png",
+                    "Voice": "Voice_person_b.wav",
+                    "Script": "",
+                    "Text": "What's up, Person A?"
                 }
             }
         ]
     },
     {
-        "id": "test_dialogue_01b",
-        "contents": [
+        "ID": "test_dialogue_01b",
+        "Contents": [
             {
-                "type": "dialogue",
-                "style": {
-                    "name": "Person B",
-                    "portrait": "portrait_person_b.png",
-                    "voice": "voice_person_b.wav",
-                    "script": "",
-                    "text": "What's wrong, Person A?"
+                "Type": "Talk",
+                "Style": {
+                    "Name": "Person B",
+                    "Portrait": "Portrait_person_b.png",
+                    "Voice": "Voice_person_b.wav",
+                    "Script": "",
+                    "Text": "What's wrong, Person A?"
                 }
             }
         ]
