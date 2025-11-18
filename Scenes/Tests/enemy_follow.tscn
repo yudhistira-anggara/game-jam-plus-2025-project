@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1bdkoaf0jrwj"]
+
+[ext_resource type="Script" uid="uid://dug25mqxj7p2" path="res://Scripts/States/EnemyFollow.cs" id="1_qux6o"]
+
+[node name="EnemyFollow" type="Node"]
+script = ExtResource("1_qux6o")
