@@ -1,14 +1,15 @@
 using Godot;
 using System;
 
-namespace GameJam.Utils
+namespace GameJam
 {
-    public partial class Utils : Node
+    [Tool]
+    public static class Utils
     {
-        public void SaveToFile(string content)
+        public static void SaveToFile(string content)
         {
-            using var file = FileAccess.Open("res://", FileAccess.ModeFlags.Write);
-            file.StoreString(content);
+            // using var file = FileAccess.Open("res://", FileAccess.ModeFlags.Write);
+            // file.StoreString(content);
         }
     }
 }

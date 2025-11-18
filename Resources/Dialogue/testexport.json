@@ -1,0 +1,67 @@
+[
+    {
+        "ID": "",
+        "Contents": [
+            {
+                "Type": "Talk",
+                "Style": {
+                    "Name": "",
+                    "Portrait": "",
+                    "Voice": "",
+                    "Script": "",
+                    "Text": ""
+                }
+            },
+            {
+                "Type": "Talk",
+                "Style": {
+                    "Name": "",
+                    "Portrait": "",
+                    "Voice": "",
+                    "Script": "",
+                    "Text": ""
+                }
+            },
+            {
+                "Type": "Selection",
+                "Options": [
+                    {
+                        "Next": "",
+                        "Script": "",
+                        "Text": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "ID": "",
+        "Contents": [
+            {
+                "Type": "Talk",
+                "Style": {
+                    "Name": "",
+                    "Portrait": "",
+                    "Voice": "",
+                    "Script": "",
+                    "Text": ""
+                }
+            }
+        ]
+    },
+    {
+        "ID": "",
+        "Contents": [
+            {
+                "Type": "Talk",
+                "Style": {
+                    "Name": "",
+                    "Portrait": "",
+                    "Voice": "",
+                    "Script": "",
+                    "Text": ""
+                }
+            }
+        ]
+    }
+]

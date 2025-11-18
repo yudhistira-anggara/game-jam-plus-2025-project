@@ -13,10 +13,8 @@ namespace GameJam
     {
         private DialogueType _type;
 
-        public DialogueStyle Style { get; set; } = new DialogueStyle();
-        public Array<DialogueOption> Option { get; set; } = [
-            new DialogueOption()
-        ];
+        public DialogueStyle Style { get; set; }
+        public Array<DialogueOption> Option { get; set; }
 
         [Export]
         public DialogueType Type
@@ -27,6 +25,16 @@ namespace GameJam
                 _type = value;
                 NotifyPropertyListChanged();
                 // GD.Print(GetPropertyList());
+                if (value == DialogueType.Talk)
+                {
+                    Style = new DialogueStyle();
+                    Option = null;
+                }
+                else if (value == DialogueType.Selection)
+                {
+                    Option = [new DialogueOption()];
+                    Style = null;
+                }
             }
         }
 

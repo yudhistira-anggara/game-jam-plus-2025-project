@@ -2,9 +2,6 @@ using Godot;
 using Godot.Collections;
 using System;
 using GameJam;
-using GameJam.Utils;
-using System.Text.Json;
-using System.Collections.Generic;
 
 namespace GameJam
 {
@@ -38,13 +35,31 @@ namespace GameJam
 
         public void SaveAsJSON()
         {
-            var dialogueFile = new List<DialogueSerializeable>();
+            var dialogueFile = new System.Collections.Generic.List<DialogueSerializeable>();
             foreach (var e in Dialogue)
             {
                 dialogueFile.Add(new DialogueSerializeable(e));
             }
-            
-            // GD.Print(JsonSerializer.Serialize(dialogueFile));
+
+            var saveDialog = new EditorFileDialog
+            {
+                FileMode = EditorFileDialog.FileModeEnum.SaveFile,
+                Access = EditorFileDialog.AccessEnum.Filesystem,
+                Filters = ["*.json ; JSON files"]
+            };
+
+            var viewport = EditorInterface.Singleton.GetEditorMainScreen();
+            viewport.AddChild(saveDialog);
+
+            saveDialog.PopupFileDialog();
+
+            saveDialog.FileSelected += path =>
+            {
+                FileAccess file = FileAccess.Open(path, FileAccess.ModeFlags.Write);
+                file.StoreString(System.Text.Json.JsonSerializer.Serialize(dialogueFile).ToString());
+                file.Close();
+            };
+            // GD.Print(System.Text.Json.JsonSerializer.Serialize(dialogueFile));
         }
     }
 }
