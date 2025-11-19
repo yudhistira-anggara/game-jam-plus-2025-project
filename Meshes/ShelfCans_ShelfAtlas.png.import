@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtuqhb73evx5y"
-path.s3tc="res://.godot/imported/ShelfCans_ShelfAtlas.png-f38fab50361f04aff79e37e1357e32d4.s3tc.ctex"
+path="res://.godot/imported/ShelfCans_ShelfAtlas.png-f38fab50361f04aff79e37e1357e32d4.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "d88ac0c8c21be2f4c9a496d58ed85a42"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://Meshes/ShelfCans_ShelfAtlas.png"
-dest_files=["res://.godot/imported/ShelfCans_ShelfAtlas.png-f38fab50361f04aff79e37e1357e32d4.s3tc.ctex"]
+dest_files=["res://.godot/imported/ShelfCans_ShelfAtlas.png-f38fab50361f04aff79e37e1357e32d4.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

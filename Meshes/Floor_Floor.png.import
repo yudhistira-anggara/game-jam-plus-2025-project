@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://csvgx167y2o8j"
-path.s3tc="res://.godot/imported/Floor_Floor.png-b6255371ae3af554b0b21f782586730e.s3tc.ctex"
+path="res://.godot/imported/Floor_Floor.png-b6255371ae3af554b0b21f782586730e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "e18bf8964dd03e2ba7a532803ae52d98"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://Meshes/Floor_Floor.png"
-dest_files=["res://.godot/imported/Floor_Floor.png-b6255371ae3af554b0b21f782586730e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Floor_Floor.png-b6255371ae3af554b0b21f782586730e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
