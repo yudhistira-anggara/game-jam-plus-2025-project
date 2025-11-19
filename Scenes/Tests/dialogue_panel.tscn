@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://eyrjn666ekxx"]
+[gd_scene load_steps=2 format=3 uid="uid://dinpbui1hpjs4"]
 
-[ext_resource type="Script" uid="uid://bwun20nc4yb5" path="res://Scripts/Dialogue/DialoguePanel.cs" id="1_7i6wu"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialoguePanel.cs" id="1_7i6wu"]
 
 [node name="DialoguePanel" type="Control" node_paths=PackedStringArray("LineLabel", "NextButton")]
 layout_mode = 3

@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://dlv3aj87e5mqj"]
+[gd_scene load_steps=2 format=3 uid="uid://dlv3aj87e5mqj"]
+
+[ext_resource type="Script" uid="uid://dyu43e6lmsump" path="res://Scripts/Dialogue/DialogueSystem.cs" id="1_3hykj"]
 
 [node name="DialogueTest" type="Node2D"]
+
+[node name="DialogueSystem" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3hykj")
+Path = "res://Resources/Dialogue/example_dialogue_demo.json"
