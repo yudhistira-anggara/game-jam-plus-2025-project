@@ -7,6 +7,7 @@ namespace GameJam
 {
     public partial class DialogueBoxDefault : PanelContainer, IDialogueBox
     {
+        public PanelContainer DialogueBoxDefaultInstance { get; set; }
         public DialogueStyleSerializable DialogueStyle { get; set; }
         public RichTextLabel StyleName { get; set; }
         public TextureRect StylePortrait { get; set; }
@@ -92,20 +93,20 @@ namespace GameJam
             }
         }
 
+        public void SetVisibility(bool toVisible)
+        {
+            DialogueBoxDefaultInstance.Visible = toVisible;
+        }
+
         public override void _Ready()
         {
+            DialogueBoxDefaultInstance = (PanelContainer)GetTree().GetFirstNodeInGroup("DialogueBoxDefault");
             StyleName = (RichTextLabel)GetTree().GetFirstNodeInGroup("NameLabel");
             StylePortrait = (TextureRect)GetTree().GetFirstNodeInGroup("PortaitImage");
             StyleText = (RichTextLabel)GetTree().GetFirstNodeInGroup("TextLabel");
             PreviousContainer = (MarginContainer)GetTree().GetFirstNodeInGroup("PreviousContainer");
             NextContainer = (MarginContainer)GetTree().GetFirstNodeInGroup("NextContainer");
             PageLabel = (Label)GetTree().GetFirstNodeInGroup("PageLabel");
-
-            // GD.Print($"1. {StyleName}");
-            // GD.Print($"2. {StylePortrait}");
-            // GD.Print($"3. {StyleText}");
-            // GD.Print($"4. {PreviousContainer}");
-            // GD.Print($"5. {NextContainer}");
         }
     }
 }

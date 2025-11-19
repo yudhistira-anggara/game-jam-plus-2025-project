@@ -18,6 +18,7 @@ namespace GameJam
 		public IDialogueBox DialogueBox { get; set; }
 		[Export]
 		public PackedScene OptionDisplayer { get; set; }
+		public IDialogueSelection DialogueSelection { get; set; }
 
 		[ExportGroup("Dialogue")]
 		[Export(PropertyHint.Enum, ".JSON File, Manual")]
@@ -31,8 +32,8 @@ namespace GameJam
 			}
 		}
 
-		[ExportToolButton("Test Button")]
-		public Callable LoadFromJsonButton => Callable.From(LoadFromJSON);
+		// [ExportToolButton("Test Button")]
+		// public Callable LoadFromJsonButton => Callable.From(LoadFromJSON);
 
 		public string Path { get; set; }
 		public DialogueFile Lines { get; set; } = new DialogueFile();
@@ -129,6 +130,7 @@ namespace GameJam
 		}
 		*/
 
+		/*
 		public void LoadFromJSON()
 		{
 			if (SourceType == 0 && Path != null && TextDisplayer != null)
@@ -142,8 +144,9 @@ namespace GameJam
 				}
 			}
 		}
+		*/
 
-		public override void _Ready()
+		public void InstantiateUIElements()
 		{
 			if (DialogueBox == null || !IsInstanceValid((Node)DialogueBox))
 			{
@@ -159,6 +162,19 @@ namespace GameJam
 					DialogueBox.ReadValues(ParsedDialogue.DialogueFile[0].Contents[0].Style, 1, TotalPages);
 				}
 			}
+
+			if (DialogueSelection == null || !IsInstanceValid((Node)DialogueSelection))
+			{
+				var instance = OptionDisplayer.Instantiate();
+				AddChild(instance);
+				DialogueSelection = instance as IDialogueSelection;
+				DialogueSelection.SetVisibility(false);
+			}
+		}
+
+		public override void _Ready()
+		{
+			InstantiateUIElements();
 		}
 
 		public override void _Input(InputEvent @event)
@@ -171,31 +187,49 @@ namespace GameJam
 				if (ParsedDialogue.DialogueFile[0].Contents[CurrentPage - 1].Type != DialogueType.Talk.ToString())
 					return;
 
-				CurrentPage--;
-				DialogueBox.ReadValues(ParsedDialogue.DialogueFile[0].Contents[CurrentPage].Style, CurrentPage + 1, TotalPages);
+				HandleStyle(false);
 			}
 			else if (@event.IsActionPressed("DialogueTestRight"))
 			{
 				if (CurrentPage + 1 >= TotalPages)
 					return;
 
-				if (ParsedDialogue.DialogueFile[0].Contents[CurrentPage + 1].Type != DialogueType.Talk.ToString())
-					return;
-
-				CurrentPage++;
-				DialogueBox.ReadValues(ParsedDialogue.DialogueFile[0].Contents[CurrentPage].Style, CurrentPage + 1, TotalPages);
+				if (ParsedDialogue.DialogueFile[0].Contents[CurrentPage + 1].Type == DialogueType.Talk.ToString())
+				{
+					HandleStyle(true);
+				}
+				else
+				{
+					HandleOptions(true);
+				}
 			}
 		}
 
-		public void HandleStyle()
-        {
-            //
-        }
+		public void HandleStyle(bool next)
+		{
+			if (next)
+				CurrentPage++;
+			else
+				CurrentPage--;
 
-		public void HandleOptions()
-        {
-            //
-        }
+			DialogueBox.SetVisibility(true);
+			DialogueSelection.SetVisibility(false);
+			DialogueBox.ReadValues(ParsedDialogue.DialogueFile[0].Contents[CurrentPage].Style, CurrentPage + 1, TotalPages);
+		}
+
+		public void HandleOptions(bool next)
+		{
+			if (next)
+				CurrentPage++;
+			else
+				CurrentPage--;
+
+			DialogueBox.SetVisibility(false);
+			DialogueSelection.SetVisibility(true);
+			DialogueSelection.ReadValues(ParsedDialogue.DialogueFile[0].Contents[TotalPages - 1].Options);
+			// GD.Print(TotalPages - 1);
+			// GD.Print(ParsedDialogue.DialogueFile[0].Contents[TotalPages - 1].Options.Count);
+		}
 	}
 
 	/*

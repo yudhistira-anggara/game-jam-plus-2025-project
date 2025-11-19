@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2uj3gvpx0er8" path="res://Scripts/UI/Dialogue/DialogueBoxDefault.cs" id="1_5vpaa"]
 
-[node name="DialogueBoxDefault" type="PanelContainer"]
+[node name="DialogueBoxDefault" type="PanelContainer" groups=["DialogueBoxDefault"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

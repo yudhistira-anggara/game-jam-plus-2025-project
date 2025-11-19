@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bmtpru68jlloh" path="res://Scripts/UI/Dialogue/DialogueSelectDefault.cs" id="1_i3c3d"]
 [ext_resource type="Script" uid="uid://b4bja6tcoic0j" path="res://Scripts/UI/Dialogue/UIScrollContainerAutoResize.cs" id="2_eiuio"]
 
-[node name="Default Dialogue Select" type="PanelContainer"]
+[node name="DialogueSelectDefault" type="PanelContainer" groups=["DialogueSelectDefault"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -44,12 +44,7 @@ layout_mode = 2
 accessibility_name = "27 per option"
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer" groups=["VBoxContainer"]]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-text = "Option"
-icon_alignment = 1

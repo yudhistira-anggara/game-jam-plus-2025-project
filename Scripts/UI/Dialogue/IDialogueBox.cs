@@ -7,5 +7,6 @@ namespace GameJam
     {
         void ReadValues(DialogueStyleSerializable dialogueStyle, int currentPage, int totalPages);
         void ChangePage(bool previousPage);
+        void SetVisibility(bool toVisible);
     }
 }

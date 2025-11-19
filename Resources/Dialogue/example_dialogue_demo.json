@@ -46,12 +46,12 @@
                 "Type": "Selection",
                 "Options": [
                     {
-                        "Text": "Not much, Person B",
+                        "Text": "Not much, Person B.",
                         "Script": "",
                         "Next": "test_dialogue_01a"
                     },
                     {
-                        "Text": "[Ignore Person B]",
+                        "Text": "[ Ignore Person B. ]",
                         "Script": "",
                         "Next": "test_dialogue_01b"
                     }
