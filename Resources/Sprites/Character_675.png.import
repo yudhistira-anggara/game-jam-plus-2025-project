@@ -2,19 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtuqhb73evx5y"
-path="res://.godot/imported/ShelfCans_ShelfAtlas.png-f38fab50361f04aff79e37e1357e32d4.ctex"
+uid="uid://dud5s6phm6w2s"
+path="res://.godot/imported/Character_675.png-f750e5d30f887e8630734a74bf94ad2d.ctex"
 metadata={
 "vram_texture": false
-}
-generator_parameters={
-"md5": "d88ac0c8c21be2f4c9a496d58ed85a42"
 }
 
 [deps]
 
-source_file="res://Meshes/ShelfCans_ShelfAtlas.png"
-dest_files=["res://.godot/imported/ShelfCans_ShelfAtlas.png-f38fab50361f04aff79e37e1357e32d4.ctex"]
+source_file="res://Resources/Sprites/Character_675.png"
+dest_files=["res://.godot/imported/Character_675.png-f750e5d30f887e8630734a74bf94ad2d.ctex"]
 
 [params]
 

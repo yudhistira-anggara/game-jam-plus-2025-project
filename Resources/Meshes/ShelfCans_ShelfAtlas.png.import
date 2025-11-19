@@ -2,19 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csvgx167y2o8j"
-path="res://.godot/imported/Floor_Floor.png-b6255371ae3af554b0b21f782586730e.ctex"
+uid="uid://dtuqhb73evx5y"
+path="res://.godot/imported/ShelfCans_ShelfAtlas.png-fdfdb90adc15fb7e44da96592c08bc47.ctex"
 metadata={
 "vram_texture": false
 }
 generator_parameters={
-"md5": "e18bf8964dd03e2ba7a532803ae52d98"
+"md5": "d88ac0c8c21be2f4c9a496d58ed85a42"
 }
 
 [deps]
 
-source_file="res://Meshes/Floor_Floor.png"
-dest_files=["res://.godot/imported/Floor_Floor.png-b6255371ae3af554b0b21f782586730e.ctex"]
+source_file="res://Resources/Meshes/ShelfCans_ShelfAtlas.png"
+dest_files=["res://.godot/imported/ShelfCans_ShelfAtlas.png-fdfdb90adc15fb7e44da96592c08bc47.ctex"]
 
 [params]
 

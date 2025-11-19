@@ -1,10 +1,10 @@
 [gd_scene load_steps=36 format=3 uid="uid://bsr47imiksk5c"]
 
-[ext_resource type="Texture2D" uid="uid://dud5s6phm6w2s" path="res://Sprites/Character_675.png" id="1_r4prl"]
+[ext_resource type="Texture2D" uid="uid://dud5s6phm6w2s" path="res://Resources/Sprites/Character_675.png" id="1_r4prl"]
 [ext_resource type="Script" uid="uid://c410xrnhmnv7c" path="res://Scripts/PlayerController/PlayerController.cs" id="1_u3p7k"]
-[ext_resource type="PackedScene" uid="uid://bj7ivr3rs7jik" path="res://Meshes/Floor.glb" id="3_t3d1d"]
-[ext_resource type="PackedScene" uid="uid://6hepbfq2k6as" path="res://Meshes/ShelfCans.glb" id="4_rjl26"]
-[ext_resource type="VoxelGIData" uid="uid://dpcqww3wujhb7" path="res://Lighting/PlayerControllerTest.VoxelGI_data.res" id="5_rjl26"]
+[ext_resource type="PackedScene" uid="uid://bj7ivr3rs7jik" path="res://Resources/Meshes/Floor.glb" id="3_t3d1d"]
+[ext_resource type="PackedScene" uid="uid://6hepbfq2k6as" path="res://Resources/Meshes/ShelfCans.glb" id="4_rjl26"]
+[ext_resource type="VoxelGIData" uid="uid://dpcqww3wujhb7" path="res://Resources/Lighting/PlayerControllerTest.VoxelGI_data.res" id="5_rjl26"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u3p7k"]
 size = Vector3(0.60253906, 1, 0.5604172)
