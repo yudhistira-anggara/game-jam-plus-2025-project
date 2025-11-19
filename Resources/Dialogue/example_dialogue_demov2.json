@@ -1,0 +1,81 @@
+[
+    {
+        "ID": "test_dialogue_01",
+        "Type": "Talk",
+        "Next": "test_dialogue_01_selection",
+        "Contents": [
+            {
+                "Name": "Person A",
+                "Portrait": "Portrait_person_a.png",
+                "Voice": "Voice_person_a.wav",
+                "Script": "",
+                "Text": "Hello, world!"
+            },
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "Hi, Person A!"
+            },
+            {
+                "Name": "Person A",
+                "Portrait": "Portrait_person_a.png",
+                "Voice": "Voice_person_a.wav",
+                "Script": "",
+                "Text": "Hello, Person B."
+            },
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "What's up, Person A?"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_01_selection",
+        "Type": "Selection",
+        "Contents": [
+            {
+                "Text": "Not much, Person B",
+                "Script": "",
+                "Next": "test_dialogue_01a"
+            },
+            {
+                "Text": "[Ignore Person B]",
+                "Script": "",
+                "Next": "test_dialogue_01b"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_01b",
+        "Type": "Talk",
+        "Next": "",
+        "Contents": [
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "What's up, Person A?"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_01c",
+        "Type": "Talk",
+        "Next": "",
+        "Contents": [
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "What's wrong, Person A?"
+            }
+        ]
+    }
+]

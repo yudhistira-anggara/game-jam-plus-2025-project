@@ -23,10 +23,30 @@
                 }
             },
             {
+                "Type": "Talk",
+                "Style": {
+                    "Name": "Person A",
+                    "Portrait": "Portrait_person_a.png",
+                    "Voice": "Voice_person_a.wav",
+                    "Script": "",
+                    "Text": "Hello, Person B."
+                }
+            },
+            {
+                "Type": "Talk",
+                "Style": {
+                    "Name": "Person B",
+                    "Portrait": "Portrait_person_b.png",
+                    "Voice": "Voice_person_b.wav",
+                    "Script": "",
+                    "Text": "What's up, Person A?"
+                }
+            },
+            {
                 "Type": "Selection",
                 "Options": [
                     {
-                        "Text": "Hello, Person B.",
+                        "Text": "Not much, Person B",
                         "Script": "",
                         "Next": "test_dialogue_01a"
                     },

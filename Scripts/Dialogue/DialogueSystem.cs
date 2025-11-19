@@ -14,7 +14,10 @@ namespace GameJam
 		private int _sourceType;
 
 		[Export]
-		public Control Displayer { get; set; }
+		public PackedScene TextDisplayer { get; set; }
+		public IDialogueBox DialogueBox { get; set; }
+		[Export]
+		public PackedScene OptionDisplayer { get; set; }
 
 		[ExportGroup("Dialogue")]
 		[Export(PropertyHint.Enum, ".JSON File, Manual")]
@@ -33,6 +36,10 @@ namespace GameJam
 
 		public string Path { get; set; }
 		public DialogueFile Lines { get; set; } = new DialogueFile();
+		public JsonDialogueParser ParsedDialogue { get; set; }
+
+		public int CurrentPage { get; set; } = 0;
+		public int TotalPages { get; set; } = 1;
 
 		[Signal]
 		public delegate void LineChangedEventHandler();
@@ -124,11 +131,71 @@ namespace GameJam
 
 		public void LoadFromJSON()
 		{
-			if (SourceType == 0 && Path != null)
+			if (SourceType == 0 && Path != null && TextDisplayer != null)
 			{
-				var test = new JsonDialogueParser(Path);
+				ParsedDialogue = new JsonDialogueParser(Path);
+
+				if (TextDisplayer is IDialogueBox box)
+				{
+					TotalPages = ParsedDialogue.DialogueFile[0].Contents.Count;
+					box.ReadValues(ParsedDialogue.DialogueFile[0].Contents[0].Style, 1, TotalPages);
+				}
 			}
 		}
+
+		public override void _Ready()
+		{
+			if (DialogueBox == null || !IsInstanceValid((Node)DialogueBox))
+			{
+				var instance = TextDisplayer.Instantiate();
+				AddChild(instance);
+				DialogueBox = instance as IDialogueBox;
+
+				if (SourceType == 0 && Path != null && TextDisplayer != null)
+				{
+					ParsedDialogue = new JsonDialogueParser(Path);
+					TotalPages = ParsedDialogue.DialogueFile[0].Contents.Count;
+
+					DialogueBox.ReadValues(ParsedDialogue.DialogueFile[0].Contents[0].Style, 1, TotalPages);
+				}
+			}
+		}
+
+		public override void _Input(InputEvent @event)
+		{
+			if (@event.IsActionPressed("DialogueTestLeft"))
+			{
+				if (CurrentPage - 1 < 0)
+					return;
+
+				if (ParsedDialogue.DialogueFile[0].Contents[CurrentPage - 1].Type != DialogueType.Talk.ToString())
+					return;
+
+				CurrentPage--;
+				DialogueBox.ReadValues(ParsedDialogue.DialogueFile[0].Contents[CurrentPage].Style, CurrentPage + 1, TotalPages);
+			}
+			else if (@event.IsActionPressed("DialogueTestRight"))
+			{
+				if (CurrentPage + 1 >= TotalPages)
+					return;
+
+				if (ParsedDialogue.DialogueFile[0].Contents[CurrentPage + 1].Type != DialogueType.Talk.ToString())
+					return;
+
+				CurrentPage++;
+				DialogueBox.ReadValues(ParsedDialogue.DialogueFile[0].Contents[CurrentPage].Style, CurrentPage + 1, TotalPages);
+			}
+		}
+
+		public void HandleStyle()
+        {
+            //
+        }
+
+		public void HandleOptions()
+        {
+            //
+        }
 	}
 
 	/*
@@ -138,42 +205,12 @@ namespace GameJam
 	[Tool]
 	public partial class JsonDialogueParser
 	{
-		List<DialogueSerializeable> DialogueFile { get; set; }
+		public List<DialogueSerializeable> DialogueFile { get; set; }
 
 		public JsonDialogueParser(string path)
 		{
 			var content = Utils.LoadFromFile(path);
 			DialogueFile = JsonSerializer.Deserialize<List<DialogueSerializeable>>(content);
-			// GD.Print(Utils.LoadFromFile(path));
-			// GD.Print("");
-
-			foreach (var e in DialogueFile)
-			{
-				GD.Print("ID: " + e.ID);
-				foreach (var f in e.Contents)
-				{
-					GD.Print("	Type: " + f.Type);
-					if (f.Type == DialogueType.Talk.ToString())
-					{
-						GD.Print("		Name: " + f.Style.Name);
-						GD.Print("		Portait: " + f.Style.Portrait);
-						GD.Print("		Voice: " + f.Style.Voice);
-						GD.Print("		Script: " + f.Style.Script);
-						GD.Print("		Text: " + f.Style.Text);
-					}
-					else if (f.Type == DialogueType.Selection.ToString())
-					{
-						foreach (var g in f.Options)
-						{
-							GD.Print("		Option: ");
-							GD.Print("			Next: " + g.Next);
-							GD.Print("			Script:" + g.Script);
-							GD.Print("			Text: " + g.Text);
-						}
-					}
-					GD.Print("");
-				}
-			}
 
 			/*
 			Trying to fix assembly unloading errors, code from:

@@ -1,0 +1,136 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt8ukpudtc8tc"]
+
+[ext_resource type="Script" uid="uid://b2uj3gvpx0er8" path="res://Scripts/UI/Dialogue/DialogueBoxDefault.cs" id="1_5vpaa"]
+
+[node name="DialogueBoxDefault" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -100.0
+offset_right = 400.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5vpaa")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="OuterPortraitContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="InnerPortraitContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterPortraitContainer"]
+layout_mode = 2
+
+[node name="PortraitImage" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterPortraitContainer/InnerPortraitContainer" groups=["PortraitImage"]]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+expand_mode = 4
+
+[node name="NameContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterPortraitContainer"]
+layout_mode = 2
+
+[node name="NameLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterPortraitContainer/NameContainer" groups=["NameLabel"]]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Test Name"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OuterTextContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InnerTextContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 32
+
+[node name="TextLabel" type="RichTextLabel" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer/InnerTextContainer" groups=["TextLabel"]]
+layout_mode = 2
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula, ipsum ac tempor eleifend, justo ex molestie nunc, in scelerisque sapien nisl ac nisl. Etiam id nisl id libero vestibulum lobortis. Morbi at pellentesque lectus, id efficitur augue. Proin sed ex condimentum, porta odio sed, vestibulum justo. Sed vestibulum sed orci vitae molestie. Duis tristique libero in dolor eleifend sagittis."
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 3
+vertical_alignment = 3
+justification_flags = 35
+threaded = true
+
+[node name="PreviousContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer" groups=["PreviousContainer"]]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="PreviousImage" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer/PreviousContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="PreviousPlaceholder" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer/PreviousContainer"]
+layout_mode = 2
+text = "<"
+vertical_alignment = 1
+
+[node name="NextContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer" groups=["NextContainer"]]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="NextImage" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer/NextContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="NextPlaceholder" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer/NextContainer"]
+layout_mode = 2
+text = ">"
+horizontal_alignment = 2
+
+[node name="PageContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="PageLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterTextContainer/PageContainer" groups=["PageLabel"]]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Page/Page"
+horizontal_alignment = 2
+vertical_alignment = 2
