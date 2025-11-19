@@ -1,14 +1,32 @@
-[gd_scene load_steps=26 format=3 uid="uid://bsr47imiksk5c"]
+[gd_scene load_steps=33 format=3 uid="uid://bsr47imiksk5c"]
 
 [ext_resource type="Texture2D" uid="uid://dud5s6phm6w2s" path="res://Sprites/Character_675.png" id="1_r4prl"]
 [ext_resource type="Script" uid="uid://c410xrnhmnv7c" path="res://Scripts/PlayerController/PlayerController.cs" id="1_u3p7k"]
+[ext_resource type="PackedScene" uid="uid://bj7ivr3rs7jik" path="res://Meshes/Floor.glb" id="3_t3d1d"]
+[ext_resource type="PackedScene" uid="uid://6hepbfq2k6as" path="res://Meshes/ShelfCans.glb" id="4_rjl26"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u3p7k"]
-size = Vector3(0.78808594, 1, 0.7968445)
+size = Vector3(0.60253906, 1, 0.5604172)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsrov"]
+atlas = ExtResource("1_r4prl")
+region = Rect2(64, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir1ys"]
+atlas = ExtResource("1_r4prl")
+region = Rect2(192, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g4jt8"]
 atlas = ExtResource("1_r4prl")
 region = Rect2(0, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1g3j"]
+atlas = ExtResource("1_r4prl")
+region = Rect2(128, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg27n"]
+atlas = ExtResource("1_r4prl")
+region = Rect2(256, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4prl"]
 atlas = ExtResource("1_r4prl")
@@ -94,10 +112,42 @@ region = Rect2(304, 0, 16, 18)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dsrov")
+}],
+"loop": true,
+"name": &"Idle_DiagDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir1ys")
+}],
+"loop": true,
+"name": &"Idle_DiagUp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_g4jt8")
 }],
 "loop": true,
-"name": &"Idle",
+"name": &"Idle_Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1g3j")
+}],
+"loop": true,
+"name": &"Idle_Left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg27n")
+}],
+"loop": true,
+"name": &"Idle_Up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -186,6 +236,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_t3d1d"]
+size = Vector3(49.934357, 108.975815, 16.427979)
+
 [node name="PlayerControllerTest" type="Node3D"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
@@ -193,7 +246,7 @@ motion_mode = 1
 script = ExtResource("1_u3p7k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.018131256)
 shape = SubResource("BoxShape3D_u3p7k")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="CharacterBody3D"]
@@ -201,7 +254,22 @@ transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70
 pixel_size = 0.05
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_cb8b7")
-animation = &"Idle"
+animation = &"Idle_DiagUp"
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 4.127, 3.026)
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/AnimatedSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.45484543, 4.734256)
+
+[node name="Floor2" parent="." instance=ExtResource("3_t3d1d")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+
+[node name="ShelfCans2" parent="." instance=ExtResource("4_rjl26")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.46897793, 0, -0.6081567)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ShelfCans2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShelfCans2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.108564, 57.844765, -7.090214)
+shape = SubResource("BoxShape3D_t3d1d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.7890841, -0.48007643, 0.38323995, 0, 0.62387955, 0.7815205, -0.6142852, -0.6166854, 0.49229342, 0, 2.6347718, 0)

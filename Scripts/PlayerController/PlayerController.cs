@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class PlayerController : CharacterBody3D
 {
@@ -7,6 +8,7 @@ public partial class PlayerController : CharacterBody3D
 	public float _walkSpeed = 1f;
 	private Vector3 _velocity;
 	private Vector3 _characterDirection;
+	private int _facingDirection = 6;
 
 
 	public override void _Ready()
@@ -29,6 +31,7 @@ public partial class PlayerController : CharacterBody3D
 			if (_characterDirection.Z == 0f)
 			{
 				if (_animatedSprite.Animation != "Walk_Left") _animatedSprite.Play("Walk_Left");
+				_facingDirection = 9;
 			}
 			else
 			{
@@ -37,10 +40,12 @@ public partial class PlayerController : CharacterBody3D
 					if (_characterDirection.Z > 0f)
 					{
 						if (_animatedSprite.Animation != "Walk_Down") _animatedSprite.Play("Walk_Down");
+						_facingDirection = 6;
 					}
 					else
 					{
 						if (_animatedSprite.Animation != "Walk_Up") _animatedSprite.Play("Walk_Up");
+						_facingDirection = 12;
 					}
 				}
 				else
@@ -48,10 +53,12 @@ public partial class PlayerController : CharacterBody3D
 					if (_characterDirection.Z > 0f)
 					{
 						if (_animatedSprite.Animation != "Walk_DiagDown") _animatedSprite.Play("Walk_DiagDown");
+						_facingDirection = 7;
 					}
 					else
 					{
 						if (_animatedSprite.Animation != "Walk_DiagUp") _animatedSprite.Play("Walk_DiagUp");
+						_facingDirection = 10;
 					}
 				}
 			}
@@ -59,7 +66,24 @@ public partial class PlayerController : CharacterBody3D
 		else
 		{
 			Velocity = Velocity.MoveToward(_characterDirection, _walkSpeed);
-			if (_animatedSprite.Animation != "Idle") _animatedSprite.Play("Idle");
+			switch (_facingDirection)
+			{
+				case 6:
+					if (_animatedSprite.Animation != "Idle_Down") _animatedSprite.Play("Idle_Down");
+					break;
+				case 9:
+					if (_animatedSprite.Animation != "Idle_Left") _animatedSprite.Play("Idle_Left");
+					break;
+				case 12:
+					if (_animatedSprite.Animation != "Idle_Up") _animatedSprite.Play("Idle_Up");
+					break;
+				case 7:
+					if (_animatedSprite.Animation != "Idle_DiagDown") _animatedSprite.Play("Idle_DiagDown");
+					break;
+				case 10:
+					if (_animatedSprite.Animation != "Idle_DiagUp") _animatedSprite.Play("Idle_DiagUp");
+					break;
+			}
 		}
 
 
