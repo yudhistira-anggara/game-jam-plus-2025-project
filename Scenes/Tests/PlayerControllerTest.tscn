@@ -1,9 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://bsr47imiksk5c"]
+[gd_scene load_steps=48 format=3 uid="uid://bsr47imiksk5c"]
 
 [ext_resource type="Texture2D" uid="uid://dud5s6phm6w2s" path="res://Resources/Sprites/Character_675.png" id="1_r4prl"]
 [ext_resource type="Script" uid="uid://c410xrnhmnv7c" path="res://Scripts/PlayerController/PlayerController.cs" id="1_u3p7k"]
 [ext_resource type="PackedScene" uid="uid://bj7ivr3rs7jik" path="res://Resources/Meshes/Floor.glb" id="3_t3d1d"]
 [ext_resource type="PackedScene" uid="uid://6hepbfq2k6as" path="res://Resources/Meshes/ShelfCans.glb" id="4_rjl26"]
+[ext_resource type="Script" uid="uid://d0vfw83uuw6ve" path="res://Scripts/PlayerController/InteractableObject.cs" id="4_xa2w6"]
+[ext_resource type="Texture2D" uid="uid://cbec4oo3c3dg0" path="res://Resources/Sprites/E_Button.png" id="5_cb8b7"]
 [ext_resource type="VoxelGIData" uid="uid://dpcqww3wujhb7" path="res://Resources/Lighting/PlayerControllerTest.VoxelGI_data.res" id="5_rjl26"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u3p7k"]
@@ -15,19 +17,39 @@ region = Rect2(64, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ir1ys"]
 atlas = ExtResource("1_r4prl")
+region = Rect2(336, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gpxn"]
+atlas = ExtResource("1_r4prl")
 region = Rect2(192, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ivri"]
+atlas = ExtResource("1_r4prl")
+region = Rect2(368, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g4jt8"]
 atlas = ExtResource("1_r4prl")
 region = Rect2(0, 0, 16, 18)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tcc6"]
+atlas = ExtResource("1_r4prl")
+region = Rect2(320, 0, 16, 18)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_t1g3j"]
 atlas = ExtResource("1_r4prl")
 region = Rect2(128, 0, 16, 18)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5dsm"]
+atlas = ExtResource("1_r4prl")
+region = Rect2(352, 0, 16, 18)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xg27n"]
 atlas = ExtResource("1_r4prl")
 region = Rect2(256, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwpax"]
+atlas = ExtResource("1_r4prl")
+region = Rect2(384, 0, 16, 18)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4prl"]
 atlas = ExtResource("1_r4prl")
@@ -112,40 +134,55 @@ region = Rect2(304, 0, 16, 18)
 [sub_resource type="SpriteFrames" id="SpriteFrames_cb8b7"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_dsrov")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_ir1ys")
 }],
 "loop": true,
 "name": &"Idle_DiagDown",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ir1ys")
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_2gpxn")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_1ivri")
 }],
 "loop": true,
 "name": &"Idle_DiagUp",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_g4jt8")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_3tcc6")
 }],
 "loop": true,
 "name": &"Idle_Down",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_t1g3j")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_j5dsm")
 }],
 "loop": true,
 "name": &"Idle_Left",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_xg27n")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_iwpax")
 }],
 "loop": true,
 "name": &"Idle_Up",
@@ -237,8 +274,50 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cb8b7"]
+radius = 0.65283203
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_t3d1d"]
 size = Vector3(49.934357, 108.975815, 16.427979)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ad0nb"]
+atlas = ExtResource("5_cb8b7")
+region = Rect2(32, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxg5c"]
+atlas = ExtResource("5_cb8b7")
+region = Rect2(16, 0, 16, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52go4"]
+atlas = ExtResource("5_cb8b7")
+region = Rect2(0, 0, 16, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ad0nb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ad0nb")
+}],
+"loop": true,
+"name": &"Inactive",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxg5c")
+}],
+"loop": true,
+"name": &"Pressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52go4")
+}],
+"loop": true,
+"name": &"Unpressed",
+"speed": 5.0
+}]
 
 [sub_resource type="Environment" id="Environment_t3d1d"]
 background_mode = 1
@@ -267,10 +346,18 @@ shaded = true
 alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_cb8b7")
-animation = &"Idle_DiagUp"
+animation = &"Idle_Down"
+frame_progress = 0.22012833
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D/AnimatedSprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.45484543, 4.734256)
+
+[node name="Area3D" type="Area3D" parent="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Area3D"]
+shape = SubResource("CylinderShape3D_cb8b7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.7890841, -0.48007643, 0.38323995, 0, 0.62387955, 0.7815205, -0.6142852, -0.6166854, 0.49229342, 0, 2.6347718, 0)
@@ -284,12 +371,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 
 [node name="ShelfCans2" parent="Environment/Shelves" instance=ExtResource("4_rjl26")]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.46897793, 0, -0.6081567)
+script = ExtResource("4_xa2w6")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Shelves/ShelfCans2"]
+[node name="StaticBody3DA" type="StaticBody3D" parent="Environment/Shelves/ShelfCans2"]
+collision_layer = 17
+collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Shelves/ShelfCans2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Shelves/ShelfCans2/StaticBody3DA"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.108564, 57.844765, -7.090214)
 shape = SubResource("BoxShape3D_t3d1d")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Environment/Shelves/ShelfCans2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.837181, 82.09774, 15.668555)
+pixel_size = 1.0
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_ad0nb")
+animation = &"Unpressed"
+frame_progress = 0.5118005
 
 [node name="ShelfCans5" parent="Environment/Shelves" instance=ExtResource("4_rjl26")]
 transform = Transform3D(-0.02, 0, -1.7484555e-09, 0, 0.02, 0, 1.7484555e-09, 0, -0.02, 1.469, 0, -1.206)
@@ -320,12 +420,24 @@ shape = SubResource("BoxShape3D_t3d1d")
 
 [node name="ShelfCans3" parent="Environment/Shelves" instance=ExtResource("4_rjl26")]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 1.4689779, 0, -0.6081567)
+script = ExtResource("4_xa2w6")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Shelves/ShelfCans3"]
+[node name="StaticBody3DB" type="StaticBody3D" parent="Environment/Shelves/ShelfCans3"]
+collision_layer = 17
+collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Shelves/ShelfCans3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Shelves/ShelfCans3/StaticBody3DB"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.108564, 57.844765, -7.090214)
 shape = SubResource("BoxShape3D_t3d1d")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Environment/Shelves/ShelfCans3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.837181, 82.09774, 15.668555)
+pixel_size = 1.0
+billboard = 1
+no_depth_test = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_ad0nb")
+animation = &"Unpressed"
 
 [node name="ShelfCans4" parent="Environment/Shelves" instance=ExtResource("4_rjl26")]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 2.468978, 0, -0.6081567)
