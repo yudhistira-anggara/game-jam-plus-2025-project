@@ -71,6 +71,6 @@ public partial class InteractableObject : Node3D, IInteractable
 	public void Uninteractable()
 	{
 		ButtonSprite.Play("Inactive");
-        CanInteract = false;
+		CanInteract = false;
 	}
 }

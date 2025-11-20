@@ -147,7 +147,7 @@ public partial class PlayerController : CharacterBody3D
 					foreach (var body in bodies)
 					{
 						var interactable = body.GetParent() as IInteractable;
-						if (interactable.CanInteract == false)
+						if (interactable.CanInteract == true)
 						{
 							interactable?.Entered();
 						}
