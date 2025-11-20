@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://djm8agv5ltgo2"]
+
+[ext_resource type="Texture2D" uid="uid://d4kvdcr4vrwyq" path="res://Resources/Sprites/Candles-Sheet.png" id="1_t0f5w"]
+[ext_resource type="Script" uid="uid://chj3c7lquoniw" path="res://Scenes/Tests/AnimatedSprite2d.cs" id="2_sh7yj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh7yj"]
+atlas = ExtResource("1_t0f5w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkenl"]
+atlas = ExtResource("1_t0f5w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3biyc"]
+atlas = ExtResource("1_t0f5w")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jveno"]
+atlas = ExtResource("1_t0f5w")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2apho"]
+atlas = ExtResource("1_t0f5w")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xf1o"]
+atlas = ExtResource("1_t0f5w")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a441q"]
+atlas = ExtResource("1_t0f5w")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhuos"]
+atlas = ExtResource("1_t0f5w")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0k1uy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sh7yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkenl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3biyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jveno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2apho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xf1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a441q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhuos")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="KetiakSmelle" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(684, 411)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_0k1uy")
+autoplay = "default"
+speed_scale = 3.0
+script = ExtResource("2_sh7yj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
