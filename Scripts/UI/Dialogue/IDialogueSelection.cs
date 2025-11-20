@@ -6,7 +6,7 @@ namespace GameJam
 {
     public partial interface IDialogueSelection
     {
-        void ReadValues(List<DialogueOptionSerializable> dialogueOptions);
+        void ReadValues(List<DialogueContentsSerializable> contents);
         void SetVisibility(bool toVisible);
     }
 }

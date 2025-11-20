@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace GameJam
 {
@@ -8,25 +9,35 @@ namespace GameJam
     public partial class DialogueSerializeable
     {
         public string ID { get; set; }
-        public List<DialogueContentsSerializable> Contents { get; set; }
+        public string Type { get; set; }
+        public string Next { get; set; }
+        public List<DialogueContentsSerializable> Contents { get; set; } =
+        [
+            new DialogueContentsSerializable(DialogueType.Talk)
+        ];
 
         public DialogueSerializeable()
         {
             ID = "";
-            Contents = [
-                new DialogueContentsSerializable()
-            ];
+            Type = DialogueType.Talk.ToString();
+            Contents = [new DialogueContentsSerializable(DialogueType.Talk)];
         }
 
         public DialogueSerializeable(Dialogue dialogue)
         {
-            ID = dialogue.ID;
-            if (dialogue.Contents.Count > 0)
+            if (dialogue.Contents == null)
             {
-                foreach (var e in dialogue.Contents)
-                {
-                    Contents.Add(new DialogueContentsSerializable(e));
-                }
+                GD.PrintErr(new NullReferenceException());
+                return;
+            }
+
+            ID = dialogue.ID;
+            Type = dialogue.Type.ToString();
+            Next = dialogue.Next;
+
+            foreach (var e in dialogue.Contents)
+            {
+                Contents.Add(new DialogueContentsSerializable(e));
             }
         }
     }

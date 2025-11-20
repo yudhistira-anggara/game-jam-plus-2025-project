@@ -5,8 +5,7 @@ namespace GameJam
 {
     public partial interface IDialogueBox
     {
-        void ReadValues(DialogueStyleSerializable dialogueStyle, int currentPage, int totalPages);
-        void ChangePage(bool previousPage);
+        void ReadValues(DialogueContentsSerializable contents, int currentPage, int totalPages);
         void SetVisibility(bool toVisible);
     }
 }
