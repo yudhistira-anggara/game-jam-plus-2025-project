@@ -8,11 +8,14 @@ using System.Collections.Generic;
 
 namespace GameJam
 {
-	[Tool]
+	public enum DialogueType
+    {
+        Talk,
+		Select
+    }
+
 	public partial class DialogueSystem : Control
 	{
-		private int _sourceType;
-
 		[Export]
 		public PackedScene TextDisplayer { get; set; }
 		public IDialogueBox DialogueBox { get; set; }
@@ -22,85 +25,43 @@ namespace GameJam
 		public DialogueSelectDefault DialogueSelection { get; set; }
 
 		[ExportGroup("Dialogue")]
-		[Export(PropertyHint.Enum, ".json, Editor")]
-		public int SourceType
-		{
-			get => _sourceType;
-			set
-			{
-				_sourceType = value;
-				NotifyPropertyListChanged();
-			}
-		}
-
-		[ExportToolButton("Test Button")]
-		public Callable LoadFromJsonButton => Callable.From(LoadFromJSON);
-
+		[Export(PropertyHint.File, $"*.json")]
 		public string Path { get; set; }
-		public DialogueFile Lines { get; set; } = new DialogueFile();
 
 		public List<DialogueSerializeable> DialogueLines { get; set; }
 
-		public string CurrentID { get; set; }
 		public string TargetID { get; set; }
 
-		public int CurrentDialogue { get; set; }
-		public int TotalDialogue { get; set; }
+		public int CurrentDialogue { get; set; } = 0;
 
-		public int CurrentPage { get; set; }
-		public int TotalPages { get; set; }
+		public int CurrentPage { get; set; } = 0;
+		public int TotalPages { get; set; } = 1;
 
-		public override Godot.Collections.Array<Godot.Collections.Dictionary> _GetPropertyList()
+		public void LoadAndRunDialogueScript()
 		{
-			Godot.Collections.Array<Godot.Collections.Dictionary> properties = [];
-			if (Engine.IsEditorHint())
-			{
-				if (SourceType == 0)
-				{
-					properties.Add(new Godot.Collections.Dictionary()
-					{
-						{"name", $"Path"},
-						{"type", (int)Variant.Type.String},
-						{"hint", (int)PropertyHint.FilePath},
-						{"hint_string", $"*.json"}
-					});
-				}
-				else
-				{
-					properties.Add(new Godot.Collections.Dictionary()
-					{
-						{"name", $"Lines"},
-						{"type", (int)Variant.Type.Object},
-						{"hint", (int)PropertyHint.ResourceType},
-						{"hint_string", $"DialogueFile"}
-					});
-				}
-			}
-			return properties;
-		}
+			var conditions = DialogueLines[CurrentDialogue].Contents[CurrentPage].Script != "" ?
+			DialogueLines[CurrentDialogue].Contents[CurrentPage].Script : "";
 
-		public void LoadFromJSON()
-		{
-			if (SourceType == 0 && Path != null && TextDisplayer != null)
-			{
-				if (TextDisplayer is IDialogueBox box)
-				{
-					// TotalPages = DialogueLines[0].Contents.Count;
-					// box.ReadValues(DialogueLines[0].Contents[0].Style, 1, TotalPages);
-				}
-			}
+			if (conditions == "")
+				return;
+
+			var scriptResource = ResourceLoader.Load<Script>(conditions);
+            var scriptNodeInstance = new Node
+            {
+                Name = "DialogueScriptNode"
+            };
+			AddChild(scriptNodeInstance);
+			scriptNodeInstance.SetScript(scriptResource);
+			scriptNodeInstance = GetNode("DialogueScriptNode");
+			scriptNodeInstance.Call("DialogueScriptCall");
+			scriptNodeInstance.QueueFree();
 		}
 
 		public void ParseJson(string path)
 		{
 			var content = Utils.LoadFromFile(path);
 			DialogueLines = JsonSerializer.Deserialize<List<DialogueSerializeable>>(content);
-			CurrentPage = 0;
-			TotalPages = DialogueLines[0].Contents.Count - 1;
-			CurrentDialogue = 0;
-			TotalDialogue = DialogueLines[0].Contents.Count;
-			CurrentID = DialogueLines[0].ID;
-			TargetID = DialogueLines[0].Next;
+			ParseDialogue(0);
 
 			/*
 			Trying to fix assembly unloading errors, code from:
@@ -113,41 +74,30 @@ namespace GameJam
 			clearCacheMethod?.Invoke(null, [null]);
 		}
 
-		public void HandleDialogueChange()
+		public void ParseDialogue(int dial)
 		{
-			if (CurrentPage == TotalPages)
-			{
-				//
-			}
+			var dia = DialogueLines[dial];
+			CurrentPage = 0;
+			TotalPages = dia.Contents.Count - 1;
+			CurrentDialogue = dial;
+			TargetID = dia.Next;
 		}
 
-		public void HandleDialogueType(DialogueSerializeable dialogue)
+		public void ChangeDialogue(string target = "", bool init = false)
 		{
-			//
-		}
+			var to = 0;
 
-		public void LoadDialogue()
-		{
-			//
-		}
-
-		public void ChangeDialogue(string target = "")
-		{
-			var to = target != "" ? DialogueLines.FindIndex(x => x.ID == target) :
-			DialogueLines.FindIndex(x => x.ID == TargetID);
+			if (!init)
+				to = target != "" ? DialogueLines.FindIndex(x => x.ID == target) : DialogueLines.FindIndex(x => x.ID == TargetID);
 
 			if (to < 0)
+			{
+				GD.PrintErr(new IndexOutOfRangeException("Target not found?"));
 				return;
+			}
 
-			CurrentDialogue = to;
-
+			ParseDialogue(to);
 			var dialogue = DialogueLines[to];
-
-			CurrentPage = 0;
-			TotalPages = DialogueLines[to].Contents.Count - 1;
-			TotalDialogue = DialogueLines[to].Contents.Count;
-			CurrentID = DialogueLines[to].ID;
-			TargetID = DialogueLines[to].Next;
 
 			if (dialogue.Type == DialogueType.Talk.ToString())
 			{
@@ -166,14 +116,6 @@ namespace GameJam
 				var instance = TextDisplayer.Instantiate();
 				AddChild(instance);
 				DialogueBox = instance as IDialogueBox;
-
-				if (SourceType == 0 && Path != null && TextDisplayer != null)
-				{
-					ParseJson(Path);
-
-					DialogueBox.ReadValues(DialogueLines[0].Contents[0], CurrentPage, TotalPages);
-					CurrentID = DialogueLines[0].ID;
-				}
 			}
 
 			if (DialogueSelection == null || !IsInstanceValid((Node)DialogueSelection))
@@ -181,17 +123,27 @@ namespace GameJam
 				var instance = SelectBox.Instantiate();
 				AddChild(instance);
 				DialogueSelection = (DialogueSelectDefault)instance;
-				DialogueSelection.SetVisibility(false);
 			}
+
+			ChangeDialogue(init: true);
+		}
+
+		public void Instantiation()
+		{
+			ParseJson(Path);
+			InstantiateUIElements();
 		}
 
 		public override void _Ready()
 		{
-			InstantiateUIElements();
+			Instantiation();
 		}
 
 		public override void _Input(InputEvent @event)
 		{
+			if (DialogueLines[CurrentDialogue].Type == DialogueType.Select.ToString())
+				return;
+
 			if (@event.IsActionPressed("DialogueTestPrevious"))
 			{
 				HandlePage(false);
@@ -205,19 +157,14 @@ namespace GameJam
 		public void HandlePage(bool next)
 		{
 			if (next == true && CurrentPage < TotalPages)
-			{
 				CurrentPage++;
-			}
 			else if (next == false && CurrentPage > 0)
 				CurrentPage--;
 			else if (CurrentPage == TotalPages)
 				ChangeDialogue();
 
-			// GD.Print($"Pages: {CurrentPage} / {TotalPages}");
-			// GD.Print($"Dialogues: {CurrentDialogue} / {TotalDialogue}");
-			// GD.Print($"ID: {CurrentID} / {TargetID}");
-
 			DialogueBox.ReadValues(DialogueLines[CurrentDialogue].Contents[CurrentPage], CurrentPage, TotalPages);
+			LoadAndRunDialogueScript();
 		}
 
 		public void HandleTalk(DialogueSerializeable dialogue)
@@ -236,9 +183,9 @@ namespace GameJam
 		}
 
 		public void OnButtonSignalReceived(string id)
-        {
-            ChangeDialogue(id);
+		{
+			ChangeDialogue(id);
 			DialogueSelection.OptionSelected -= OnButtonSignalReceived;
-        }
+		}
 	}
 }

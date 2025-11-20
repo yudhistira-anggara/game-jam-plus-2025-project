@@ -6,7 +6,7 @@
         "Contents": [
             {
                 "Name": "Person A",
-                "Portrait": "Portrait_person_a.png",
+                "Portrait": "res://Resources/Images/Lost.JPG",
                 "Voice": "Voice_person_a.wav",
                 "Script": "",
                 "Text": "Hello, world!"
@@ -15,14 +15,14 @@
                 "Name": "Person B",
                 "Portrait": "Portrait_person_b.png",
                 "Voice": "Voice_person_b.wav",
-                "Script": "",
+                "Script": "res://Scripts/DialogueScripts/Test.cs",
                 "Text": "Hi, Person A!"
             },
             {
                 "Name": "Person A",
-                "Portrait": "Portrait_person_a.png",
+                "Portrait": "res://Resources/Images/Lost.JPG",
                 "Voice": "Voice_person_a.wav",
-                "Script": "",
+                "Script": "res://Scripts/DialogueScripts/Test2.cs",
                 "Text": "Hello, Person B."
             },
             {
@@ -106,7 +106,7 @@
             },
             {
                 "Name": "Person A",
-                "Portrait": "Portrait_person_a.png",
+                "Portrait": "res://Resources/Images/Lost.JPG",
                 "Voice": "Voice_person_a.wav",
                 "Script": "",
                 "Text": "Uhh...? I don't know, why did the chicken cross the road?"
