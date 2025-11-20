@@ -15,21 +15,6 @@ namespace GameJam
             new Dialogue()
         ];
 
-        public override void _ValidateProperty(Dictionary property)
-        {
-            string value = property["name"].AsString();
-            bool isMatch = value switch
-            {
-                "Resource" or "resource_local_to_scene" or "resource_path" or "resource_name" => true,
-                _ => false
-            };
-
-            if (isMatch)
-            {
-                property["usage"] = (int)PropertyUsageFlags.None;
-            }
-        }
-
         [ExportToolButton("Save Dialogue to .JSON", Icon = "New")]
         public Callable SaveAsJSONButton => Callable.From(SaveAsJSON);
 
@@ -46,7 +31,7 @@ namespace GameJam
             {
                 FileMode = EditorFileDialog.FileModeEnum.SaveFile,
                 Access = EditorFileDialog.AccessEnum.Filesystem,
-                Filters = ["*.json ; JSON files"]
+                Filters = ["*.json"]
             };
 
             var viewport = EditorInterface.Singleton.GetEditorMainScreen();
@@ -61,6 +46,21 @@ namespace GameJam
                 file.Close();
             };
             // GD.Print(System.Text.Json.JsonSerializer.Serialize(dialogueFile));
+        }
+
+        public override void _ValidateProperty(Dictionary property)
+        {
+            string value = property["name"].AsString();
+            bool isMatch = value switch
+            {
+                "Resource" or "resource_local_to_scene" or "resource_path" or "resource_name" => true,
+                _ => false
+            };
+
+            if (isMatch)
+            {
+                property["usage"] = (int)PropertyUsageFlags.None;
+            }
         }
     }
 }

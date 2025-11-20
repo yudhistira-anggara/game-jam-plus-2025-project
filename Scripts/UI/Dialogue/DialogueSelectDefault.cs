@@ -6,23 +6,37 @@ namespace GameJam
 {
     public partial class DialogueSelectDefault : PanelContainer, IDialogueSelection
     {
+        public Control ParentNode { get; set; }
         public PanelContainer DialogueSelectDefaultInstance { get; set; }
-        public List<DialogueOptionSerializable> DialogueOptions { get; set; }
+        public List<DialogueContentsSerializable> DialogueOptions { get; set; }
         public VBoxContainer VBoxContainer { get; set; }
-        public List<Button> ButtonList { get; set; } = [];
 
-        public void ReadValues(List<DialogueOptionSerializable> dialogueOptions)
+        [Signal]
+        public delegate void OptionSelectedEventHandler(string value);
+
+        public void ReadValues(List<DialogueContentsSerializable> dialogueOptions)
         {
+            Godot.Collections.Array<Node> child = VBoxContainer.GetChildren();
+            if (child.Count > 0)
+            {
+                foreach (var i in child)
+                {
+                    VBoxContainer.RemoveChild(i);
+                }
+            }
+
             DialogueOptions = dialogueOptions;
             HandleButtons();
+        }
+
+        public void OnOptionSelected(string value)
+        {
+            EmitSignal(SignalName.OptionSelected, value);
         }
 
         public void HandleButtons()
         {
             if (DialogueOptions == null)
-                return;
-
-            if (ButtonList.Count == DialogueOptions.Count)
                 return;
 
             foreach (var i in DialogueOptions)
@@ -32,7 +46,8 @@ namespace GameJam
                     Text = i.Text
                 };
 
-                ButtonList.Add(newButton);
+                newButton.Pressed += () => OnOptionSelected(i.Next);
+
                 VBoxContainer.AddChild(newButton);
             }
         }
@@ -44,6 +59,7 @@ namespace GameJam
 
         public override void _Ready()
         {
+            ParentNode = (Control)GetParent();
             DialogueSelectDefaultInstance = (PanelContainer)GetTree().GetFirstNodeInGroup("DialogueSelectDefault");
             VBoxContainer = (VBoxContainer)GetTree().GetFirstNodeInGroup("VBoxContainer");
         }

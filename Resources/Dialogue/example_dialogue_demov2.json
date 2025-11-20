@@ -2,7 +2,7 @@
     {
         "ID": "test_dialogue_01",
         "Type": "Talk",
-        "Next": "test_dialogue_01_selection",
+        "Next": "test_dialogue_01_select",
         "Contents": [
             {
                 "Name": "Person A",
@@ -31,43 +31,50 @@
                 "Voice": "Voice_person_b.wav",
                 "Script": "",
                 "Text": "What's up, Person A?"
-            }
-        ]
-    },
-    {
-        "ID": "test_dialogue_01_selection",
-        "Type": "Selection",
-        "Contents": [
-            {
-                "Text": "Not much, Person B",
-                "Script": "",
-                "Next": "test_dialogue_01a"
             },
             {
-                "Text": "[Ignore Person B]",
+                "Name": "",
+                "Portrait": "",
+                "Voice": "",
                 "Script": "",
-                "Next": "test_dialogue_01b"
+                "Text": "[ Continue . . . ? ]"
             }
         ]
     },
     {
-        "ID": "test_dialogue_01b",
+        "ID": "test_dialogue_01_select",
+        "Type": "Select",
+        "Contents": [
+            {
+                "Next": "test_dialogue_01a",
+                "Script": "",
+                "Text": "Not much, Person B"
+            },
+            {
+                "Next": "test_dialogue_01b",
+                "Script": "",
+                "Text": "[ Ignore Person B. ]"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_01a",
         "Type": "Talk",
-        "Next": "",
+        "Next": "test_dialogue_02",
         "Contents": [
             {
                 "Name": "Person B",
                 "Portrait": "Portrait_person_b.png",
                 "Voice": "Voice_person_b.wav",
                 "Script": "",
-                "Text": "What's up, Person A?"
+                "Text": "Hey dude, wanna hear a joke?"
             }
         ]
     },
     {
-        "ID": "test_dialogue_01c",
+        "ID": "test_dialogue_01b",
         "Type": "Talk",
-        "Next": "",
+        "Next": "test_dialogue_02",
         "Contents": [
             {
                 "Name": "Person B",
@@ -75,6 +82,132 @@
                 "Voice": "Voice_person_b.wav",
                 "Script": "",
                 "Text": "What's wrong, Person A?"
+            },
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "Here, I have a joke that will cheer your day:"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_02",
+        "Type": "Talk",
+        "Next": "test_dialogue_02_select",
+        "Contents": [
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "Why did the chicken cross the road?"
+            },
+            {
+                "Name": "Person A",
+                "Portrait": "Portrait_person_a.png",
+                "Voice": "Voice_person_a.wav",
+                "Script": "",
+                "Text": "Uhh...? I don't know, why did the chicken cross the road?"
+            },
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "WEED EATER."
+            },
+            {
+                "Name": "",
+                "Portrait": "",
+                "Voice": "",
+                "Script": "",
+                "Text": "[ Continue . . . ? ]"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_02_select",
+        "Type": "Select",
+        "Contents": [
+            {
+                "Next": "test_dialogue_02a",
+                "Script": "",
+                "Text": "I don't get it?"
+            },
+            {
+                "Next": "test_dialogue_02b",
+                "Script": "",
+                "Text": "Haha, that's a good one!"
+            },
+            {
+                "Next": "test_dialogue_02c",
+                "Script": "",
+                "Text": "Hey, I've heard of that before, nice reference!"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_02a",
+        "Type": "Talk",
+        "Next": "test_dialogue_03",
+        "Contents": [
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "It's funny because it's \"Randomly Generated\"."
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_02b",
+        "Type": "Talk",
+        "Next": "test_dialogue_03",
+        "Contents": [
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "Haha, thanks bro, you should watch VeggieTales™, I got it from that!"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_02c",
+        "Type": "Talk",
+        "Next": "test_dialogue_03",
+        "Contents": [
+            {
+                "Name": "Person B",
+                "Portrait": "Portrait_person_b.png",
+                "Voice": "Voice_person_b.wav",
+                "Script": "",
+                "Text": "Yeeeah dude, VeggieTales™ rocks!"
+            }
+        ]
+    },
+    {
+        "ID": "test_dialogue_03",
+        "Type": "Talk",
+        "Next": "test_dialogue_01",
+        "Contents": [
+            {
+                "Name": "",
+                "Portrait": "",
+                "Voice": "",
+                "Script": "",
+                "Text": "End of dialogue demonstration."
+            },
+            {
+                "Name": "",
+                "Portrait": "",
+                "Voice": "",
+                "Script": "",
+                "Text": "[ Return . . . ? ]"
             }
         ]
     }

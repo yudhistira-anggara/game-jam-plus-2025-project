@@ -9,32 +9,21 @@ namespace GameJam
     [GlobalClass]
     public partial class DialogueContents : Resource
     {
-        private DialogueType _type;
+        public DialogueType Type { get; set; }
 
-        public DialogueStyle Style { get; set; }
-        public Array<DialogueOption> Option { get; set; }
+        // Talk
+        public string Name { get; set; } = "";
+        public Image Portrait { get; set; }
+        public AudioStream Voice { get; set; }
 
+        // Selection
+        public string Next { get; set; }
+
+        // Shared
         [Export]
-        public DialogueType Type
-        {
-            get => _type;
-            set
-            {
-                _type = value;
-                NotifyPropertyListChanged();
-                // GD.Print(GetPropertyList());
-                if (value == DialogueType.Talk)
-                {
-                    Style = new DialogueStyle();
-                    Option = null;
-                }
-                else if (value == DialogueType.Selection)
-                {
-                    Option = [new DialogueOption()];
-                    Style = null;
-                }
-            }
-        }
+        public Script Script { get; set; }
+        [Export(PropertyHint.MultilineText)]
+        public string Text { get; set; } = "";
 
         public override Array<Dictionary> _GetPropertyList()
         {
@@ -42,24 +31,38 @@ namespace GameJam
 
             if (Engine.IsEditorHint())
             {
-                if (_type == DialogueType.Talk)
+                if (Type == DialogueType.Talk)
                 {
                     properties.Add(new Dictionary()
                     {
-                        {"name", $"Style"},
-                        {"type", (int)Variant.Type.Object},
-                        {"hint", (int)PropertyHint.ResourceType},
-                        {"hint_string", $"DialogueStyle"}
+                        {"name", $"Name"},
+                        {"type", (int)Variant.Type.String},
+                        {"hint", (int)PropertyHint.PlaceholderText},
+                        {"hint_string", $"Name"}
+                    });
+                    properties.Add(new Dictionary()
+                    {
+                        {"name", $"Portrait"},
+                        {"type", (int)Variant.Type.Rid},
+                        {"hint", (int)PropertyHint.File},
+                        {"hint_string", $"*.png, *.bmp, *.jpg, *.jpeg, *.svg, *.tga, *.webp, *.image"}
+                    });
+                    properties.Add(new Dictionary()
+                    {
+                        {"name", $"Voice"},
+                        {"type", (int)Variant.Type.Rid},
+                        {"hint", (int)PropertyHint.File},
+                        {"hint_string", $"*.wav, *.mp3, *.ogg"}
                     });
                 }
-                else if (_type == DialogueType.Selection)
+                else
                 {
                     properties.Add(new Dictionary()
                     {
-                        {"name", $"Option"},
-                        {"type", (int)Variant.Type.Array},
-                        {"hint", (int)PropertyHint.ResourceType},
-                        {"hint_string", $"DialogueOption"}
+                        {"name", $"Next"},
+                        {"type", (int)Variant.Type.String},
+                        {"hint", (int)PropertyHint.PlaceholderText},
+                        {"hint_string", $"Next ID"}
                     });
                 }
             }

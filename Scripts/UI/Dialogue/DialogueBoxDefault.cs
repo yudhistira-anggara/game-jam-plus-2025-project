@@ -7,19 +7,20 @@ namespace GameJam
 {
     public partial class DialogueBoxDefault : PanelContainer, IDialogueBox
     {
-        public PanelContainer DialogueBoxDefaultInstance { get; set; }
-        public DialogueStyleSerializable DialogueStyle { get; set; }
+        public PanelContainer Instance { get; set; }
         public RichTextLabel StyleName { get; set; }
         public TextureRect StylePortrait { get; set; }
         public RichTextLabel StyleText { get; set; }
         public AudioStream StyleVoice { get; set; }
         public MarginContainer PreviousContainer { get; set; }
         public MarginContainer NextContainer { get; set; }
+        public VBoxContainer OuterPortraitContainer { get; set; }
         public Label PageLabel { get; set; }
+        
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
 
-        public void ReadValues(DialogueStyleSerializable dialogueStyle, int currentPage, int totalPages)
+        public void ReadValues(DialogueContentsSerializable contents, int currentPage, int totalPages)
         {
             if (totalPages < currentPage)
             {
@@ -27,41 +28,31 @@ namespace GameJam
                 return;
             }
 
-            DialogueStyle = dialogueStyle;
+            DialogueContentsSerializable Contents = contents;
 
-            StyleName.Text = DialogueStyle.Name != "" ? DialogueStyle.Name : "Nameless";
+            StyleName.Text = Contents.Name != "" ? Contents.Name : "";
 
-            if (DialogueStyle.Portrait != "" && FileAccess.FileExists(DialogueStyle.Portrait))
+            ManageVisibility();
+
+            if (Contents.Portrait != "" && FileAccess.FileExists(Contents.Portrait))
             {
-                Image image = Image.LoadFromFile(DialogueStyle.Portrait);
+                Image image = Image.LoadFromFile(Contents.Portrait);
                 ImageTexture imageTexture = ImageTexture.CreateFromImage(image);
                 StylePortrait.Texture = imageTexture;
             }
 
-            StyleText.Text = DialogueStyle.Text != "" ? DialogueStyle.Text : "Textless.";
+            StyleText.Text = Contents.Text != "" ? Contents.Text : "";
 
-            TotalPages = totalPages;
-            CurrentPage = currentPage != 0 ? currentPage : 1;
+            CurrentPage = currentPage + 1;
+            TotalPages = totalPages + 1;
 
             ManagePagesVisibility();
             ManagePageLabel();
         }
 
-        public void ChangePage(bool previousPage)
+        public void ManageVisibility()
         {
-            if (previousPage && CurrentPage > 1)
-            {
-                CurrentPage--;
-            }
-            else if (CurrentPage < TotalPages)
-            {
-                CurrentPage++;
-            }
-        }
-
-        public void LoadPage(int pageNumber)
-        {
-            //
+            OuterPortraitContainer.Visible = StyleName.Text != "";
         }
 
         public void ManagePageLabel()
@@ -95,15 +86,16 @@ namespace GameJam
 
         public void SetVisibility(bool toVisible)
         {
-            DialogueBoxDefaultInstance.Visible = toVisible;
+            Instance.Visible = toVisible;
         }
 
         public override void _Ready()
         {
-            DialogueBoxDefaultInstance = (PanelContainer)GetTree().GetFirstNodeInGroup("DialogueBoxDefault");
+            Instance = (PanelContainer)GetTree().GetFirstNodeInGroup("DialogueBoxDefault");
             StyleName = (RichTextLabel)GetTree().GetFirstNodeInGroup("NameLabel");
             StylePortrait = (TextureRect)GetTree().GetFirstNodeInGroup("PortaitImage");
             StyleText = (RichTextLabel)GetTree().GetFirstNodeInGroup("TextLabel");
+            OuterPortraitContainer = (VBoxContainer)GetTree().GetFirstNodeInGroup("OuterPortraitContainer");
             PreviousContainer = (MarginContainer)GetTree().GetFirstNodeInGroup("PreviousContainer");
             NextContainer = (MarginContainer)GetTree().GetFirstNodeInGroup("NextContainer");
             PageLabel = (Label)GetTree().GetFirstNodeInGroup("PageLabel");

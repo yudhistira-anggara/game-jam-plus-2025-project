@@ -37,15 +37,16 @@ theme_override_constants/margin_bottom = 4
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="OuterPortraitContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="OuterPortraitContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer" groups=["OuterPortraitContainer"]]
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_vertical = 4
 
 [node name="InnerPortraitContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterPortraitContainer"]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 
 [node name="PortraitImage" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBoxContainer/OuterPortraitContainer/InnerPortraitContainer" groups=["PortraitImage"]]
-custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 expand_mode = 4
 
