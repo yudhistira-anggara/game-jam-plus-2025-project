@@ -46,7 +46,6 @@ namespace GameJam
                     Text = i.Text
                 };
 
-                // newButton.Pressed += () => EmitSignal(SignalName.OptionSelected, "Test3");
                 newButton.Pressed += () => OnOptionSelected(i.Next);
 
                 VBoxContainer.AddChild(newButton);
