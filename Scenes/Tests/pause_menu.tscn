@@ -1,0 +1,232 @@
+[gd_scene load_steps=33 format=3 uid="uid://chu5nshfdvqia"]
+
+[ext_resource type="Script" uid="uid://4sdbq2pow0nx" path="res://Scripts/PlayerController/PauseMenu.cs" id="1_6xb31"]
+[ext_resource type="Texture2D" uid="uid://b3vdqufupyui3" path="res://Resources/Sprites/ResumeButton.png" id="2_u2wxa"]
+[ext_resource type="Texture2D" uid="uid://bbfhgfu0quvei" path="res://Resources/Sprites/SettingsButton.png" id="3_x43bc"]
+[ext_resource type="Texture2D" uid="uid://epf5026hgte" path="res://Resources/Sprites/ExitButton.png" id="4_o2wqs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jpcx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qnwov"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6dto7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3557o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4pc0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a7q8p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cibxr"]
+atlas = ExtResource("2_u2wxa")
+region = Rect2(0, 0, 60, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gq7w"]
+atlas = ExtResource("2_u2wxa")
+region = Rect2(120, 0, 60, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1xrq"]
+atlas = ExtResource("2_u2wxa")
+region = Rect2(60, 0, 60, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6vrmh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cibxr")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gq7w")
+}],
+"loop": true,
+"name": &"On_Click",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1xrq")
+}],
+"loop": true,
+"name": &"On_Hover",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xn5bg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_likh3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qmhdl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6bern"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_woypy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asw8p"]
+atlas = ExtResource("3_x43bc")
+region = Rect2(0, 0, 72, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8tdq"]
+atlas = ExtResource("3_x43bc")
+region = Rect2(144, 0, 72, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upor7"]
+atlas = ExtResource("3_x43bc")
+region = Rect2(72, 0, 72, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lldru"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asw8p")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8tdq")
+}],
+"loop": true,
+"name": &"On_Click",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upor7")
+}],
+"loop": true,
+"name": &"On_Hover",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jmpi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bpxj6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_amvtd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h720u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_86g0x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4o7f"]
+atlas = ExtResource("4_o2wqs")
+region = Rect2(0, 0, 39, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_708fm"]
+atlas = ExtResource("4_o2wqs")
+region = Rect2(78, 0, 39, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vv12"]
+atlas = ExtResource("4_o2wqs")
+region = Rect2(39, 0, 39, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0x1ft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4o7f")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_708fm")
+}],
+"loop": true,
+"name": &"On_Click",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vv12")
+}],
+"loop": true,
+"name": &"On_Hover",
+"speed": 5.0
+}]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6xb31")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 126.0
+offset_right = 894.0
+offset_bottom = 638.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8jpcx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qnwov")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6dto7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3557o")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b4pc0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_a7q8p")
+text = "Resume"
+icon_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer/VBoxContainer/Resume"]
+position = Vector2(211, 75)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_6vrmh")
+animation = &"On_Click"
+
+[node name="Settings" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xn5bg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_likh3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qmhdl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_6bern")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_woypy")
+text = "Settings"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer/VBoxContainer/Settings"]
+position = Vector2(211, 72)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_lldru")
+animation = &"On_Click"
+
+[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2jmpi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bpxj6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_amvtd")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_h720u")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_86g0x")
+text = "Exit"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PanelContainer/VBoxContainer/Exit"]
+position = Vector2(211, 77)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_0x1ft")
+animation = &"Default"
+
+[connection signal="button_down" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_button_down"]
+[connection signal="button_up" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_button_up"]
+[connection signal="mouse_entered" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
