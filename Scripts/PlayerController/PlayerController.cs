@@ -16,9 +16,11 @@ public partial class PlayerController : CharacterBody3D
 	private Area3D _interactionArea;
 	private bool _canInteract = false;
 	private bool _isInteracting = false;
-
+	[Export]
+	public Control PauseMenu;
 	public override void _Ready()
 	{
+		PauseMenu.Hide();
 		_animatedSprite = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
 		_interactionArea = GetNode<Area3D>("Area3D");
 		_interactionArea.Monitoring = true;
@@ -154,20 +156,24 @@ public partial class PlayerController : CharacterBody3D
 					}
 				}
 			}
-			If (Input.IsActionJustPressed("pause"))
-			{
-				_Pause();
-			}
+			
 
 		}
-
+		if (Input.IsActionJustPressed("pause"))
+			{
+				_Pause();
+				
+			}
+		
 		MoveAndSlide();
+
 	}
 
-	private void _Pause()
-    {
+	private async void _Pause()
+	{
+		PauseMenu.Show();
 		GetTree().Paused = true;
-    }
+	}
 
 	#region Alert System
 	private void _OnBodyEntered(Node3D body)
