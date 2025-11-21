@@ -14,7 +14,6 @@
         "**/*.tscn": true,
         "**/*.uid": true,
         "**/export_presets.cfg": true,
-        "icon.svg": true,
-        "Scenes/": true
+        "icon.svg": true
     }
 }
