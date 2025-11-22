@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwrvat1bn6ld3"]
+
+[ext_resource type="Script" uid="uid://da6k8oenaky88" path="res://Scripts/Gameplay/Trade/LineGraph.cs" id="1_oq7pa"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oq7pa")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="YTicksContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
