@@ -1,0 +1,57 @@
+[
+    {
+        "ID": "t_pol_01",
+        "Title": "Will He Get Elected?",
+        "Desc": "",
+        "Duration": 60,
+        "Options": [
+            {
+                "Name": "Yes",
+                "Odds": 50,
+                "Tags": [
+                    "Populism",
+                    "Nationalism"
+                ]
+            },
+            {
+                "Name": "No",
+                "Odds": 50,
+                "Tags": [
+                    "Communism",
+                    "Globalism"
+                ]
+            }
+        ],
+        "Tags": [
+            "Politics",
+            "Democracy"
+        ],
+        "Flags": []
+    },
+    {
+        "ID": "t_spo_01",
+        "Title": "Who Will Win?",
+        "Desc": "",
+        "Duration": 60,
+        "Options": [
+            {
+                "Name": "Team A",
+                "Odds": 25,
+                "Tags": [
+                    "Team_A"
+                ]
+            },
+            {
+                "Name": "Team B",
+                "Odds": 75,
+                "Tags": [
+                    "Team_B"
+                ]
+            }
+        ],
+        "Tags": [
+            "Sports"
+        ],
+        "Flags": []
+    }
+]

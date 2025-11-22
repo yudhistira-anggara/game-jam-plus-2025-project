@@ -1,12 +1,124 @@
-[gd_scene load_steps=4 format=3 uid="uid://ng67ef6kvjk6"]
+[gd_scene load_steps=9 format=3 uid="uid://ng67ef6kvjk6"]
 
 [ext_resource type="Script" uid="uid://dm72piu2m4vq4" path="res://Scripts/Main.cs" id="1_kln2b"]
-[ext_resource type="PackedScene" uid="uid://eyrjn666ekxx" path="res://Scenes/Tests/dialogue_panel.tscn" id="1_r150o"]
-[ext_resource type="PackedScene" uid="uid://dt1urggbegxuu" path="res://Scenes/Tests/dialogue_system.tscn" id="2_idj7w"]
+[ext_resource type="Script" uid="uid://k03ihd0usxrf" path="res://Scripts/Tests/TestButton.cs" id="2_idj7w"]
+[ext_resource type="Script" uid="uid://brle1iq2je27d" path="res://Scripts/Tests/TestProgress.cs" id="3_rgh2o"]
+[ext_resource type="Script" uid="uid://cj6rxoxa11lam" path="res://Scripts/Tests/TestButton2.cs" id="3_v1gob"]
+[ext_resource type="Script" uid="uid://b84fwvrjngqnm" path="res://Scripts/Tests/TestButton3.cs" id="4_jw32o"]
+[ext_resource type="Script" uid="uid://cyhebphn84ubx" path="res://Scripts/Tests/TimerLabel.cs" id="4_pbw6q"]
+[ext_resource type="Script" uid="uid://l3pm3d3qovdn" path="res://Scripts/UI/Tests/TradesLabel.cs" id="7_jw32o"]
+[ext_resource type="Script" uid="uid://bsgutg814j735" path="res://Scripts/UI/Tests/TradersLabel.cs" id="8_50glp"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kln2b")
 
-[node name="DialoguePanel" parent="." instance=ExtResource("1_r150o")]
+[node name="TestButton" type="Button" parent="."]
+custom_minimum_size = Vector2(64, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 951.0
+offset_top = 518.0
+offset_right = 1015.0
+offset_bottom = 550.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Test"
+script = ExtResource("2_idj7w")
 
-[node name="DialogueSystem" parent="." instance=ExtResource("2_idj7w")]
+[node name="TestButton2" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(64, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 951.0
+offset_top = 563.0
+offset_right = 1055.0
+offset_bottom = 595.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Test Trades"
+script = ExtResource("3_v1gob")
+
+[node name="TestButton3" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(64, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 951.0
+offset_top = 608.0
+offset_right = 1055.0
+offset_bottom = 640.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Test Traders"
+script = ExtResource("4_jw32o")
+
+[node name="TestProgress" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(512, 32)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 951.0
+offset_top = 474.0
+offset_right = 1463.0
+offset_bottom = 506.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+show_percentage = false
+script = ExtResource("3_rgh2o")
+
+[node name="TimerLabel" type="Label" parent="."]
+offset_left = 951.0
+offset_top = 439.0
+offset_right = 991.0
+offset_bottom = 462.0
+text = "00:00"
+script = ExtResource("4_pbw6q")
+
+[node name="Traders List" type="Label" parent="."]
+offset_left = 456.0
+offset_top = 378.0
+offset_right = 544.0
+offset_bottom = 401.0
+text = "Traders List: "
+
+[node name="TradesLabel" type="Label" parent="Traders List"]
+layout_mode = 0
+offset_left = -240.0
+offset_top = 23.0
+offset_right = -152.0
+offset_bottom = 46.0
+script = ExtResource("7_jw32o")
+
+[node name="Trades List" type="Label" parent="."]
+offset_left = 216.0
+offset_top = 378.0
+offset_right = 304.0
+offset_bottom = 401.0
+text = "Trades List: "
+
+[node name="TradersLabel" type="Label" parent="Trades List"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 23.0
+offset_right = 328.0
+offset_bottom = 46.0
+script = ExtResource("8_50glp")
