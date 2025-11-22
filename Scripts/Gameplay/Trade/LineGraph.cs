@@ -1,8 +1,11 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Runtime.InteropServices;
 
-public partial class LineChart : Control
+public partial class LineGraph : GridContainer
 {
 	[Export] public float LineWidth = 5f;
 	[Export] public Color LineColor = Colors.White;
@@ -10,10 +13,10 @@ public partial class LineChart : Control
 	[Export] public string XLabelText = "";
 	[Export] public string YLabelText = "";
 	[Export] public int XTicks = 7;
-	[Export] public int YTicks = 7;
+	public int YTicks = 7;
 
-	private bool xNumerical = true;
-	private bool yNumerical = true;
+	[Export] private bool xNumerical = false;
+	[Export] private bool yNumerical = true;
 
 	private float? minX, maxX, minY, maxY;
 
@@ -37,9 +40,9 @@ public partial class LineChart : Control
 		new Godot.Collections.Dictionary() { {"x", "TUE"}, {"y", 8.0f} },
 		new Godot.Collections.Dictionary() { {"x", "WED"}, {"y", 3.0f} },
 		new Godot.Collections.Dictionary() { {"x", "THU"}, {"y", 5.0f} },
-		new Godot.Collections.Dictionary() { {"x", "FRI"}, {"y", 4.0f} },
+		new Godot.Collections.Dictionary() { {"x", "FRI"}, {"y", 5.0f} },
 		new Godot.Collections.Dictionary() { {"x", "SAT"}, {"y", 6.0f} },
-		new Godot.Collections.Dictionary() { {"x", "SUN"}, {"y", 1.0f} }
+		new Godot.Collections.Dictionary() { {"x", "SUN"}, {"y", 2.0f} }
 	};
 
 	public override void _Ready()
@@ -51,7 +54,7 @@ public partial class LineChart : Control
 		background = lineContainer.GetNode<ColorRect>("Background");
 		xTicksContainer = GetNode<Container>("XTicksContainer");
 		yTicksContainer = GetNode<Container>("YTicksContainer");
-
+		
 		// Create and style the Line2D
 		line = new Line2D();
 		line.Width = LineWidth;
@@ -66,6 +69,7 @@ public partial class LineChart : Control
 
 		AnalyzeData();
 		CalculateMinMax();
+		YTicks = Convert.ToInt16(MathF.Round(maxY.Value - minY.Value)) + 1 ;
 		GenerateTicks();
 		DrawLineChart();
 
@@ -76,8 +80,8 @@ public partial class LineChart : Control
 	private void DeferredResizeAndRedraw()
 	{
 		// Now rect_size is correct after children were resized
-		lineRectWidth = lineContainer.RectSize.x;
-		lineRectHeight = lineContainer.RectSize.y;
+		lineRectWidth = lineContainer.Size.X;
+		lineRectHeight = lineContainer.Size.Y;
 
 		if (lineRectWidth <= 0 || lineRectHeight <= 0) return;
 
@@ -91,19 +95,7 @@ public partial class LineChart : Control
 
 	private void AnalyzeData()
 	{
-		xNumerical = true;
-		yNumerical = true;
 
-		foreach (var point in data)
-		{
-			var xVal = point["x"];
-			var yVal = point["y"];
-
-			if (!(xVal is int || xVal is float || xVal is double))
-				xNumerical = false;
-			if (!(yVal is int || yVal is float || yVal is double))
-				yNumerical = false;
-		}
 	}
 
 	private void CalculateMinMax()
@@ -140,7 +132,7 @@ public partial class LineChart : Control
 		for (int i = 0; i < XTicks; i++)
 		{
 			var tick = new Label();
-			tick.SizeFlagsHorizontal = (int)SizeFlags.ExpandFill;
+			tick.SizeFlagsHorizontal = SizeFlags.ExpandFill;
 			tick.HorizontalAlignment = HorizontalAlignment.Center;
 
 			if (xNumerical && i < data.Count)
@@ -156,16 +148,17 @@ public partial class LineChart : Control
 		}
 
 		// Y-axis ticks (from bottom to top: high to low visually, but we reverse index)
+		var spanY = maxY.Value - minY.Value;
 		for (int i = YTicks - 1; i >= 0; i--)
 		{
 			var tick = new Label();
-			tick.SizeFlagsVertical = (int)SizeFlags.ExpandFill;
+			tick.SizeFlagsVertical = SizeFlags.ExpandFill;
 			tick.VerticalAlignment = VerticalAlignment.Center;
 
 			if (yNumerical)
 			{
 				float value = minY.Value + i * (maxY.Value - minY.Value) / (YTicks - 1);
-				tick.Text = Mathf.Round(value).ToString();
+				tick.Text = value.ToString();
 			}
 			else
 			{
@@ -196,22 +189,30 @@ public partial class LineChart : Control
 	private float ScaleX(float val)
 	{
 		float dx = maxX.Value - minX.Value;
-		if (dx == 0) return lineRectX / 2;
+		if (dx == 0)
+		{
+			Debug.Print("dx is zero in ScaleX");
+			return lineRectX / 2;
+
+		}
 		return ((val - minX.Value) * lineRectWidth / dx) + lineRectX / 2;
 	}
 
 	private float ScaleY(float val)
 	{
 		float dy = maxY.Value - minY.Value;
-		if (dy == 0) return lineRectHeight / 2;
+		if (dy == 0)
+		{
+			Debug.Print("dy is zero in ScaleY");
+			return lineRectHeight / 2;
+		}
 		return lineRectHeight - ((val - minY.Value) * lineRectHeight / dy) + lineRectY / 2;
 	}
 
 	private float GetValue(Variant val, int index)
 	{
-		if (val.VariantType == Variant.Type.Int || 
-			val.VariantType == Variant.Type.Float ||
-			val.VariantType == Variant.Type.Real)
+		if (val.VariantType == Variant.Type.Int ||
+			val.VariantType == Variant.Type.Float)
 		{
 			return (float)val;
 		}

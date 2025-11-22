@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://q3s02txaofra"]
+[gd_scene load_steps=8 format=3 uid="uid://2hqm4kkbunee"]
 
-[ext_resource type="Texture2D" uid="uid://g0yv0xt5ddh" path="res://Resources/Sprites/X.png" id="1_n5o26"]
-[ext_resource type="Script" uid="uid://c4lftlsklalum" path="res://Scripts/UI/Tests/ExitButton.cs" id="2_6885t"]
+[ext_resource type="Texture2D" uid="uid://g0yv0xt5ddh" path="res://Resources/Sprites/X.png" id="1_5j8mc"]
+[ext_resource type="Script" uid="uid://c4lftlsklalum" path="res://Scripts/UI/Tests/ExitButton.cs" id="2_tys0g"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jirbj"]
 font_color = Color(1, 0, 0, 1)
@@ -1413,8 +1413,8 @@ scale = Vector2(0.33, 0.33)
 
 [node name="Button" type="Button" parent="ExitContainer"]
 layout_mode = 2
-icon = ExtResource("1_n5o26")
+icon = ExtResource("1_5j8mc")
 flat = true
-script = ExtResource("2_6885t")
+script = ExtResource("2_tys0g")
 
 [connection signal="pressed" from="ExitContainer/Button" to="ExitContainer/Button" method="_on_pressed"]
