@@ -57,5 +57,33 @@
             "Sports"
         ],
         "Flags": []
+    },
+        {
+        "ID": "t_chi_01",
+        "Title": "Will the children ever be happy?",
+        "Desc": "",
+        "Duration": 10,
+        "Options": [
+            {
+                "Name": "Team A",
+                "Odds": 30,
+                "Trend": 3,
+                "Tags": [
+                    "Team_A"
+                ]
+            },
+            {
+                "Name": "Team B",
+                "Odds": 0,
+                "Trend": -2,
+                "Tags": [
+                    "Team_B"
+                ]
+            }
+        ],
+        "Tags": [
+            "Sports"
+        ],
+        "Flags": []
     }
 ]

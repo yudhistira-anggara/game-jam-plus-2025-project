@@ -14,9 +14,9 @@ namespace GameJam
         public List<string> TradeFiles { get; set; } = [];
 
         public int TradeCount { get; set; } = 0;
-        public int MaxTrades { get; set; } = 6;
+        public int MaxTrades { get; set; } = 15;
 
-        public double DecisionInterval { get; set; } = 3;
+        public double DecisionInterval { get; set; } = 1;
         public double TimeSinceLastDecision { get; set; } = 0;
 
         public override void _Ready()
@@ -107,8 +107,8 @@ namespace GameJam
                     }
                     else
                     {
-                        if (Random.Shared.NextDouble() < 0.3 == false)
-                            return;
+                        // if (Random.Shared.NextDouble() < 0.3 == false)
+                            // return;
 
                         if (t.Duration > GameManager.Instance.GameTimer.TimeLeft)
                             return;

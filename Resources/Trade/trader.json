@@ -46,4 +46,29 @@
             "Unique"
         ]
     }
+        ,{
+        "ID": "Bude_Semok",
+        "Name": "Putri Bude",
+        "Desc": "",
+        "Wealth": 100000,
+        "Income": 500,
+        "Activeness": 50,
+        "Interests": {
+            "Politics": 50,
+            "Military": 25,
+            "Populism": 25,
+            "Nationalism": 250,
+            "Sports": -100,
+            "Children": 1000
+        },
+        "Personality": {
+            "Caution": 10,
+            "Fomo": 80,
+            "Willingness": 25,
+            "Memory": 20
+        },
+        "Flags": [
+            "Unique"
+        ]
+    }
 ]

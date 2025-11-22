@@ -64,7 +64,7 @@ namespace GameJam
 
             if (Random.Shared.NextDouble() < act)
             {
-                // CreateRequest(trade);
+                 CreateRequest(trade);
             }
 
             /*

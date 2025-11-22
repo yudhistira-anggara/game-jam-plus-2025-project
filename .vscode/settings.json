@@ -15,5 +15,6 @@
         "**/*.uid": true,
         "**/export_presets.cfg": true,
         "icon.svg": true
-    }
+    },
+    "godotTools.editorPath.godot4": "d:\\Courses\\Godot_v4.5.1-stable_mono_win64\\Godot_v4.5.1-stable_mono_win64.exe"
 }
