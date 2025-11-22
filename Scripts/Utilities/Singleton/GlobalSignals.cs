@@ -12,11 +12,14 @@ namespace GameJam
         public delegate void TestSignalEventHandler();
 
         [Signal]
+        public delegate void DurationLeftEventHandler(double duration);
+
+        [Signal]
         public delegate void NewListingEventHandler(Listing listing);
         [Signal]
         public delegate void KillListingEventHandler(Listing listing);
         [Signal]
-        public delegate void BuyListingEventHandler(Listing listing);
+        public delegate void BuyListingEventHandler(Trader trader, Listing listing);
 
         [Signal]
         public delegate void NewTradeEventHandler(Trade trade);
@@ -27,6 +30,9 @@ namespace GameJam
 
         [Signal]
         public delegate void NewTraderEventHandler(Trader trader);
+
+        [Signal]
+        public delegate void TradeHistoryUpdateEventHandler(TradeHistory th);
         
         [Signal]
         public delegate void NewTradeRequestEventHandler(TradeRequest request);
