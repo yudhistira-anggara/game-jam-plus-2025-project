@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvhovqso54jht"]
+
+[ext_resource type="Script" uid="uid://bwnqm5ql16rie" path="res://Scripts/Generators/NewsGenerator.cs" id="1_n42c8"]
+[ext_resource type="PackedScene" path="res://Scenes/Tests/state_machine.tscn" id="1_ruf43"]
+
+[node name="NewsGenerator" type="Node"]
+script = ExtResource("1_n42c8")
+
+[node name="StateMachine" parent="." instance=ExtResource("1_ruf43")]

@@ -1,0 +1,17 @@
+{
+  "templates": [
+    "{subject} {verb} {topic} amid {context}.",
+    "{location} {event} sparks {reaction}.",
+    "{subject} announces {topic} in {location}.",
+    "{subject} faces {topic} over {context}.",
+    "{subject} {verb} {topic} in {location}.",
+    "{event} in {location} triggers {reaction}."
+  ],
+  "subject": ["Fruit Ink.", "UP Government", "Mason Slow", "Edison Motors", "EU Commission", "Diben", "Mas Telon", "Breada Thunkberg", "Cook", "Dutch van der Leyen"],
+  "verb": ["unveils", "cracks down on", "celebrates", "launches", "investigates"],
+  "topic": ["AI breakthrough", "data scandal", "sales milestone", "EV recall", "trade deal", "green reforms", "AI initiative", "import ban", "fiscal stimulus"],
+  "context": ["global privacy outcry", "tech boom", "climate emergency", "election turmoil"],
+  "location": ["Washingaton CD", "Alloy Mounds", "Rispa", "Jingbei", "Donlon", "Black Hills", "corporate HQ", "UP summit", "Vosad Forum"],
+  "event": ["protests", "climate summit", "cyber disaster", "trade talks", "product launch"],
+  "reaction": ["fierce debate", "widespread relief", "public outrage", "market surge"]
+}

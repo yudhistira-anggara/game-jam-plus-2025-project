@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcm1lhweolaty"]
+
+[ext_resource type="Script" uid="uid://c26wkrjgme23f" path="res://Scripts/Generators/NameGenerator.cs" id="1_dwj7o"]
+
+[node name="NameGenerator" type="Node"]
+script = ExtResource("1_dwj7o")
