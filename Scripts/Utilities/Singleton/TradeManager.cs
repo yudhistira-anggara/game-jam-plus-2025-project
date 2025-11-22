@@ -13,7 +13,8 @@ namespace GameJam
 
         public List<string> TradeFiles { get; set; } = [];
 
-        public int MaxTrades { get; set; } = 12;
+        public int TradeCount { get; set; } = 0;
+        public int MaxTrades { get; set; } = 6;
 
         public double DecisionInterval { get; set; } = 1;
         public double TimeSinceLastDecision { get; set; } = 0;
@@ -39,7 +40,7 @@ namespace GameJam
                 return;
 
             GenerateTrade();
-            
+
             TimeSinceLastDecision = 0;
         }
 
@@ -50,8 +51,10 @@ namespace GameJam
 
         public void HandleTradeRequest(TradeRequest request)
         {
+            /*
             if (1 == 1)
                 EmitSignal(GlobalSignals.SignalName.Refund, request);
+            */
 
             TradeRequests.Add(request);
         }
@@ -96,11 +99,13 @@ namespace GameJam
                     }
                     else
                     {
-                        if (Random.Shared.NextDouble() < 0.5)
-                        {
-                            Trades.Add(t);
-                            GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, t);
-                        }
+                        if (Random.Shared.NextDouble() < 0.3 == false)
+                            return;
+
+                        t.Index = TradeCount;
+                        Trades.Add(t);
+                        GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, t);
+                        TradeCount++;
                     }
                 }
             }

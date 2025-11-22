@@ -6,6 +6,7 @@ namespace GameJam
 {
     public partial class Trade : GodotObject
     {
+        public int Index { get; set; }
         public string ID { get; set; }
         public string Title { get; set; }
         public string Desc { get; set; }
@@ -37,6 +38,8 @@ namespace GameJam
     public partial class TradeRequest : GodotObject
     {
         public string Requester { get; set; }
+        public string Target { get; set; }
+        public int Index { get; set; }
         public string Option { get; set; }
         public bool IsBuy { get; set; }
         public int Shares { get; set; }

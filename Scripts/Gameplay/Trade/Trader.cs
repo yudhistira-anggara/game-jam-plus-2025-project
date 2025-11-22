@@ -6,6 +6,7 @@ namespace GameJam
 {
     public partial class Trader : Node
     {
+        public int Index { get; set; }
         public string ID { get; set; }
         // public string Name { get; set; }
         public string Desc { get; set; }
@@ -59,12 +60,20 @@ namespace GameJam
 
         public void DecideAction(Trade trade)
         {
+            double act = (double)Activeness / 100;
+
+            if (Random.Shared.NextDouble() < act)
+            {
+                CreateRequest(trade);
+            }
+
+            /*
             var willing = CalculateWillingness(trade);
 
             if (!willing)
                 return;
-
-
+            
+            */
         }
 
         public void HandleRefund(TradeRequest request)
@@ -78,10 +87,12 @@ namespace GameJam
         {
             var Request = new TradeRequest()
             {
-
+                Requester = ID,
+                Target = trade.ID,
+                Index = trade.Index
             };
-            CurrentTrades.Add("test", 5);
-            EmitSignal(GlobalSignals.SignalName.NewTradeRequest, Request);
+            // CurrentTrades.Add(trade.ID, 5);
+            GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTradeRequest, Request);
         }
     }
 }

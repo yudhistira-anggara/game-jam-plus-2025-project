@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ng67ef6kvjk6"]
+[gd_scene load_steps=10 format=3 uid="uid://ng67ef6kvjk6"]
 
 [ext_resource type="Script" uid="uid://dm72piu2m4vq4" path="res://Scripts/Main.cs" id="1_kln2b"]
 [ext_resource type="Script" uid="uid://k03ihd0usxrf" path="res://Scripts/Tests/TestButton.cs" id="2_idj7w"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cyhebphn84ubx" path="res://Scripts/Tests/TimerLabel.cs" id="4_pbw6q"]
 [ext_resource type="Script" uid="uid://l3pm3d3qovdn" path="res://Scripts/UI/Tests/TradesLabel.cs" id="7_jw32o"]
 [ext_resource type="Script" uid="uid://bsgutg814j735" path="res://Scripts/UI/Tests/TradersLabel.cs" id="8_50glp"]
+[ext_resource type="Script" uid="uid://b8lsjrtq66t6t" path="res://Scripts/UI/Tests/TradeRequestsLabel.cs" id="9_vy5pj"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kln2b")
@@ -94,31 +95,43 @@ text = "00:00"
 script = ExtResource("4_pbw6q")
 
 [node name="Traders List" type="Label" parent="."]
-offset_left = 456.0
-offset_top = 378.0
-offset_right = 544.0
-offset_bottom = 401.0
+offset_left = 277.0
+offset_top = 64.0
+offset_right = 377.0
+offset_bottom = 87.0
 text = "Traders List: "
 
-[node name="TradesLabel" type="Label" parent="Traders List"]
+[node name="TradersLabel" type="Label" parent="Traders List"]
 layout_mode = 0
-offset_left = -240.0
 offset_top = 23.0
-offset_right = -152.0
+offset_right = 88.0
+offset_bottom = 46.0
+script = ExtResource("8_50glp")
+
+[node name="Trades List" type="Label" parent="."]
+offset_left = 37.0
+offset_top = 64.0
+offset_right = 130.0
+offset_bottom = 87.0
+text = "Trades List: "
+
+[node name="TradesLabel" type="Label" parent="Trades List"]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 88.0
 offset_bottom = 46.0
 script = ExtResource("7_jw32o")
 
-[node name="Trades List" type="Label" parent="."]
-offset_left = 216.0
-offset_top = 378.0
-offset_right = 304.0
-offset_bottom = 401.0
-text = "Trades List: "
+[node name="Trade Request List" type="Label" parent="."]
+offset_left = 538.0
+offset_top = 64.0
+offset_right = 631.0
+offset_bottom = 87.0
+text = "Trade Request List:"
 
-[node name="TradersLabel" type="Label" parent="Trades List"]
+[node name="TradeRequestsLabel" type="Label" parent="Trade Request List"]
 layout_mode = 0
-offset_left = 240.0
 offset_top = 23.0
-offset_right = 328.0
+offset_right = 88.0
 offset_bottom = 46.0
-script = ExtResource("8_50glp")
+script = ExtResource("9_vy5pj")

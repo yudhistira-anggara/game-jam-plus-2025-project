@@ -9,6 +9,9 @@ namespace GameJam
         public static GlobalSignals Instance { get; private set; }
 
         [Signal]
+        public delegate void TestSignalEventHandler();
+
+        [Signal]
         public delegate void NewTradeEventHandler(Trade trade);
 
         [Signal]
