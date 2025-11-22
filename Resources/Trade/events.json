@@ -1,0 +1,14 @@
+[
+    {
+        "id": "e_generic_01",
+        "title": "",
+        "desc": "",
+        "odds": 5,
+        "target": [
+            "any"
+        ],
+        "effect": {
+            
+        }
+    }
+]

@@ -16,9 +16,11 @@ public partial class PlayerController : CharacterBody3D
 	private Area3D _interactionArea;
 	private bool _canInteract = false;
 	private bool _isInteracting = false;
-
+	[Export]
+	public Control PauseMenu;
 	public override void _Ready()
 	{
+		PauseMenu.Hide();
 		_animatedSprite = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
 		_interactionArea = GetNode<Area3D>("Area3D");
 		_interactionArea.Monitoring = true;
@@ -154,67 +156,25 @@ public partial class PlayerController : CharacterBody3D
 					}
 				}
 			}
-			/*else
-			{
-				if (_isInteracting)
-				{
-					_isInteracting = false;
-					var bodies = _interactionArea.GetOverlappingBodies();
-					foreach (var body in bodies)
-					{
-						var interactable = body.GetParent() as IInteractable;
-						interactable?.Entered();
-					}
-				}
-			}*/
-		}/*
-		
-		if (Input.IsActionPressed("interact"))
-		{
-			if (!_isInteracting)
-			{
-				_isInteracting = true;
-				var bodies = _interactionArea.GetOverlappingBodies();
-				var shortestDistance = Mathf.Inf;
-				var bodyDistance = 0f;
-				var farthestBody = new Node3D();
-				var closestBody = new Node3D();
-				foreach (var body in bodies)
-				{
-					var collisionBody = body.GetNode<CollisionShape3D>("CollisionShape3D");
-					bodyDistance = collisionBody.GlobalPosition.DistanceTo(this.GlobalPosition);
-					farthestBody = body;
-					if (bodyDistance < shortestDistance)
-					{
-						farthestBody = closestBody;
-						closestBody = body;
-						shortestDistance = bodyDistance;
-						Debug.Print("Found closer body: " + body.Name + " at distance " + bodyDistance);
-					}
-				}
-				var farthestParent = farthestBody.GetParent() as IInteractable;
-				farthestParent?.Uninteractable();
-				var closestParent = closestBody.GetParent() as IInteractable;
-				closestParent?.Interaction();
-			}
-		
-		}
-		else
-		{
-			if (_isInteracting)
-			{
-				_isInteracting = false;
-				var bodies = _interactionArea.GetOverlappingBodies();
-				foreach (var body in bodies)
-				{
-					var interactable = body.GetParent() as IInteractable;
-					interactable?.Entered();
-				}
-			}
-		}*/
+			
 
+		}
+		if (Input.IsActionJustPressed("pause"))
+			{
+				_Pause();
+				
+			}
+		
 		MoveAndSlide();
+
 	}
+
+	private async void _Pause()
+	{
+		PauseMenu.Show();
+		GetTree().Paused = true;
+	}
+
 	#region Alert System
 	private void _OnBodyEntered(Node3D body)
 	{
@@ -230,20 +190,6 @@ public partial class PlayerController : CharacterBody3D
 		interactable?.Exited();
 	}
 	#endregion
-	public void PlayWalkAnimation()
-	{
-		if (_characterDirection == new Vector3(0f, 0f, 0f))
-		{
-			_animatedSprite.Play("WalkForward");
-		}
 
-	}
 
-	public void NearObject()
-	{
-		if (GetNode<Area3D>("Area3D").HasOverlappingBodies())
-		{
-
-		}
-	}
 }

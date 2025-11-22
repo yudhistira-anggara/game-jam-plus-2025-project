@@ -11,12 +11,11 @@ namespace GameJam
         public RichTextLabel StyleName { get; set; }
         public TextureRect StylePortrait { get; set; }
         public RichTextLabel StyleText { get; set; }
-        public AudioStream StyleVoice { get; set; }
         public MarginContainer PreviousContainer { get; set; }
         public MarginContainer NextContainer { get; set; }
         public VBoxContainer OuterPortraitContainer { get; set; }
         public Label PageLabel { get; set; }
-        
+
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; }
 
@@ -36,9 +35,16 @@ namespace GameJam
 
             if (Contents.Portrait != "" && FileAccess.FileExists(Contents.Portrait))
             {
-                Image image = Image.LoadFromFile(Contents.Portrait);
-                ImageTexture imageTexture = ImageTexture.CreateFromImage(image);
+                if (!Utils.IsValidImageExtension(Contents.Portrait))
+                    return;
+                    
+                Texture2D image = (Texture2D)ResourceLoader.Load(Contents.Portrait);
+                ImageTexture imageTexture = ImageTexture.CreateFromImage(image.GetImage());
                 StylePortrait.Texture = imageTexture;
+            }
+            else
+            {
+                StylePortrait.Texture = null;
             }
 
             StyleText.Text = Contents.Text != "" ? Contents.Text : "";
@@ -93,7 +99,7 @@ namespace GameJam
         {
             Instance = (PanelContainer)GetTree().GetFirstNodeInGroup("DialogueBoxDefault");
             StyleName = (RichTextLabel)GetTree().GetFirstNodeInGroup("NameLabel");
-            StylePortrait = (TextureRect)GetTree().GetFirstNodeInGroup("PortaitImage");
+            StylePortrait = (TextureRect)GetTree().GetFirstNodeInGroup("PortraitImage");
             StyleText = (RichTextLabel)GetTree().GetFirstNodeInGroup("TextLabel");
             OuterPortraitContainer = (VBoxContainer)GetTree().GetFirstNodeInGroup("OuterPortraitContainer");
             PreviousContainer = (MarginContainer)GetTree().GetFirstNodeInGroup("PreviousContainer");

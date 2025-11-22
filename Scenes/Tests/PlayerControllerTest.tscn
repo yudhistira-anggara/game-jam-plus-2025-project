@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bsr47imiksk5c"]
+[gd_scene load_steps=51 format=3 uid="uid://bsr47imiksk5c"]
 
 [ext_resource type="Script" uid="uid://c410xrnhmnv7c" path="res://Scripts/PlayerController/PlayerController.cs" id="1_u3p7k"]
 [ext_resource type="Texture2D" uid="uid://bdupfi26vnykp" path="res://Resources/Sprites/Character_20.png" id="2_cb8b7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d0vfw83uuw6ve" path="res://Scripts/PlayerController/InteractableObject.cs" id="4_xa2w6"]
 [ext_resource type="Texture2D" uid="uid://cbec4oo3c3dg0" path="res://Resources/Sprites/E_Button.png" id="5_cb8b7"]
 [ext_resource type="VoxelGIData" uid="uid://dpcqww3wujhb7" path="res://Resources/Lighting/PlayerControllerTest.VoxelGI_data.res" id="5_rjl26"]
+[ext_resource type="PackedScene" uid="uid://chu5nshfdvqia" path="res://Scenes/Tests/pause_menu.tscn" id="9_4dcvm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_u3p7k"]
 size = Vector3(0.60253906, 1, 0.5604172)
@@ -342,9 +343,10 @@ ambient_light_color = Color(0.41215247, 0.41215247, 0.41215247, 1)
 
 [node name="PlayerControllerTest" type="Node3D"]
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("PauseMenu")]
 motion_mode = 1
 script = ExtResource("1_u3p7k")
+PauseMenu = NodePath("../PauseMenu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.018131256)
@@ -814,3 +816,5 @@ camera_attributes = SubResource("CameraAttributesPhysical_rjl26")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 size = Vector3(20, 5, 20)
 data = ExtResource("5_rjl26")
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_4dcvm")]

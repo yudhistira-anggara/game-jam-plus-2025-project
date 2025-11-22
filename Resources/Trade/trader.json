@@ -1,0 +1,49 @@
+[
+    {
+        "ID": "trader_joe",
+        "Name": "Joe Momma",
+        "Desc": "",
+        "Wealth": 10000,
+        "Income": 500,
+        "Activeness": 50,
+        "Interests": {
+            "Politics": 50,
+            "Military": 25,
+            "Populism": 25,
+            "Nationalism": 50,
+            "Communism": -50,
+            "Sports": -50
+        },
+        "Personality": {
+            "Caution": 10,
+            "Fomo": 50,
+            "Willingness": 25,
+            "Memory": 20
+        },
+        "Flags": [
+            "Unique"
+        ]
+    },
+    {
+        "ID": "trader_bill",
+        "Name": "Lil Billy",
+        "Desc": "",
+        "Wealth": 1000,
+        "Income": 50,
+        "Activeness": 75,
+        "Interests": {
+            "Politics": -100,
+            "Military": 50,
+            "Populism": 75,
+            "Sports": 25
+        },
+        "Personality": {
+            "Fomo": 75,
+            "Willingness": 50,
+            "Memory": 5
+        },
+        "Flags": [
+            "Unique"
+        ]
+    }
+]
