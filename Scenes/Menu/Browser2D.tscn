@@ -1,11 +1,20 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfuj1xycrgu7h"]
 
 [ext_resource type="PackedScene" uid="uid://2hqm4kkbunee" path="res://Scenes/Browser/Browser2D.tscn" id="1_ubc6x"]
-[ext_resource type="Script" uid="uid://dgv3noq7f35i" path="res://Scripts/UI/Tests/Browser2dShake.cs" id="2_f7mq2"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_ode8w"]
+script/source = "using Godot;
+using System;
+
+public partial class Browser2dShake : Control
+{
+	
+}
+"
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Browser" parent="." instance=ExtResource("1_ubc6x")]
 offset_right = 1920.0
 offset_bottom = 1080.0
-script = ExtResource("2_f7mq2")
+script = SubResource("CSharpScript_ode8w")
