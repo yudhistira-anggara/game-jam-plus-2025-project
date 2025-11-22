@@ -3,7 +3,7 @@ using System;
 
 namespace GameJam
 {
-    public partial class TradesLabel : Label
+    public partial class TradeTimerLabel : Label
     {
         private GlobalSignals _globalSignals { get; set; }
         private TradeManager _tradeManager { get; set; }
@@ -24,21 +24,17 @@ namespace GameJam
 
             _globalSignals = GlobalSignals.Instance;
             _tradeManager = TradeManager.Instance;
-            _globalSignals.NewTrade += UpdateTrade;
-            _globalSignals.ResolveTrade += UpdateTrade;
-            _globalSignals.TradeModified += UpdateTrade;
+            _globalSignals.DurationLeft += UpdateTimer;
         }
 
-        public void UpdateTrade(Trade t)
+        public void UpdateTimer(double d)
         {
             Text = "";
             foreach (var tr in _tradeManager.Trades)
             {
-                Text += $"\n{tr.Index}.{tr.Title}\n";
-                foreach (var o in tr.Options)
-                {
-                    Text += $"-> [{o.Name}] {o.Odds} ({o.Trend})\n ";
-                }
+                var ts = TimeSpan.FromSeconds(tr.Duration);
+                var st = ts.ToString(@"mm\:ss");
+                Text += $"\n{st}";
             }
         }
     }

@@ -7,7 +7,7 @@ namespace GameJam
     /*
     DISPLAYED ODDS = (OPTION_VALUE / TOTAL_VALUE_OF_OPTIONS) * 100 -> %
     */
-    
+
     public partial class Trade : GodotObject
     {
         public int Index { get; set; }
@@ -89,10 +89,11 @@ namespace GameJam
         {
             Duration -= delta;
 
+            GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.DurationLeft, Duration);
+
             if (Duration <= 0)
             {
-                GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.ResolveTrade);
-                Free();
+                GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.ResolveTrade, this);
             }
         }
     }
@@ -100,8 +101,8 @@ namespace GameJam
     public partial class TradeOption : GodotObject
     {
         public string Name { get; set; }
-        public int Odds { get; set; }
-        public int Trend { get; set; }
+        public double Odds { get; set; }
+        public double Trend { get; set; }
         public List<string> Tags { get; set; }
     }
 
@@ -112,6 +113,16 @@ namespace GameJam
         public int Index { get; set; }
         public string Option { get; set; }
         public bool IsBuy { get; set; }
+        public int Shares { get; set; }
+        public int Money { get; set; }
+    }
+
+    public partial class TradeHistory : GodotObject
+    {
+        public string Purchaser { get; set; }
+        public int Index { get; set; }
+        public string Target { get; set; }
+        public string Option { get; set; }
         public int Shares { get; set; }
         public int Money { get; set; }
     }

@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace GameJam
@@ -15,7 +16,7 @@ namespace GameJam
         public int TraderCount { get; set; } = 0;
         public int MaxTraders { get; set; } = 6;
 
-        public double DecisionInterval { get; set; } = 5;
+        public double DecisionInterval { get; set; } = 3;
         public double TimeSinceLastDecision { get; set; } = 0;
 
         public override void _Ready()
@@ -34,18 +35,13 @@ namespace GameJam
             if (TimeSinceLastDecision < DecisionInterval)
                 return;
 
-            var trades = TradeManager.Instance.Trades;
-
-            if (trades.Count <= 0)
-                return;
-
-            foreach (var t in trades)
+            foreach (var tr in Traders.ToList())
             {
-                foreach (var tr in Traders)
-                {
-                    // GD.Print($"{t.ID}, {tr.Name} - {tr.Activeness}");
+                // GD.Print($"{t.ID}, {tr.Name} - {tr.Activeness}");
 
-                    tr.DecideAction(t);
+                foreach (var ls in ListingManager.Instance.Listings.ToList())
+                {
+                    tr.DecideAction(ls);
                 }
             }
 
