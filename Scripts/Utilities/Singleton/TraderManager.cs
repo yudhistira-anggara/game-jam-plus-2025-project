@@ -12,10 +12,10 @@ namespace GameJam
         public List<Trader> Traders { get; set; } = [];
         public List<string> TraderFiles { get; set; } = [];
 
-        public int AnonymousCount { get; set; } = 0;
-        public int MaxTraders { get; set; } = 24;
+        public int TraderCount { get; set; } = 0;
+        public int MaxTraders { get; set; } = 9;
 
-        public double DecisionInterval { get; set; } = 3;
+        public double DecisionInterval { get; set; } = 5;
         public double TimeSinceLastDecision { get; set; } = 0;
 
         public override void _Ready()
@@ -43,9 +43,13 @@ namespace GameJam
             {
                 foreach (var tr in Traders)
                 {
+                    // GD.Print($"{t.ID}, {tr.Name} - {tr.Activeness}");
+
                     tr.DecideAction(t);
                 }
             }
+
+            TimeSinceLastDecision = 0;
         }
 
         public void ModifyTraderFile(string filePath, bool addFile = true)
@@ -77,8 +81,9 @@ namespace GameJam
             {
                 var trader = new Trader()
                 {
-                    ID = $"anonymous_{AnonymousCount}",
-                    Name = $"(Anonymous)",
+                    Index = TraderCount,
+                    ID = $"anon_{TraderCount}",
+                    Name = $"Anon ({TraderCount})",
                     Wealth = 100,
                     Income = 100,
                     Activeness = 20
@@ -87,7 +92,7 @@ namespace GameJam
                 Traders.Add(trader);
                 GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, trader);
 
-                AnonymousCount++;
+                TraderCount++;
             }
         }
 
@@ -113,11 +118,14 @@ namespace GameJam
                     }
                     else
                     {
-                        var nt = new Trader(tr);
+                        Trader nt = new(tr)
+                        {
+                            Index = TraderCount,
+                        };
                         Traders.Add(nt);
                         GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, nt);
+                        TraderCount++;
                     }
-
                 }
             }
 

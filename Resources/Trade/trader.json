@@ -18,7 +18,29 @@
             "Caution": 10,
             "Fomo": 50,
             "Willingness": 25,
-            "Memory": 10
+            "Memory": 20
+        },
+        "Flags": [
+            "Unique"
+        ]
+    },
+    {
+        "ID": "trader_bill",
+        "Name": "Lil Billy",
+        "Desc": "",
+        "Wealth": 1000,
+        "Income": 50,
+        "Activeness": 75,
+        "Interests": {
+            "Politics": -100,
+            "Military": 50,
+            "Populism": 75,
+            "Sports": 25
+        },
+        "Personality": {
+            "Fomo": 75,
+            "Willingness": 50,
+            "Memory": 5
         },
         "Flags": [
             "Unique"

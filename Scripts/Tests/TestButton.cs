@@ -14,6 +14,9 @@ namespace GameJam
             if (_gameManager is null)
                 return;
 
+            _tradeManager.TradeRequests.Clear();
+            GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TestSignal);
+
             _gameManager.IsGameActive = true;
             _traderManager.InitializeTraders();
             Disabled = true;

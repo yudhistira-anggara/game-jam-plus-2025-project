@@ -3,7 +3,7 @@ using System;
 
 namespace GameJam
 {
-    public partial class TradesLabel : Label
+    public partial class TradeRequestsLabel : Label
     {
         private GlobalSignals _globalSignals { get; set; }
 
@@ -16,12 +16,18 @@ namespace GameJam
             }
 
             _globalSignals = GlobalSignals.Instance;
-            _globalSignals.NewTrade += OnNewTrade;
+            _globalSignals.NewTradeRequest += OnNewTradeRequest;
+            _globalSignals.TestSignal += ClearLabel;
         }
 
-        public void OnNewTrade(Trade t)
+        public void ClearLabel()
         {
-            Text += $"\n{t.Index}.{t.Title}";
+            Text = "";
+        }
+
+        public void OnNewTradeRequest(TradeRequest tr)
+        {
+            Text += $"\n{tr.Requester} -> {tr.Index}";
         }
     }
 }
