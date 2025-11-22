@@ -13,7 +13,7 @@ namespace GameJam
         public List<string> TraderFiles { get; set; } = [];
 
         public int TraderCount { get; set; } = 0;
-        public int MaxTraders { get; set; } = 9;
+        public int MaxTraders { get; set; } = 6;
 
         public double DecisionInterval { get; set; } = 5;
         public double TimeSinceLastDecision { get; set; } = 0;

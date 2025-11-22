@@ -60,11 +60,11 @@ namespace GameJam
 
         public void DecideAction(Trade trade)
         {
-            double act = (double)Activeness / 100;
+            var act = (double)Activeness / 100;
 
             if (Random.Shared.NextDouble() < act)
             {
-                CreateRequest(trade);
+                // CreateRequest(trade);
             }
 
             /*

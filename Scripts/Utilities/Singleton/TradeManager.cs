@@ -16,7 +16,7 @@ namespace GameJam
         public int TradeCount { get; set; } = 0;
         public int MaxTrades { get; set; } = 6;
 
-        public double DecisionInterval { get; set; } = 1;
+        public double DecisionInterval { get; set; } = 3;
         public double TimeSinceLastDecision { get; set; } = 0;
 
         public override void _Ready()
@@ -41,16 +41,24 @@ namespace GameJam
 
             GenerateTrade();
 
+            foreach (var t in Trades)
+            {
+                t.UpdateOdds();
+                t.UpdateTrend();
+            }
+
             TimeSinceLastDecision = 0;
         }
 
         public void ResolveTrade()
         {
-            // 
+            // TASK : DO TRADE RESOLVE
         }
 
         public void HandleTradeRequest(TradeRequest request)
         {
+            // Maybe a task? HANDLE TRADE REFUNDS
+
             /*
             if (1 == 1)
                 EmitSignal(GlobalSignals.SignalName.Refund, request);
@@ -63,7 +71,7 @@ namespace GameJam
         {
             if (!FileAccess.FileExists(filePath))
             {
-                GD.PushError("TraderManager.ModifyTraderFile; File does not exist.");
+                GD.PushError($"[{GetType().Name}]");
                 return;
             }
 
@@ -75,7 +83,7 @@ namespace GameJam
 
             if (!TradeFiles.Contains(filePath))
             {
-                GD.PushError("TradeManager.ModifyTraderFile; TradeFiles does not contain filePath.");
+                GD.PushError($"[{GetType().Name}]");
                 return;
             }
 
@@ -100,6 +108,9 @@ namespace GameJam
                     else
                     {
                         if (Random.Shared.NextDouble() < 0.3 == false)
+                            return;
+
+                        if (t.Duration > GameManager.Instance.GameTimer.TimeLeft)
                             return;
 
                         t.Index = TradeCount;

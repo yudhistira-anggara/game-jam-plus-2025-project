@@ -21,6 +21,7 @@ GameManager="*res://Scripts/Utilities/Singleton/GameManager.cs"
 GlobalSignals="*res://Scripts/Utilities/Singleton/GlobalSignals.cs"
 TradeManager="*res://Scripts/Utilities/Singleton/TradeManager.cs"
 TraderManager="*res://Scripts/Utilities/Singleton/TraderManager.cs"
+ListingManager="*res://Scripts/Utilities/Singleton/ListingManager.cs"
 
 [display]
 
