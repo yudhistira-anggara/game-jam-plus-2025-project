@@ -1,0 +1,27 @@
+[
+    {
+        "ID": "trader_joe",
+        "Name": "Joe Momma",
+        "Desc": "",
+        "Wealth": 10000,
+        "Income": 500,
+        "Activeness": 50,
+        "Interests": {
+            "Politics": 50,
+            "Military": 25,
+            "Populism": 25,
+            "Nationalism": 50,
+            "Communism": -50,
+            "Sports": -50
+        },
+        "Personality": {
+            "Caution": 10,
+            "Fomo": 50,
+            "Willingness": 25,
+            "Memory": 10
+        },
+        "Flags": [
+            "Unique"
+        ]
+    }
+]
