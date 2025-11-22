@@ -1,13 +1,14 @@
 [
     {
         "ID": "t_pol_01",
-        "Title": "Will He Get Elected?",
+        "Title": "Will %He% Get Elected?",
         "Desc": "",
-        "Duration": 60,
+        "Duration": 15,
         "Options": [
             {
                 "Name": "Yes",
                 "Odds": 50,
+                "Trend": 1,
                 "Tags": [
                     "Populism",
                     "Nationalism"
@@ -16,6 +17,7 @@
             {
                 "Name": "No",
                 "Odds": 50,
+                "Trend": 1,
                 "Tags": [
                     "Communism",
                     "Globalism"
@@ -32,11 +34,12 @@
         "ID": "t_spo_01",
         "Title": "Who Will Win?",
         "Desc": "",
-        "Duration": 60,
+        "Duration": 10,
         "Options": [
             {
                 "Name": "Team A",
                 "Odds": 25,
+                "Trend": 3,
                 "Tags": [
                     "Team_A"
                 ]
@@ -44,6 +47,7 @@
             {
                 "Name": "Team B",
                 "Odds": 75,
+                "Trend": -2,
                 "Tags": [
                     "Team_B"
                 ]
