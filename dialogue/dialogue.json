@@ -1,7 +1,0 @@
-{
-  "lines": [
-    "[b]Hello[/b], this is a <wait=0.5>[color=yellow]test[/color].",
-    "This line has <wait=1> a long pause.",
-    "[i][color=#66aaff]Styled[/color][/i] text works during typing."
-  ]
-}

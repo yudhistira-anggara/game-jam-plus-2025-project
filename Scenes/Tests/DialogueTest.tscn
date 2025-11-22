@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://dlv3aj87e5mqj"]
+[gd_scene load_steps=4 format=3 uid="uid://dlv3aj87e5mqj"]
+
+[ext_resource type="Script" uid="uid://dyu43e6lmsump" path="res://Scripts/Dialogue/DialogueSystem.cs" id="1_3hykj"]
+[ext_resource type="PackedScene" uid="uid://bt8ukpudtc8tc" path="res://Scenes/Prefabs/UI/DialogueBoxDefault.tscn" id="2_pb05i"]
+[ext_resource type="PackedScene" uid="uid://b40ox7xjkl6yh" path="res://Scenes/Prefabs/UI/DialogueSelectDefault.tscn" id="3_k5l54"]
 
 [node name="DialogueTest" type="Node2D"]
+
+[node name="DialogueSystem" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 683.0
+offset_top = 384.0
+offset_right = 683.0
+offset_bottom = 384.0
+script = ExtResource("1_3hykj")
+TextDisplayer = ExtResource("2_pb05i")
+SelectBox = ExtResource("3_k5l54")
+Path = "res://Resources/Dialogue/example_dialogue_demov2.json"

@@ -1,0 +1,19 @@
+{
+    "files.exclude": {
+        ".godot/": true,
+        "**/.editorconfig": true,
+        "**/.gitattributes": true,
+        "**/.gitignore": true,
+        "**/*.csproj": true,
+        "**/*.glb": true,
+        "**/*.godot": true,
+        "**/*.import": true,
+        "**/*.res": true,
+        "**/*.sln": true,
+        "**/*.tres": true,
+        "**/*.tscn": true,
+        "**/*.uid": true,
+        "**/export_presets.cfg": true,
+        "icon.svg": true
+    }
+}
