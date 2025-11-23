@@ -26,7 +26,7 @@ namespace GameJam
             Instance = this;
             ModifyTradeFile("res://Resources/Trade/trades.json");
             GlobalSignals.Instance.NewTradeRequest += HandleTradeRequest;
-            GlobalSignals.Instance.ResolveTrade += UpdateTradeManager;
+            GlobalSignals.Instance.TradeExpire += UpdateTradeManager;
             GlobalSignals.Instance.BuyListing += UpdateTradeHistory;
         }
 
@@ -42,6 +42,16 @@ namespace GameJam
                 t.UpdateTrade(delta);
             }
 
+            if (TradeHistory.Count > 10)
+            {
+                while (TradeHistory.Count > 10)
+                {
+                    var th = TradeHistory[0];
+                    TradeHistory.RemoveAt(0);
+                    GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeHistoryUpdate, th);
+                }
+            }
+
             if (TimeSinceLastDecision < DecisionInterval)
                 return;
 
@@ -50,8 +60,8 @@ namespace GameJam
 
             foreach (var t in Trades.ToList())
             {
+                t.AddRandomShares();
                 t.UpdateOdds();
-                t.UpdateTrend();
                 GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeModified, t);
             }
 
@@ -117,7 +127,7 @@ namespace GameJam
         {
             foreach (var tf in TradeFiles)
             {
-                List<Trade> parsed = Utils.ParseJsonList<Trade>(tf);
+                List<TradeSerializable> parsed = Utils.ParseJsonList<TradeSerializable>(tf);
 
                 foreach (var t in parsed)
                 {
@@ -136,10 +146,13 @@ namespace GameJam
                         if (t.Duration > GameManager.Instance.GameTimer.TimeLeft)
                             return;
 
-                        t.Index = TradeCount;
+                        Trade nt = new(t)
+                        {
+                            Index = TradeCount
+                        };
 
-                        Trades.Add(t);
-                        GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, t);
+                        Trades.Add(nt);
+                        GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, nt);
                         TradeCount++;
                     }
                 }

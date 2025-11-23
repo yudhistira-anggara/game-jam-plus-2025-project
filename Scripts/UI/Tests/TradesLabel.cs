@@ -1,3 +1,4 @@
+using GameJam.DialogueScripts;
 using Godot;
 using System;
 
@@ -31,14 +32,35 @@ namespace GameJam
 
         public void UpdateTrade(Trade t)
         {
-            Text = "";
+            Text = "\n";
             foreach (var tr in _tradeManager.Trades)
             {
-                Text += $"\n{tr.Index}.{tr.Title}\n";
+                Text += $"{tr.Index}.{tr.Title}\n";
                 foreach (var o in tr.Options)
                 {
-                    Text += $"-> [{o.Name}] {o.Odds} ({o.Trend})\n ";
+                    Text += $"[{o.Option}] {o.Odds}% ({UpdateTradeLabel(o.Trend)}) {o.Shares}x\n";
                 }
+                Text += "\n";
+            }
+        }
+
+        public string UpdateTradeLabel(decimal t)
+        {
+            string value = t >=0 ? $"+{t}" : $"{t}";
+            return value;
+        }
+
+        public void UpdateTrade(Trade trade, TradeOption option)
+        {
+            Text = "\n";
+            foreach (var tr in _tradeManager.Trades)
+            {
+                Text += $"{tr.Index}.{tr.Title}\n";
+                foreach (var o in tr.Options)
+                {
+                    Text += $"[{o.Option}] {o.Odds}% ({UpdateTradeLabel(o.Trend)}) {o.Shares}x\n";
+                }
+                Text += "\n";
             }
         }
     }

@@ -3,8 +3,8 @@
         "ID": "trader_joe",
         "Name": "Joe Momma",
         "Desc": "",
-        "Wealth": 10000,
-        "Income": 500,
+        "Wealth": 500,
+        "Income": 100,
         "Activeness": 50,
         "Interests": {
             "Politics": 50,
@@ -28,8 +28,8 @@
         "ID": "trader_bill",
         "Name": "Lil Billy",
         "Desc": "",
-        "Wealth": 1000,
-        "Income": 50,
+        "Wealth": 100,
+        "Income": 10,
         "Activeness": 75,
         "Interests": {
             "Politics": -100,

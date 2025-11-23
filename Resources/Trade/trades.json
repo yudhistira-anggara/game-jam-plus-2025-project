@@ -6,8 +6,9 @@
         "Duration": 30,
         "Options": [
             {
-                "Name": "Yes",
+                "Option": "Yes",
                 "Odds": 50,
+                "Shares": 50,
                 "Trend": 1,
                 "Tags": [
                     "Populism",
@@ -15,8 +16,9 @@
                 ]
             },
             {
-                "Name": "No",
+                "Option": "No",
                 "Odds": 50,
+                "Shares": 50,
                 "Trend": 1,
                 "Tags": [
                     "Communism",
@@ -37,17 +39,19 @@
         "Duration": 15,
         "Options": [
             {
-                "Name": "Team A",
+                "Option": "Team A",
                 "Odds": 25,
-                "Trend": 3,
+                "Shares": 25,
+                "Trend": 4,
                 "Tags": [
                     "Team_A"
                 ]
             },
             {
-                "Name": "Team B",
+                "Option": "Team B",
                 "Odds": 75,
-                "Trend": -2,
+                "Shares": 75,
+                "Trend": 1,
                 "Tags": [
                     "Team_B"
                 ]

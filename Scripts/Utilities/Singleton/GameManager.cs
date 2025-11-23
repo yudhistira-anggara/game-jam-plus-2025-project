@@ -27,7 +27,7 @@ namespace GameJam
             Instance = this;
             GameTimer = new Timer
             {
-                WaitTime = 60,
+                WaitTime = 120,
                 OneShot = true
             };
             GameTimer.Timeout += OnTimerTimeout;

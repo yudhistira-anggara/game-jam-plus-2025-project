@@ -9,12 +9,12 @@ namespace GameJam
         public int Index { get; set; }
         public ListingTarget Target { get; set; }
         public int Size { get; set; }
-        public int Shares { get; set; }
-        public int PriceOffer { get; set; } // Per shares
+        public decimal Shares { get; set; }
+        public decimal PriceOffer { get; set; } // Per shares
         public double Duration { get; set; }
         public double RandomDie { get; set; } = 0.1;
 
-        public void OnTradeResolved(Trade trade)
+        public void OnTradeResolved(Trade trade, TradeOption option)
         {
             GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.KillListing, this);
             GlobalSignals.Instance.ResolveTrade -= OnTradeResolved;
