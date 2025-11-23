@@ -19,11 +19,12 @@ namespace GameJam
         public double DecisionInterval { get; set; } = 3;
         public double TimeSinceLastDecision { get; set; } = 0;
 
-		public override void _Ready()
-		{
-			Instance = this;
-			ModifyTraderFile("res://Resources/Trade/trader.json");
-		}
+        public override void _Ready()
+        {
+            Instance = this;
+            ModifyTraderFile("res://Resources/Trade/trader.json");
+            GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
+        }
 
 		public override void _Process(double delta)
 		{
@@ -68,25 +69,38 @@ namespace GameJam
 				return;
 			}
 
-			TraderFiles.Remove(filePath);
-		}
+            TraderFiles.Remove(filePath);
+        }
 
-		public void CreateAnonymousTrader()
-		{
-			while (Traders.Count < MaxTraders)
-			{
-				var trader = new Trader()
-				{
-					Index = TraderCount,
-					ID = $"anon_{TraderCount}",
-					Name = $"Anon ({TraderCount})",
-					Wealth = 100,
-					Income = 100,
-					Activeness = 20
-				};
+        public void OnTradeDayStarted()
+        {
+            //
+        }
 
-				Traders.Add(trader);
-				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, trader);
+        public void OnTradeDayEnded()
+        {
+            foreach (var tr in Traders)
+            {
+                tr.Wealth += tr.Income;
+            }
+        }
+
+        public void CreateAnonymousTrader()
+        {
+            while (Traders.Count < MaxTraders)
+            {
+                var trader = new Trader()
+                {
+                    Index = TraderCount,
+                    ID = $"anon_{TraderCount}",
+                    Name = $"Anon ({TraderCount})",
+                    Wealth = 20,
+                    Income = 20,
+                    Activeness = 20
+                };
+                GlobalSignals.Instance.ResolveTrade += trader.OnTradeResolved;
+                Traders.Add(trader);
+                GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, trader);
 
 				TraderCount++;
 			}
@@ -97,33 +111,35 @@ namespace GameJam
 			// Trader parsed = Utils.ParseJson<Trader>(filePath);
 		}
 
-		public void InitializeTraders()
-		{
-			foreach (var tf in TraderFiles)
-			{
-				List<TraderSerializeable> parsed = Utils.ParseJsonList<TraderSerializeable>(tf);
+        public void InitializeTraders()
+        {
+            foreach (var tf in TraderFiles)
+            {
+                List<TraderSerializable> parsed = Utils.ParseJsonList<TraderSerializable>(tf);
 
 				foreach (var tr in parsed)
 				{
 					if (Traders.Count >= MaxTraders)
 						return;
 
-					if (Traders.Exists(x => x.Name == tr.Name) && tr.Flags.Contains("Unique"))
-					{
-						//
-					}
-					else
-					{
-						Trader nt = new(tr)
-						{
-							Index = TraderCount,
-						};
-						Traders.Add(nt);
-						GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, nt);
-						TraderCount++;
-					}
-				}
-			}
+                    if (Traders.Exists(x => x.Name == tr.Name) && tr.Flags.Contains("Unique"))
+                    {
+                        //
+                    }
+                    else if (!tr.Flags.Contains("Disabled"))
+                    {
+                        Trader nt = new(tr)
+                        {
+                            Index = TraderCount,
+                        };
+
+                        GlobalSignals.Instance.ResolveTrade += nt.OnTradeResolved;
+                        Traders.Add(nt);
+                        GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, nt);
+                        TraderCount++;
+                    }
+                }
+            }
 
 			if (Traders.Count < MaxTraders)
 				CreateAnonymousTrader();

@@ -16,7 +16,7 @@ namespace GameJam
                 return;
             }
 
-            if (ListingManager.Instance is null)
+            if (TradeManager.Instance is null)
             {
                 GD.PushError($"[{GetType().Name}]");
                 return;
@@ -29,11 +29,11 @@ namespace GameJam
 
         public void UpdateTradeHistory(TradeHistory his)
         {
-            Text = "";
+            Text = "\n";
             foreach (var th in _tradeManager.TradeHistory)
             {
-                Text += $"{th.Index}.{th.Target}.{th.Option}\n";
-                Text += $"{th.Purchaser} bought {th.Shares} shares for ${th.Money}\n";
+                Text += $"{th.Index}.{th.Target}\n";
+                Text += $"{th.Purchaser} bought {th.Shares}x [{th.Option}] for ${th.Money}\n\n";
             }
         }
     }

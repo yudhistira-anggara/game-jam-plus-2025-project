@@ -23,6 +23,8 @@ namespace GameJam
             Instance = this;
             GlobalSignals.Instance.KillListing += UpdateListingManager;
             GlobalSignals.Instance.BuyListing += OnListingPurchase;
+            GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
+            GlobalSignals.Instance.TradeDayEnd += OnTradeDayEnded;
         }
 
         public override void _Process(double delta)
@@ -50,6 +52,16 @@ namespace GameJam
             TimeSinceLastDecision = 0;
         }
 
+        public void OnTradeDayStarted()
+        {
+            //
+        }
+
+        public void OnTradeDayEnded()
+        {
+            Listings.Clear();
+        }
+
         public void OnListingPurchase(Trader tr, Listing ls)
         {
             UpdateListingManager(ls);
@@ -61,37 +73,40 @@ namespace GameJam
         }
 
         // Decide trade volume: vs 45%, s 29%, m 16%, ml 7%, l 3%
-        public static (int size, int sellAmount) RandomizeTradeVolume()
+        public static (int size, int sellAmount) RandomizeTradeVolume(decimal odds)
         {
+            // min value of listing has to equal $1
+            int minValue = (int)(1 / odds);
+
             int sellAmount;
             int tSize;
 
-            double volume = GD.Randf();
+            double volume = GD.RandRange(0, 100);
 
-            if (volume <= 0.03)
+            if (volume <= 3)
             {
-                tSize = 4; // Large = Over 1001
-                sellAmount = GD.RandRange(1001, 10000);
+                tSize = 32;
+                sellAmount = GD.RandRange(minValue * tSize, minValue * tSize * tSize);
             }
-            else if (volume <= 0.07)
+            else if (volume <= 7)
             {
-                tSize = 3; // Medium-Large = 501 to 1000
-                sellAmount = GD.RandRange(501, 1000);
+                tSize = 16;
+                sellAmount = GD.RandRange(minValue * tSize, minValue * tSize * tSize);
             }
-            else if (volume <= 0.16)
+            else if (volume <= 16)
             {
-                tSize = 2; // Medium = 101 to 500
-                sellAmount = GD.RandRange(101, 500);
+                tSize = 8;
+                sellAmount = GD.RandRange(minValue * tSize, minValue * tSize * tSize);
             }
-            else if (volume <= 0.29)
+            else if (volume <= 29)
             {
-                tSize = 1; // Small = 26 to 100
-                sellAmount = GD.RandRange(26, 100);
+                tSize = 4;
+                sellAmount = GD.RandRange(minValue * tSize, minValue * tSize * tSize);
             }
             else
             {
-                tSize = 0; // Very Small = 1 to 25
-                sellAmount = GD.RandRange(1, 25);
+                tSize = 2;
+                sellAmount = GD.RandRange(minValue, minValue * tSize * tSize);
             }
 
             return (tSize, sellAmount);
@@ -104,30 +119,37 @@ namespace GameJam
 
             foreach (var e in trade.Options)
             {
-                if (Listings.Count(l => l.Target.Option == e.Name) > MaxListingPerTradeOptions)
-                    // if (Listings.Count(l => l.Target[trade.ID] == e.Name) >= MaxListingPerTradeOptions)
+                int listingCount = Listings.Count(d => d.Target.ID == trade.ID && d.Target.Option == e.Option);
+
+                if (listingCount >= MaxListingPerTradeOptions)
                     return;
 
-                double tOdds = trade.Options.Sum(t => t.Odds);
+                decimal tShares = trade.Options.Sum(t => t.Shares);
 
-                var tV = RandomizeTradeVolume();
+                decimal relativeOdds = Math.Round(e.Shares / tShares, 2);
+                decimal avgOdds = 1 / trade.Options.Count;
+                decimal bestOpOdds = trade.Options.Max(t => t.Shares) / tShares;
+
+                // decimal minFinalOdds = e.Trend * (decimal)trade.Duration;
+                // decimal maxFinalOdds = Math.Abs(e.Trend) * (decimal)trade.Duration;
+                // decimal expectedFinalOdds = (decimal)(e.Odds + GD.RandRange((double)minFinalOdds, (double)maxFinalOdds));
+
+                // GD.Print($"{minFinalOdds} <-> {maxFinalOdds} ~ {expectedFinalOdds}");
+
+                var tV = RandomizeTradeVolume(relativeOdds);
                 int tSize = tV.size;
                 int sellAmount = tV.sellAmount;
 
-                double relativeOdds = e.Odds / tOdds;
-                double avgOdds = 1 / trade.Options.Count;
-                double bestOpOdds = trade.Options.Max(t => t.Odds) / tOdds;
+                // GD.Print($"{e.Shares} / {tShares} ~ {relativeOdds}; Amount: {sellAmount}x");
 
-                double minFinalOdds = e.Trend * trade.Duration;
-                double maxFinalOdds = Math.Abs(e.Trend) * trade.Duration;
-                double expectedFinalOdds = e.Odds + GD.RandRange(minFinalOdds, maxFinalOdds);
-
-                int basePayout = (int)((1 - relativeOdds) * sellAmount);
+                decimal baseProfit = Math.Round(1 - relativeOdds, 2);
+                decimal basePayout = baseProfit * sellAmount;
 
                 // Random base confidence from -1.0 to 1.0
-                double confidence = GD.RandRange(-1.0, 1.0);
+                decimal confidence = (decimal)GD.RandRange(-1d, 1d);
 
                 // If option is performing worse than average
+                /*
                 if (relativeOdds < avgOdds)
                 {
                     // If option is expected to perform better later on
@@ -154,20 +176,39 @@ namespace GameJam
                         confidence -= relativeOdds;
                     }
                 }
+                */
 
                 // Less time and worse odds = cheaper;  Less time and better odds = more expensive
-                double durMod = 1 - Math.Clamp(trade.Duration / 15, 0.0, 0.5);
-                durMod = GD.RandRange(confidence, durMod);
+                decimal dur = (decimal)trade.Duration;
 
-                int confidencePricing = (int)(basePayout * confidence);
-                int durationPricing = (int)(basePayout * durMod);
+                if (dur <= 0)
+                    dur = 0.01m;
 
-                var priceOffer = basePayout + confidencePricing + durationPricing;
+                decimal durMod = 1 - (decimal)Math.Clamp(trade.Duration / trade.BaseDuration, 0, 1);
+                // GD.Print($"durMod: {durMod}");
+
+                if (confidence > 0)
+                    confidence += durMod;
+                else
+                    confidence -= durMod;
+
+                decimal adjustPricing = Math.Round(basePayout * confidence * durMod, 2);
+
+                // GD.Print($"c: {confidence}; dur: [{Math.Round(trade.Duration, 4)} -> {durMod}]; adjP: ${adjustPricing}");
+
+                decimal priceOffer = Math.Round(basePayout + adjustPricing, 2);
+
+                if (priceOffer <= 0)
+                    priceOffer = basePayout;
+
+                // GD.Print($"bPr: ${baseProfit}; bPa: ${basePayout}; Offer: ${priceOffer}\n");
+
+                e.Shares += sellAmount;
 
                 var ls = new Listing()
                 {
                     Index = trade.Index,
-                    Target = new ListingTarget(trade.ID, e.Name),
+                    Target = new ListingTarget(trade.ID, e.Option),
                     Size = tSize,
                     Shares = sellAmount,
                     PriceOffer = priceOffer,
