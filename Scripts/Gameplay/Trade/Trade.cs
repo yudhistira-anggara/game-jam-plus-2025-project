@@ -5,17 +5,17 @@ using System.Linq;
 
 namespace GameJam
 {
-    public partial class Trade : GodotObject
-    {
-        public int Index { get; set; }
-        public string ID { get; set; }
-        public string Title { get; set; }
-        public string Desc { get; set; }
-        public double BaseDuration { get; set; }
-        public double Duration { get; set; }
-        public List<TradeOption> Options { get; set; }
-        public List<string> Tags { get; set; }
-        public List<string> Flags { get; set; }
+	public partial class Trade : GodotObject
+	{
+		public int Index { get; set; }
+		public string ID { get; set; }
+		public string Title { get; set; }
+		public string Desc { get; set; }
+		public double BaseDuration { get; set; }
+		public double Duration { get; set; }
+		public List<TradeOption> Options { get; set; }
+		public List<string> Tags { get; set; }
+		public List<string> Flags { get; set; }
 
 		public Trade(TradeSerializable ts)
 		{

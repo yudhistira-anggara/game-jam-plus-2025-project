@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Xml.Serialization;
 namespace GameJam
 {
 	public partial class TradesGridContainer : GridContainer
@@ -39,7 +41,7 @@ namespace GameJam
 			_globalSignals.KillListing += DestroyListing;
 			//_globalSignals.TestSignal += ClearLabel;
 		}
-		public override void _Process(double delta)
+		/*public override void _Process(double delta)
 		{
 			//for (int i = 0; i < _tradeManager.Trades.Count; i++)
 			//{
@@ -51,10 +53,20 @@ namespace GameJam
 
 			//var p = 1 - (wt - tl) / wt;
 			//Value = p;
+		}*/
+		private async void NullCheck()
+		{
+			foreach (var panel in this.GetChildren())
+			{
+				if (panel.GetChildCount() == 0)
+				{
+				}
+			}
+			await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
 		}
-
 		public void CreateTrade(Trade trade)
 		{
+			NullCheck();
 			if (trade.Tags.Contains("Sports") && _sportContainer is not null)
 			{
 				var instancedContainer = _sportContainer.Instantiate() as MarginContainer;
