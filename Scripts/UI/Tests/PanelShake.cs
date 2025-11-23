@@ -18,6 +18,7 @@ public partial class PanelShake : Node2D
 	}
 	private void _shake_panel(float duration)
 	{
+		if (!IsInsideTree()) return;
 		var panel_tween = GetTree()?.CreateTween();
 		panel_tween.TweenMethod(
 			Callable.From<float>(_start_panel_shake), // Pass method reference
@@ -34,6 +35,7 @@ public partial class PanelShake : Node2D
 	}
 	public void PlayExplosion()
 	{
+		if (!IsInsideTree()) return;
 		_shake_panel(2.0f);
 		_explosionParticles.OneShot = true; 
 		_explosionParticles.Emitting = true; 
@@ -48,6 +50,7 @@ public partial class PanelShake : Node2D
 	}
 	public void SpawnEffect()
 	{
+		if (!IsInsideTree()) return;
 		_shake_panel(0.3f);
 		this.Scale = new Vector2(0.0f,0.0f);
 		var panel_tween = GetTree()?.CreateTween();

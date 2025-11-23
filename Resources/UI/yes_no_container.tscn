@@ -85,14 +85,22 @@ custom_minimum_size = Vector2(370, 0)
 layout_mode = 2
 
 [node name="FoldableContainer" type="FoldableContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+clip_contents = true
 layout_mode = 2
 theme = SubResource("Theme_4ipcm")
 theme_override_icons/expanded_arrow = ExtResource("4_by0jk")
 theme_override_icons/expanded_arrow_mirrored = ExtResource("5_mxo0m")
 theme_override_icons/folded_arrow = ExtResource("6_vgrji")
 theme_override_icons/folded_arrow_mirrored = ExtResource("7_j4k4y")
+folded = true
 title = "Does HE Know. . . ?"
 title_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

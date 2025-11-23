@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c2o0ld77xhaq1"]
+
+[node name="ListingContainer" type="ProgressBar"]
+custom_minimum_size = Vector2(100, 30)
+show_percentage = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 4.0
+grow_vertical = 2
+flat = true

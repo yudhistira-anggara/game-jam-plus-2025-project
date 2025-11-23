@@ -102,11 +102,11 @@ namespace GameJam
 			GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeHistoryUpdate, th);
 		}
 
-        public void UpdateTradeManager(Trade t)
-        {
+		public void UpdateTradeManager(Trade t)
+		{
 			TradeCount--;
-            Trades.Remove(t);
-        }
+			Trades.Remove(t);
+		}
 
 		public void HandleTradeRequest(TradeRequest request)
 		{
@@ -162,7 +162,7 @@ namespace GameJam
 					}
 					else
 					{
-						var dur = t.Duration + GD.RandRange(-6d, 6d);
+						var dur = t.Duration + GD.RandRange(-2d, 9d);
 
 						if (dur > GameManager.Instance.GameTimer.TimeLeft)
 							dur = t.Duration;
