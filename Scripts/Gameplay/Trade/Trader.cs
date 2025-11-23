@@ -5,63 +5,68 @@ using System.Linq;
 
 namespace GameJam
 {
-	public partial class Trader : Node
-	{
-		public int Index { get; set; }
-		public string ID { get; set; }
-		// public string Name { get; set; }
-		public string Desc { get; set; }
-		public int Wealth { get; set; }
-		public int Income { get; set; }
-		public int Activeness { get; set; }
-		public Dictionary<string, int> Interests { get; set; } = [];
-		public Dictionary<string, int> Personality { get; set; } = [];
-		public List<string> Flags { get; set; } = [];
+    public partial class Trader : GodotObject
+    {
+        public int Index { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Desc { get; set; }
+        public decimal Wealth { get; set; }
+        public decimal Income { get; set; }
+        public int Activeness { get; set; }
+        public Dictionary<string, int> Interests { get; set; } = [];
+        public Dictionary<string, int> Personality { get; set; } = [];
+        public List<string> Flags { get; set; } = [];
 
-		public List<Listing> TradeHistory { get; set; } = [];
+        public List<TradeHistory> TradeHistory { get; set; } = [];
 
 		public Trader() { }
 
-		public Trader(TraderSerializeable t)
-		{
-			ID = t.ID;
-			Name = t.Name;
-			Desc = t.Desc;
-			Wealth = t.Wealth;
-			Income = t.Income;
-			Activeness = t.Activeness;
-			Interests = t.Interests;
-			Personality = t.Personality;
-			Flags = t.Flags;
-		}
+        public Trader(TraderSerializable t)
+        {
+            ID = t.ID;
+            Name = t.Name;
+            Desc = t.Desc;
+            Wealth = t.Wealth;
+            Income = t.Income;
+            Activeness = t.Activeness;
+            Interests = t.Interests;
+            Personality = t.Personality;
+            Flags = t.Flags;
+        }
 
-		public override void _Ready()
-		{
-			GlobalSignals.Instance.Refund += HandleRefund;
-		}
+        public bool CalculateWillingness(Listing list)
+        {
+            if (Wealth < list.PriceOffer)
+                return false;
 
-		public bool CalculateWillingness(Listing list)
-		{
-			if (Wealth < list.PriceOffer)
-				return false;
+            var tr = TradeManager.Instance.Trades.Find(t => t.ID == list.Target.ID);
+            decimal tShares = tr.Options.Sum(t => t.Shares);
 
-			var tr = TradeManager.Instance.Trades.Find(t => t.ID == list.Target.ID);
-			var op = tr.Options.Find(op => op.Name == list.Target.Option);
-			var ps = Personality;
+            var op = tr.Options.Find(op => op.Option == list.Target.Option);
 
-			double tOdds = tr.Options.Sum(t => t.Odds);
+            var ps = Personality;
 
-			double relativeOdds = op.Odds / tOdds;
-			double avgOdds = 1 / tr.Options.Count;
-			double bestOpOdds = tr.Options.Max(t => t.Odds) / tOdds;
+            decimal relativeOdds = Math.Round(op.Shares / tShares, 2);
+            decimal avgOdds = 1 / tr.Options.Count;
+            decimal bestOpOdds = tr.Options.Max(t => t.Shares) / tShares;
 
-			double minFinalOdds = op.Trend * tr.Duration;
-			double maxFinalOdds = Math.Abs(op.Trend) * tr.Duration;
-			double expectedFinalOdds = op.Odds + GD.RandRange(minFinalOdds, maxFinalOdds);
+            decimal minFinalOdds = op.Trend * (decimal)tr.Duration;
+            // decimal maxFinalOdds = Math.Abs(op.Trend) * tr.Duration;
+            // decimal expectedFinalOdds = op.Odds + GD.RandRange(minFinalOdds, maxFinalOdds);
 
-			var potentialWinning = bestOpOdds * 100 * list.Shares;
-			var potentialLosing = potentialWinning - list.PriceOffer;
-			var gamble = Math.Clamp(potentialLosing / potentialWinning, 0.0, 1);
+            GD.Print($"minPredict: {minFinalOdds}; {op.Trend} * {Math.Round(tr.Duration, 4)}");
+
+            // var potentialWinning = bestOpOdds * 100 * list.Shares;
+            // var potentialLosing = potentialWinning - list.PriceOffer;
+            // var gamble = Math.Clamp(potentialLosing / potentialWinning, 0.0, 1);
+
+            decimal basePricePerShare = Math.Round(1 - relativeOdds, 2);
+            decimal offerPricePerShare = Math.Round(list.PriceOffer / list.Shares, 2);
+
+            decimal basePrice = Math.Round(basePricePerShare * list.Shares);
+
+            // Predicted price
 
 			var opinion = GD.RandRange(-100, 100);
 
@@ -91,19 +96,50 @@ namespace GameJam
 			willing -= ps.TryGetValue("Caution", out value) ? value : 10;
 			willing += opinion;
 
-			var finalThoughts = ((double)willing / 100) + gamble;
+            var finalThoughts = (double)willing / 100;
 
-			if (finalThoughts > 0)
-			{
-				return true;
-			}
-			else
-				return false;
-		}
+            if (finalThoughts > 0)
+            {
+                // GD.Print($"{ID}: {list.Index}.{list.Target.ID} {list.Shares}x [{list.Target.Option}] @ ${list.PriceOffer} ({op.Odds}%) -> {finalThoughts}");
+                // GD.Print($"base: ${basePricePerShare} -> ${basePrice} : offer: ${offerPricePerShare} -> ${list.PriceOffer}");
+                return true;
+            }
+            else
+                return false;
+        }
 
-		public void DecideAction(Listing list)
-		{
-			var act = (double)Activeness / 100;
+        public void OnTradeResolved(Trade trade, TradeOption option)
+        {
+            var allTrade = TradeHistory.FindAll(d => d.Index == trade.Index && d.Target == trade.ID);
+
+            decimal money = 0;
+
+            foreach (var t in allTrade.ToList())
+            {
+                var op = trade.Options.Find(o => o.Option == t.Option);
+
+                var totalShares = trade.Options.Sum(t => t.Shares);
+
+                decimal relativeOdds = op.Shares / totalShares;
+                decimal basePayout = Math.Round(1 - relativeOdds, 2);
+                decimal totalPayout = Math.Round(basePayout * t.Shares, 2);
+
+                if (op.Option == option.Option)
+                {
+                    money += totalPayout;
+                    // GD.Print($"{ID}: {t.Index}.{t.Target}.{t.Option} - {op.Odds}% - {t.Shares}x => ${totalPayout} ");
+                }
+
+                allTrade.Remove(t);
+            }
+
+            Wealth += money;
+            GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TraderUpdate, this);
+        }
+
+        public void DecideAction(Listing list)
+        {
+            var act = (double)Activeness / 100;
 
 			if (!(Random.Shared.NextDouble() < act))
 				return;
@@ -121,28 +157,20 @@ namespace GameJam
 			if (TradeHistory.Count > memory)
 				TradeHistory.RemoveAt(0);
 
-			TradeHistory.Add(list);
-			Wealth -= list.PriceOffer;
+            var th = new TradeHistory()
+            {
+                Purchaser = Name,
+                Index = list.Index,
+                Target = list.Target.ID,
+                Option = list.Target.Option,
+                Shares = list.Shares,
+                Money = list.PriceOffer
+            };
 
-			GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.BuyListing, trader, list);
-		}
+            TradeHistory.Add(th);
+            Wealth -= list.PriceOffer;
 
-		public void HandleRefund(TradeRequest request)
-		{
-			if (request.Requester != Name)
-				return;
-		}
-
-		public void CreateRequest(Trade trade)
-		{
-			var Request = new TradeRequest()
-			{
-				Requester = ID,
-				Target = trade.ID,
-				Index = trade.Index
-			};
-			// CurrentTrades.Add(trade.ID, 5);
-			GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTradeRequest, Request);
-		}
-	}
+            GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.BuyListing, trader, list);
+        }
+    }
 }

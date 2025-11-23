@@ -21,6 +21,7 @@ namespace GameJam
 		public double DecisionInterval { get; set; } = 1;
 		public double TimeSinceLastDecision { get; set; } = 0;
 
+<<<<<<< HEAD
 		public override void _Ready()
 		{
 			Instance = this;
@@ -29,6 +30,16 @@ namespace GameJam
 			GlobalSignals.Instance.ResolveTrade += UpdateTradeManager;
 			GlobalSignals.Instance.BuyListing += UpdateTradeHistory;
 		}
+=======
+        public override void _Ready()
+        {
+            Instance = this;
+            ModifyTradeFile("res://Resources/Trade/trades.json");
+            GlobalSignals.Instance.NewTradeRequest += HandleTradeRequest;
+            GlobalSignals.Instance.TradeExpire += UpdateTradeManager;
+            GlobalSignals.Instance.BuyListing += UpdateTradeHistory;
+        }
+>>>>>>> b71daeb9d505db7e8a5acd675e73bf817f451cb8
 
 		public override void _Process(double delta)
 		{
@@ -42,18 +53,42 @@ namespace GameJam
 				t.UpdateTrade(delta);
 			}
 
+<<<<<<< HEAD
 			if (TimeSinceLastDecision < DecisionInterval)
 				return;
+=======
+            if (TradeHistory.Count > 10)
+            {
+                while (TradeHistory.Count > 10)
+                {
+                    var th = TradeHistory[0];
+                    TradeHistory.RemoveAt(0);
+                    GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeHistoryUpdate, th);
+                }
+            }
+
+            if (TimeSinceLastDecision < DecisionInterval)
+                return;
+>>>>>>> b71daeb9d505db7e8a5acd675e73bf817f451cb8
 
 			if (Trades.Count < MaxTrades)
 				GenerateTrade();
 
+<<<<<<< HEAD
 			foreach (var t in Trades.ToList())
 			{
 				t.UpdateOdds();
 				t.UpdateTrend();
 				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeModified, t);
 			}
+=======
+            foreach (var t in Trades.ToList())
+            {
+                t.AddRandomShares();
+                t.UpdateOdds();
+                GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeModified, t);
+            }
+>>>>>>> b71daeb9d505db7e8a5acd675e73bf817f451cb8
 
 			TimeSinceLastDecision = 0;
 		}
@@ -113,11 +148,11 @@ namespace GameJam
 			TradeFiles.Remove(filePath);
 		}
 
-		public void GenerateTrade()
-		{
-			foreach (var tf in TradeFiles)
-			{
-				List<Trade> parsed = Utils.ParseJsonList<Trade>(tf);
+        public void GenerateTrade()
+        {
+            foreach (var tf in TradeFiles)
+            {
+                List<TradeSerializable> parsed = Utils.ParseJsonList<TradeSerializable>(tf);
 
 				foreach (var t in parsed)
 				{
@@ -136,14 +171,17 @@ namespace GameJam
 						if (t.Duration > GameManager.Instance.GameTimer.TimeLeft)
 							return;
 
-						t.Index = TradeCount;
+                        Trade nt = new(t)
+                        {
+                            Index = TradeCount
+                        };
 
-						Trades.Add(t);
-						GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, t);
-						TradeCount++;
-					}
-				}
-			}
-		}
-	}
+                        Trades.Add(nt);
+                        GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, nt);
+                        TradeCount++;
+                    }
+                }
+            }
+        }
+    }
 }
