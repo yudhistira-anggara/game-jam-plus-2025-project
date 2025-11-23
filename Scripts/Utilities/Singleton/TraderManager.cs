@@ -80,11 +80,11 @@ namespace GameJam
                     Index = TraderCount,
                     ID = $"anon_{TraderCount}",
                     Name = $"Anon ({TraderCount})",
-                    Wealth = 100,
-                    Income = 100,
+                    Wealth = 20,
+                    Income = 20,
                     Activeness = 20
                 };
-
+                GlobalSignals.Instance.ResolveTrade += trader.OnTradeResolved;
                 Traders.Add(trader);
                 GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, trader);
 
@@ -101,7 +101,7 @@ namespace GameJam
         {
             foreach (var tf in TraderFiles)
             {
-                List<TraderSerializeable> parsed = Utils.ParseJsonList<TraderSerializeable>(tf);
+                List<TraderSerializable> parsed = Utils.ParseJsonList<TraderSerializable>(tf);
 
                 foreach (var tr in parsed)
                 {
@@ -118,6 +118,8 @@ namespace GameJam
                         {
                             Index = TraderCount,
                         };
+
+                        GlobalSignals.Instance.ResolveTrade += nt.OnTradeResolved;
                         Traders.Add(nt);
                         GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, nt);
                         TraderCount++;
