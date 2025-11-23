@@ -16,7 +16,7 @@ namespace GameJam
 		public List<string> TradeFiles { get; set; } = [];
 
 		public int TradeCount { get; set; } = 0;
-		public int MaxTrades { get; set; } = 4;
+		public int MaxTrades { get; set; } = 6;
 
 		public double DecisionInterval { get; set; } = 1;
 		public double TimeSinceLastDecision { get; set; } = 0;
@@ -129,6 +129,8 @@ namespace GameJam
 			{
 				List<TradeSerializable> parsed = Utils.ParseJsonList<TradeSerializable>(tf);
 
+				parsed.Shuffle();
+
 				foreach (var t in parsed)
 				{
 					if (Trades.Count >= MaxTrades)
@@ -140,10 +142,15 @@ namespace GameJam
 					}
 					else
 					{
-						// if (Random.Shared.NextDouble() < 0.3 == false)
-						//    return;
+						var dur = t.Duration + GD.RandRange(-5d, 5d);
+
+						if (dur > GameManager.Instance.GameTimer.TimeLeft)
+							dur = t.Duration;
 
 						if (t.Duration > GameManager.Instance.GameTimer.TimeLeft)
+							return;
+
+						if (GD.Randf() < 0.3)
 							return;
 
 						Trade nt = new(t)

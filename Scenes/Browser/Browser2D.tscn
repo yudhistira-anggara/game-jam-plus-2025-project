@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://2hqm4kkbunee"]
+[gd_scene load_steps=64 format=3 uid="uid://btvxv85t2topa"]
 
 [ext_resource type="Texture2D" uid="uid://dxm3mpbuayalv" path="res://Resources/Sprites/Window_HighRes.png" id="1_0hro5"]
 [ext_resource type="Theme" uid="uid://c2e0le61neu4q" path="res://Resources/Fonts/PixelFont.tres" id="1_bkoup"]
@@ -15,9 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://bghi6kudmwenf" path="res://Resources/Sprites/Secured.png" id="9_13i77"]
 [ext_resource type="Script" uid="uid://c6dkb8iwoi3ll" path="res://Scripts/UI/Tests/PanelShake.cs" id="12_72f4u"]
 [ext_resource type="Texture2D" uid="uid://suvu7s16vrvi" path="res://Resources/Sprites/Panel_Gray.png" id="12_eesvp"]
-[ext_resource type="StyleBox" uid="uid://wdeeaq11ngk0" path="res://Resources/Sprites/Gray2Panel.tres" id="13_i54xj"]
-[ext_resource type="StyleBox" uid="uid://dhbtsmik4cq4f" path="res://Resources/Sprites/GrayDisabled.tres" id="14_565cx"]
-[ext_resource type="StyleBox" uid="uid://dkxadpnv71cax" path="res://Resources/Sprites/DarkPanel.tres" id="14_gcaf5"]
+[ext_resource type="StyleBox" path="res://Resources/Sprites/Gray2Panel.tres" id="13_i54xj"]
+[ext_resource type="StyleBox" path="res://Resources/Sprites/GrayDisabled.tres" id="14_565cx"]
+[ext_resource type="StyleBox" path="res://Resources/Sprites/DarkPanel.tres" id="14_gcaf5"]
 [ext_resource type="Texture2D" uid="uid://bddtuysr6324q" path="res://Resources/Sprites/House_of_Pals_Mini.png" id="17_565cx"]
 [ext_resource type="Texture2D" uid="uid://bfndkcwcqxu52" path="res://Resources/Sprites/Ads_MAXXLOANSmini.png" id="18_0h6qt"]
 [ext_resource type="Texture2D" uid="uid://btox7evx2p2gx" path="res://Resources/Sprites/Dollar_Sign.png" id="18_txx6u"]

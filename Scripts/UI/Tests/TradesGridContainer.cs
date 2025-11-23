@@ -73,8 +73,8 @@ namespace GameJam
 			container.Name = $"{trade.Index}";
 			GetEmptyPanel()?.AddChild(container);
 			_tradeContainers.Add(container);
-			UpdateTrade(trade);
 			container.GetNode<PanelShake>("Node2D").SpawnEffect();
+			UpdateTrade(trade);
 		}
 		private Node GetEmptyPanel()
 		{
