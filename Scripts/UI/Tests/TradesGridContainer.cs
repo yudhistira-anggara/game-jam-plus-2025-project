@@ -35,18 +35,17 @@ namespace GameJam
 			_globalSignals.TradeModified += UpdateTrade;
 
 			_listingManager = ListingManager.Instance;
-			_globalSignals.NewListing += UpdateListing;
-			_globalSignals.KillListing += UpdateListing;
-			_globalSignals.TestSignal += ClearLabel;
+			_globalSignals.NewListing += CreateListing;
+			_globalSignals.KillListing += DestroyListing;
+			//_globalSignals.TestSignal += ClearLabel;
 		}
 		public override void _Process(double delta)
 		{
-			for (int i = 0; i < _tradeManager.Trades.Count; i++)
-			{
-				var tr = _tradeManager.Trades[i];
-				var tradeContainer = _tradeContainers[i];
-
-			}
+			//for (int i = 0; i < _tradeManager.Trades.Count; i++)
+			//{
+			//	var tr = _tradeManager.Trades[i];
+			//	var tradeContainer = _tradeContainers[i];
+			//}
 			//var wt = _gameManagerTimer.WaitTime;
 			//var tl = _gameManagerTimer.TimeLeft;
 
@@ -73,8 +72,9 @@ namespace GameJam
 			container.Name = $"{trade.Index}";
 			GetEmptyPanel()?.AddChild(container);
 			_tradeContainers.Add(container);
-			UpdateTrade(trade);
+			
 			container.GetNode<PanelShake>("Node2D").SpawnEffect();
+			UpdateTrade(trade);
 		}
 		private Node GetEmptyPanel()
 		{
@@ -151,39 +151,13 @@ namespace GameJam
 				}
 			}
 		}
-		private void UpdateListing(Listing ls)
+		private void CreateListing(Listing ls)
 		{
-			foreach (var tradeContainer in _tradeContainers)
-			{
-				tradeContainer.QueueFree();
-			}
-			_tradeContainers.Clear();
-
-			foreach (var trade in _tradeManager.Trades)
-			{
-				CreateTrade(trade);
-			}
+			
 		}
-		private void UpdateListing(Trade trade)
+		private void DestroyListing(Listing ls)
 		{
-			foreach (var tradeContainer in _tradeContainers)
-			{
-				tradeContainer.QueueFree();
-			}
-			_tradeContainers.Clear();
-
-			foreach (var tr in _tradeManager.Trades)
-			{
-				CreateTrade(tr);
-			}
-		}
-		private void ClearLabel()
-		{
-			foreach (var tradeContainer in _tradeContainers)
-			{
-				tradeContainer.QueueFree();
-			}
-			_tradeContainers.Clear();
+			
 		}
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://domn2n6xgknlb"]
+[gd_scene load_steps=18 format=3 uid="uid://domn2n6xgknlb"]
 
 [ext_resource type="Script" uid="uid://c6dkb8iwoi3ll" path="res://Scripts/UI/Tests/PanelShake.cs" id="1_x702a"]
 [ext_resource type="Theme" uid="uid://c2e0le61neu4q" path="res://Resources/Fonts/PixelFont.tres" id="2_yu55v"]
@@ -29,8 +29,6 @@ VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_p2ui4")
 VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_ol2gm")
 
 [sub_resource type="Theme" id="Theme_4ipcm"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x702a"]
 
 [sub_resource type="Curve" id="Curve_pn4ro"]
 _data = [Vector2(0.2267442, 1), 0.0, 0.0, 0, 0, Vector2(0.98837215, 0.48314613), 0.0, 0.0, 0, 0]
@@ -95,24 +93,6 @@ theme_override_icons/folded_arrow = ExtResource("6_vgrji")
 theme_override_icons/folded_arrow_mirrored = ExtResource("7_j4k4y")
 title = "Does HE Know. . . ?"
 title_alignment = 1
-
-[node name="ProgressBar" type="ProgressBar" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_x702a")
-value = 58.27
-show_percentage = false
-
-[node name="Button" type="Button" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer/ProgressBar"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 362.0
-offset_bottom = 20.0
-grow_vertical = 2
-flat = true
 
 [node name="PanelContainer" type="PanelContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

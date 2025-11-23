@@ -18,7 +18,7 @@ public partial class PanelShake : Node2D
 	}
 	private void _shake_panel(float duration)
 	{
-		var panel_tween = GetTree().CreateTween();
+		var panel_tween = GetTree()?.CreateTween();
 		panel_tween.TweenMethod(
 			Callable.From<float>(_start_panel_shake), // Pass method reference
 			4.0f, // Initial value
@@ -50,7 +50,7 @@ public partial class PanelShake : Node2D
 	{
 		_shake_panel(0.3f);
 		this.Scale = new Vector2(0.0f,0.0f);
-		var panel_tween = GetTree().CreateTween();
+		var panel_tween = GetTree()?.CreateTween();
 		panel_tween.TweenProperty(
 			this,
 			"scale",
