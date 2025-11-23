@@ -16,8 +16,8 @@ namespace GameJam
 
 		public List<string> TradeFiles { get; set; } = [];
 
-        public int TradeCount { get; set; } = 0;
-        public int MaxTrades { get; set; } = 4;
+		public int TradeCount { get; set; } = 0;
+		public int MaxTrades { get; set; } = 6;
 
 		public double DecisionInterval { get; set; } = 1;
 		public double TimeSinceLastDecision { get; set; } = 0;
@@ -142,33 +142,40 @@ namespace GameJam
 			TradeFiles.Remove(filePath);
 		}
 
-        public void GenerateTrade()
-        {
-            foreach (var tf in TradeFiles)
-            {
-                List<TradeSerializable> parsed = Utils.ParseJsonList<TradeSerializable>(tf);
+		public void GenerateTrade()
+		{
+			foreach (var tf in TradeFiles)
+			{
+				List<TradeSerializable> parsed = Utils.ParseJsonList<TradeSerializable>(tf);
+
+				parsed.Shuffle();
 
 				foreach (var t in parsed)
 				{
 					if (Trades.Count >= MaxTrades)
 						return;
 
-                    if (Trades.Exists(x => x.ID == t.ID) && t.Flags.Contains("Unique"))
-                    {
-                        //
-                    }
-                    else if (!t.Flags.Contains("Disabled"))
-                    {
-                        // if (Random.Shared.NextDouble() < 0.3 == false)
-                        //    return;
+					if (Trades.Exists(x => x.ID == t.ID) && t.Flags.Contains("Unique"))
+					{
+						//
+					}
+					else
+					{
+						var dur = t.Duration + GD.RandRange(-5d, 5d);
+
+						if (dur > GameManager.Instance.GameTimer.TimeLeft)
+							dur = t.Duration;
 
 						if (t.Duration > GameManager.Instance.GameTimer.TimeLeft)
 							return;
 
-                        Trade nt = new(t)
-                        {
-                            Index = TradeCount
-                        };
+						if (GD.Randf() < 0.3)
+							return;
+
+						Trade nt = new(t)
+						{
+							Index = TradeCount
+						};
 
 						Trades.Add(nt);
 						GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, nt);
