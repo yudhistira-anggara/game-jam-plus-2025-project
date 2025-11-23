@@ -16,11 +16,6 @@ public partial class PanelShake : Node2D
 	{
 		_shake_panel(0.2f);
 	}
-	public void _on_button_pressed()
-	{
-		_shake_panel(2.0f);
-		PlayExplosion();
-	}
 	private void _shake_panel(float duration)
 	{
 		var panel_tween = GetTree().CreateTween();
@@ -39,6 +34,7 @@ public partial class PanelShake : Node2D
 	}
 	public void PlayExplosion()
 	{
+		_shake_panel(2.0f);
 		_explosionParticles.OneShot = true; 
 		_explosionParticles.Emitting = true; 
 		_explosionParticles.Finished += OnExplosionFinished;
@@ -50,12 +46,24 @@ public partial class PanelShake : Node2D
 			1.0f  // Duration
 		);
 	}
-
+	public void SpawnEffect()
+	{
+		_shake_panel(0.3f);
+		this.Scale = new Vector2(0.0f,0.0f);
+		var panel_tween = GetTree().CreateTween();
+		panel_tween.TweenProperty(
+			this,
+			"scale",
+			new Vector2(1.0f,1.0f),
+			0.2f  // Duration
+		);
+	}
 	private void OnExplosionFinished()
 	{
+		
 		var parent = GetParent();
 		var grandParent = parent.GetParent();
 		grandParent.RemoveChild(parent);
-		QueueFree();
+		parent.QueueFree();
 	}
 }

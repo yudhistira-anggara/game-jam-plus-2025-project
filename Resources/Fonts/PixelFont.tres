@@ -1,7 +1,19 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c2e0le61neu4q"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c2e0le61neu4q"]
 
 [ext_resource type="FontFile" uid="uid://ctfg513868u4a" path="res://Resources/Fonts/DePixelKlein.ttf" id="1_cnl15"]
+[ext_resource type="Texture2D" uid="uid://ce8y23n8kvn08" path="res://Resources/Sprites/Progress_Transparent.png" id="1_ws7y7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ws7y7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2ld11"]
+texture = ExtResource("1_ws7y7")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
 
 [resource]
 default_font = ExtResource("1_cnl15")
 default_font_size = 26
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_ws7y7")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_2ld11")

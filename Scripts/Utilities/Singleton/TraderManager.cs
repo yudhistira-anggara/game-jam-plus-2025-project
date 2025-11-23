@@ -71,22 +71,22 @@ namespace GameJam
 			TraderFiles.Remove(filePath);
 		}
 
-        public void CreateAnonymousTrader()
-        {
-            while (Traders.Count < MaxTraders)
-            {
-                var trader = new Trader()
-                {
-                    Index = TraderCount,
-                    ID = $"anon_{TraderCount}",
-                    Name = $"Anon ({TraderCount})",
-                    Wealth = 20,
-                    Income = 20,
-                    Activeness = 20
-                };
-                GlobalSignals.Instance.ResolveTrade += trader.OnTradeResolved;
-                Traders.Add(trader);
-                GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, trader);
+		public void CreateAnonymousTrader()
+		{
+			while (Traders.Count < MaxTraders)
+			{
+				var trader = new Trader()
+				{
+					Index = TraderCount,
+					ID = $"anon_{TraderCount}",
+					Name = $"Anon ({TraderCount})",
+					Wealth = 20,
+					Income = 20,
+					Activeness = 20
+				};
+				GlobalSignals.Instance.ResolveTrade += trader.OnTradeResolved;
+				Traders.Add(trader);
+				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, trader);
 
 				TraderCount++;
 			}
@@ -97,35 +97,35 @@ namespace GameJam
 			// Trader parsed = Utils.ParseJson<Trader>(filePath);
 		}
 
-        public void InitializeTraders()
-        {
-            foreach (var tf in TraderFiles)
-            {
-                List<TraderSerializable> parsed = Utils.ParseJsonList<TraderSerializable>(tf);
+		public void InitializeTraders()
+		{
+			foreach (var tf in TraderFiles)
+			{
+				List<TraderSerializable> parsed = Utils.ParseJsonList<TraderSerializable>(tf);
 
 				foreach (var tr in parsed)
 				{
 					if (Traders.Count >= MaxTraders)
 						return;
 
-                    if (Traders.Exists(x => x.Name == tr.Name) && tr.Flags.Contains("Unique"))
-                    {
-                        //
-                    }
-                    else
-                    {
-                        Trader nt = new(tr)
-                        {
-                            Index = TraderCount,
-                        };
+					if (Traders.Exists(x => x.Name == tr.Name) && tr.Flags.Contains("Unique"))
+					{
+						//
+					}
+					else
+					{
+						Trader nt = new(tr)
+						{
+							Index = TraderCount,
+						};
 
-                        GlobalSignals.Instance.ResolveTrade += nt.OnTradeResolved;
-                        Traders.Add(nt);
-                        GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, nt);
-                        TraderCount++;
-                    }
-                }
-            }
+						GlobalSignals.Instance.ResolveTrade += nt.OnTradeResolved;
+						Traders.Add(nt);
+						GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, nt);
+						TraderCount++;
+					}
+				}
+			}
 
 			if (Traders.Count < MaxTraders)
 				CreateAnonymousTrader();

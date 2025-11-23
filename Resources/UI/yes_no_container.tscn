@@ -1,0 +1,229 @@
+[gd_scene load_steps=19 format=3 uid="uid://domn2n6xgknlb"]
+
+[ext_resource type="Script" uid="uid://c6dkb8iwoi3ll" path="res://Scripts/UI/Tests/PanelShake.cs" id="1_x702a"]
+[ext_resource type="Theme" uid="uid://c2e0le61neu4q" path="res://Resources/Fonts/PixelFont.tres" id="2_yu55v"]
+[ext_resource type="StyleBox" uid="uid://dkxadpnv71cax" path="res://Resources/Sprites/DarkPanel.tres" id="3_yf2l0"]
+[ext_resource type="Texture2D" uid="uid://or4havo3ggx8" path="res://Resources/Sprites/Arrow_Down.png" id="4_by0jk"]
+[ext_resource type="Texture2D" uid="uid://b2rxannorrg1p" path="res://Resources/Sprites/Arrow_Up.png" id="5_mxo0m"]
+[ext_resource type="Texture2D" uid="uid://cuyognlq135xm" path="res://Resources/Sprites/Arrow_Right.png" id="6_vgrji"]
+[ext_resource type="Texture2D" uid="uid://ddy2ojekvbhdl" path="res://Resources/Sprites/Arrow_Left.png" id="7_j4k4y"]
+[ext_resource type="Texture2D" uid="uid://bkg8m8tldo4ec" path="res://Resources/Sprites/Smoke.png" id="8_x702a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x702a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g5qrc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q6116"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_op4ab"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2ui4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ol2gm"]
+
+[sub_resource type="Theme" id="Theme_axj6s"]
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_g5qrc")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_q6116")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_op4ab")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_p2ui4")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_ol2gm")
+
+[sub_resource type="Theme" id="Theme_4ipcm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x702a"]
+
+[sub_resource type="Curve" id="Curve_pn4ro"]
+_data = [Vector2(0.2267442, 1), 0.0, 0.0, 0, 0, Vector2(0.98837215, 0.48314613), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="YesNoContainer" type="MarginContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(198, 117.5)
+script = ExtResource("1_x702a")
+
+[node name="PanelContainer" type="PanelContainer" parent="Node2D"]
+offset_left = -191.0
+offset_top = -113.5
+offset_right = 199.0
+offset_bottom = 121.5
+theme = ExtResource("2_yu55v")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_x702a")
+
+[node name="Panel" type="Panel" parent="Node2D/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_yf2l0")
+
+[node name="ProgressBar" type="ProgressBar" parent="Node2D/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+value = 93.41
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Node2D/PanelContainer"]
+custom_minimum_size = Vector2(390, 228)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme = SubResource("Theme_axj6s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+
+[node name="FoldableContainer" type="FoldableContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_4ipcm")
+theme_override_icons/expanded_arrow = ExtResource("4_by0jk")
+theme_override_icons/expanded_arrow_mirrored = ExtResource("5_mxo0m")
+theme_override_icons/folded_arrow = ExtResource("6_vgrji")
+theme_override_icons/folded_arrow_mirrored = ExtResource("7_j4k4y")
+title = "Does HE Know. . . ?"
+title_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_x702a")
+value = 58.27
+show_percentage = false
+
+[node name="Button" type="Button" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 362.0
+offset_bottom = 20.0
+grow_vertical = 2
+flat = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Option" type="Label" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("2_yu55v")
+text = "Yes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Odds" type="Label" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "51%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Buy"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="Option" type="Label" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme = ExtResource("2_yu55v")
+text = "No"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Odds" type="Label" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "49%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Buy"
+
+[node name="Total" type="Label" parent="Node2D/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+size_flags_stretch_ratio = 0.0
+text = "$ 122,757,452.14"
+vertical_alignment = 2
+
+[node name="Explosion" type="CPUParticles2D" parent="Node2D"]
+position = Vector2(-4.755, 37.825)
+emitting = false
+amount = 100
+texture = ExtResource("8_x702a")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.43
+randomness = 0.57
+lifetime_randomness = 0.11
+emission_shape = 3
+emission_rect_extents = Vector2(195.055, 78.865)
+direction = Vector2(4.225, -149.56)
+spread = 180.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+scale_amount_min = 3.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_pn4ro")
+
+[node name="Notification" type="Label" parent="Node2D"]
+offset_left = 175.0
+offset_top = -124.5
+offset_right = 220.0
+offset_bottom = -56.5
+pivot_offset = Vector2(21.6, 27.45)
+theme = ExtResource("2_yu55v")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 66
+text = "3"
+
+[connection signal="mouse_entered" from="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/HBoxContainer/MarginContainer/Button" to="Node2D" method="_on_button_mouse_entered"]
+[connection signal="mouse_entered" from="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/HBoxContainer/MarginContainer/Button" to="Node2D" method="_on_button_mouse_entered"]

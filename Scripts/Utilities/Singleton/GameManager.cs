@@ -22,17 +22,17 @@ namespace GameJam
 		private bool _IsTradingActive = false;
 		public bool IsTradingActive { get; set; } = false;
 
-        public override void _Ready()
-        {
-            Instance = this;
-            GameTimer = new Timer
-            {
-                WaitTime = 120,
-                OneShot = true
-            };
-            GameTimer.Timeout += OnTimerTimeout;
-            AddChild(GameTimer);
-        }
+		public override void _Ready()
+		{
+			Instance = this;
+			GameTimer = new Timer
+			{
+				WaitTime = 120,
+				OneShot = true
+			};
+			GameTimer.Timeout += OnTimerTimeout;
+			AddChild(GameTimer);
+		}
 
 		public void OnTimerTimeout()
 		{

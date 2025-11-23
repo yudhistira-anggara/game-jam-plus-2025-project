@@ -1,27 +1,27 @@
 [
-    {
-        "ID": "t_pol_01",
-        "Title": "Will %He% Get Elected?",
-        "Desc": "",
-        "Duration": 30,
-        "Options": [
-            {
-                "Option": "Yes",
-                "Odds": 50,
-                "Shares": 50,
-                "Trend": 1,
-                "Tags": [
-                    "Populism",
+	{
+		"ID": "t_pol_01",
+		"Title": "Will %He% Get Elected?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
                     "Nationalism"
-                ]
-            },
-            {
-                "Option": "No",
-                "Odds": 50,
-                "Shares": 50,
-                "Trend": 1,
-                "Tags": [
-                    "Communism",
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
                     "Globalism"
 				]
 			}
@@ -29,30 +29,30 @@
 		"Tags": [
 			"Politics",
             "Democracy"
-        ],
-        "Flags": []
-    },
-    {
-        "ID": "t_spo_01",
-        "Title": "Who Will Win?",
-        "Desc": "",
-        "Duration": 15,
-        "Options": [
-            {
-                "Option": "Team A",
-                "Odds": 25,
-                "Shares": 25,
-                "Trend": 4,
-                "Tags": [
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_spo_01",
+		"Title": "Who Will Win?",
+		"Desc": "",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Team A",
+				"Odds": 25,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
                     "Team_A"
-                ]
-            },
-            {
-                "Option": "Team B",
-                "Odds": 75,
-                "Shares": 75,
-                "Trend": 1,
-                "Tags": [
+				]
+			},
+			{
+				"Option": "Team B",
+				"Odds": 75,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
                     "Team_B"
 				]
 			}
