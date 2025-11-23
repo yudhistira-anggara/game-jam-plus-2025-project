@@ -104,6 +104,7 @@ namespace GameJam
 
         public void UpdateTradeManager(Trade t)
         {
+			TradeCount--;
             Trades.Remove(t);
         }
 
@@ -161,7 +162,7 @@ namespace GameJam
 					}
 					else
 					{
-						var dur = t.Duration + GD.RandRange(-5d, 5d);
+						var dur = t.Duration + GD.RandRange(-6d, 6d);
 
 						if (dur > GameManager.Instance.GameTimer.TimeLeft)
 							dur = t.Duration;
@@ -174,7 +175,8 @@ namespace GameJam
 
 						Trade nt = new(t)
 						{
-							Index = TradeCount
+							Index = TradeCount,
+							Duration = dur
 						};
 
 						Trades.Add(nt);

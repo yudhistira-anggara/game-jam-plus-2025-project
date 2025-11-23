@@ -5,17 +5,17 @@ using System.Linq;
 
 namespace GameJam
 {
-    public partial class Trade : GodotObject
-    {
-        public int Index { get; set; }
-        public string ID { get; set; }
-        public string Title { get; set; }
-        public string Desc { get; set; }
-        public double BaseDuration { get; set; }
-        public double Duration { get; set; }
-        public List<TradeOption> Options { get; set; }
-        public List<string> Tags { get; set; }
-        public List<string> Flags { get; set; }
+	public partial class Trade : GodotObject
+	{
+		public int Index { get; set; }
+		public string ID { get; set; }
+		public string Title { get; set; }
+		public string Desc { get; set; }
+		public double BaseDuration { get; set; }
+		public double Duration { get; set; }
+		public List<TradeOption> Options { get; set; }
+		public List<string> Tags { get; set; }
+		public List<string> Flags { get; set; }
 
 		public Trade(TradeSerializable ts)
 		{
@@ -77,6 +77,12 @@ namespace GameJam
 
 			foreach (var op in Options)
 			{
+				if (tShares == 0)
+					tShares = 1;
+
+				if (op.Shares == 0)
+					op.Shares = 1;
+
 				decimal relativeOdds = Math.Round(op.Shares / tShares * 100, 2);
 				decimal curOdds = relativeOdds * (Math.Abs(op.Trend) + 1);
 				decimal rand = (decimal)GD.RandRange((double)curOdds * 0.75, (double)curOdds * 1.25);
@@ -109,9 +115,9 @@ namespace GameJam
 			var winName = randStr[rand.RandWeighted(randDist)];
 
 			// var winOpt = Options.FindIndex(x => x.Option == winName);
-			
+
 			var winOpt = Options.Find(x => x.Option == winName);
-			
+
 			GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.ResolveTrade, this, winOpt);
 		}
 
@@ -123,8 +129,8 @@ namespace GameJam
 
 			if (Duration <= 0)
 			{
-				ResolveTrade();
 				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeExpire, this);
+				ResolveTrade();
 			}
 		}
 	}
