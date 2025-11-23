@@ -22,6 +22,8 @@ GlobalSignals="*res://Scripts/Utilities/Singleton/GlobalSignals.cs"
 TradeManager="*res://Scripts/Utilities/Singleton/TradeManager.cs"
 TraderManager="*res://Scripts/Utilities/Singleton/TraderManager.cs"
 ListingManager="*res://Scripts/Utilities/Singleton/ListingManager.cs"
+AudioManager="*res://Scripts/Utilities/Singleton/AudioManager.cs"
+PlayerManager="*res://Scripts/Utilities/Singleton/PlayerManager.cs"
 
 [display]
 
