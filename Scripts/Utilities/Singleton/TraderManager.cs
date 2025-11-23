@@ -23,6 +23,7 @@ namespace GameJam
         {
             Instance = this;
             ModifyTraderFile("res://Resources/Trade/trader.json");
+            GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
         }
 
         public override void _Process(double delta)
@@ -71,6 +72,19 @@ namespace GameJam
             TraderFiles.Remove(filePath);
         }
 
+        public void OnTradeDayStarted()
+        {
+            //
+        }
+
+        public void OnTradeDayEnded()
+        {
+            foreach (var tr in Traders)
+            {
+                tr.Wealth += tr.Income;
+            }
+        }
+
         public void CreateAnonymousTrader()
         {
             while (Traders.Count < MaxTraders)
@@ -112,7 +126,7 @@ namespace GameJam
                     {
                         //
                     }
-                    else
+                    else if (!tr.Flags.Contains("Disabled"))
                     {
                         Trader nt = new(tr)
                         {

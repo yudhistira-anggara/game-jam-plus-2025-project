@@ -12,6 +12,7 @@ namespace GameJam
         public List<Trade> Trades { get; set; } = [];
         public List<TradeRequest> TradeRequests { get; set; } = [];
         public List<TradeHistory> TradeHistory { get; set; } = [];
+        public List<TradeHistory> OldTradeHistory { get; set; } = [];
 
         public List<string> TradeFiles { get; set; } = [];
 
@@ -28,6 +29,8 @@ namespace GameJam
             GlobalSignals.Instance.NewTradeRequest += HandleTradeRequest;
             GlobalSignals.Instance.TradeExpire += UpdateTradeManager;
             GlobalSignals.Instance.BuyListing += UpdateTradeHistory;
+            GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
+            GlobalSignals.Instance.TradeDayEnd += OnTradeDayEnded;
         }
 
         public override void _Process(double delta)
@@ -66,6 +69,22 @@ namespace GameJam
             }
 
             TimeSinceLastDecision = 0;
+        }
+
+        public void OnTradeDayStarted()
+        {
+            //
+        }
+
+        public void OnTradeDayEnded()
+        {
+            foreach (var t in TradeHistory)
+            {
+                OldTradeHistory.Add(t);
+            }
+            TradeHistory.Clear();
+            TradeCount = 0;
+            Trades.Clear();
         }
 
         public void UpdateTradeHistory(Trader t, Listing l)
@@ -138,7 +157,7 @@ namespace GameJam
                     {
                         //
                     }
-                    else
+                    else if (!t.Flags.Contains("Disabled"))
                     {
                         // if (Random.Shared.NextDouble() < 0.3 == false)
                         //    return;
