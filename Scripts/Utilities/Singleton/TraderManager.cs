@@ -16,8 +16,8 @@ namespace GameJam
 		public int TraderCount { get; set; } = 0;
 		public int MaxTraders { get; set; } = 6;
 
-        public double DecisionInterval { get; set; } = 3;
-        public double TimeSinceLastDecision { get; set; } = 0;
+		public double DecisionInterval { get; set; } = 3;
+		public double TimeSinceLastDecision { get; set; } = 0;
 
 		public override void _Ready()
 		{
@@ -35,15 +35,15 @@ namespace GameJam
 			if (TimeSinceLastDecision < DecisionInterval)
 				return;
 
-            foreach (var tr in Traders.ToList())
-            {
-                // GD.Print($"{t.ID}, {tr.Name} - {tr.Activeness}");
+			foreach (var tr in Traders.ToList())
+			{
+				// GD.Print($"{t.ID}, {tr.Name} - {tr.Activeness}");
 
-                foreach (var ls in ListingManager.Instance.Listings.ToList())
-                {
-                    tr.DecideAction(ls);
-                }
-            }
+				foreach (var ls in ListingManager.Instance.Listings.ToList())
+				{
+					tr.DecideAction(ls);
+				}
+			}
 
 			TimeSinceLastDecision = 0;
 		}

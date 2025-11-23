@@ -53,6 +53,9 @@ public partial class PanelShake : Node2D
 
 	private void OnExplosionFinished()
 	{
-		this.QueueFree();
+		var parent = GetParent();
+		var grandParent = parent.GetParent();
+		grandParent.RemoveChild(parent);
+		QueueFree();
 	}
 }

@@ -11,7 +11,7 @@ namespace GameJam
 
 		public List<Trade> Trades { get; set; } = [];
 		public List<TradeRequest> TradeRequests { get; set; } = [];
-        public List<TradeHistory> TradeHistory { get; set; } = [];
+		public List<TradeHistory> TradeHistory { get; set; } = [];
 
 		public List<string> TradeFiles { get; set; } = [];
 
@@ -26,57 +26,57 @@ namespace GameJam
 			Instance = this;
 			ModifyTradeFile("res://Resources/Trade/trades.json");
 			GlobalSignals.Instance.NewTradeRequest += HandleTradeRequest;
-            GlobalSignals.Instance.ResolveTrade += UpdateTradeManager;
-            GlobalSignals.Instance.BuyListing += UpdateTradeHistory;
+			GlobalSignals.Instance.ResolveTrade += UpdateTradeManager;
+			GlobalSignals.Instance.BuyListing += UpdateTradeHistory;
 		}
 
-        public override void _Process(double delta)
-        {
-            TimeSinceLastDecision += delta;
+		public override void _Process(double delta)
+		{
+			TimeSinceLastDecision += delta;
 
 			if (!GameManager.Instance.IsGameActive)
 				return;
 
-            foreach (var t in Trades.ToList())
-            {
-                t.UpdateTrade(delta);
-            }
+			foreach (var t in Trades.ToList())
+			{
+				t.UpdateTrade(delta);
+			}
 
 			if (TimeSinceLastDecision < DecisionInterval)
 				return;
 
-            if (Trades.Count < MaxTrades)
-    			GenerateTrade();
+			if (Trades.Count < MaxTrades)
+				GenerateTrade();
 
 			foreach (var t in Trades.ToList())
 			{
 				t.UpdateOdds();
 				t.UpdateTrend();
-                GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeModified, t);
+				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeModified, t);
 			}
 
 			TimeSinceLastDecision = 0;
 		}
 
-        public void UpdateTradeHistory(Trader t, Listing l)
-        {
-            var th = new TradeHistory()
-            {
-                Purchaser = t.ID,
-                Index = l.Index,
-                Target = l.Target.ID,
-                Option = l.Target.Option,
-                Shares = l.Shares,
-                Money = l.PriceOffer
-            };
-            TradeHistory.Add(th);
-            GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeHistoryUpdate, th);
-        }
+		public void UpdateTradeHistory(Trader t, Listing l)
+		{
+			var th = new TradeHistory()
+			{
+				Purchaser = t.ID,
+				Index = l.Index,
+				Target = l.Target.ID,
+				Option = l.Target.Option,
+				Shares = l.Shares,
+				Money = l.PriceOffer
+			};
+			TradeHistory.Add(th);
+			GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeHistoryUpdate, th);
+		}
 
-        public void UpdateTradeManager(Trade t)
-        {
-            Trades.Remove(t);
-        }
+		public void UpdateTradeManager(Trade t)
+		{
+			Trades.Remove(t);
+		}
 
 		public void HandleTradeRequest(TradeRequest request)
 		{
@@ -124,14 +124,14 @@ namespace GameJam
 					if (Trades.Count >= MaxTrades)
 						return;
 
-                    if (Trades.Exists(x => x.ID == t.ID) && t.Flags.Contains("Unique"))
-                    {
-                        //
-                    }
-                    else
-                    {
-                        // if (Random.Shared.NextDouble() < 0.3 == false)
-                        //    return;
+					if (Trades.Exists(x => x.ID == t.ID) && t.Flags.Contains("Unique"))
+					{
+						//
+					}
+					else
+					{
+						// if (Random.Shared.NextDouble() < 0.3 == false)
+						//    return;
 
 						if (t.Duration > GameManager.Instance.GameTimer.TimeLeft)
 							return;
