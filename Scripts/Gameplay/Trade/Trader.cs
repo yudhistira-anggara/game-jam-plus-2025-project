@@ -5,35 +5,35 @@ using System.Linq;
 
 namespace GameJam
 {
-	public partial class Trader : GodotObject
-	{
-		public int Index { get; set; }
-		public string ID { get; set; }
-		public string Name { get; set; }
-		public string Desc { get; set; }
-		public decimal Wealth { get; set; }
-		public decimal Income { get; set; }
-		public int Activeness { get; set; }
-		public Dictionary<string, int> Interests { get; set; } = [];
-		public Dictionary<string, int> Personality { get; set; } = [];
-		public List<string> Flags { get; set; } = [];
+    public partial class Trader : GodotObject
+    {
+        public int Index { get; set; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Desc { get; set; }
+        public decimal Wealth { get; set; }
+        public decimal Income { get; set; }
+        public int Activeness { get; set; }
+        public Dictionary<string, int> Interests { get; set; } = [];
+        public Dictionary<string, int> Personality { get; set; } = [];
+        public List<string> Flags { get; set; } = [];
 
-		public List<TradeHistory> TradeHistory { get; set; } = [];
+        public List<TradeHistory> TradeHistory { get; set; } = [];
 
 		public Trader() { }
 
-		public Trader(TraderSerializable t)
-		{
-			ID = t.ID;
-			Name = t.Name;
-			Desc = t.Desc;
-			Wealth = t.Wealth;
-			Income = t.Income;
-			Activeness = t.Activeness;
-			Interests = t.Interests;
-			Personality = t.Personality;
-			Flags = t.Flags;
-		}
+        public Trader(TraderSerializable t)
+        {
+            ID = t.ID;
+            Name = t.Name;
+            Desc = t.Desc;
+            Wealth = t.Wealth;
+            Income = t.Income;
+            Activeness = t.Activeness;
+            Interests = t.Interests;
+            Personality = t.Personality;
+            Flags = t.Flags;
+        }
 
 		public bool CalculateWillingness(Listing list)
 		{
