@@ -23,6 +23,8 @@ namespace GameJam
             Instance = this;
             GlobalSignals.Instance.KillListing += UpdateListingManager;
             GlobalSignals.Instance.BuyListing += OnListingPurchase;
+            GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
+            GlobalSignals.Instance.TradeDayEnd += OnTradeDayEnded;
         }
 
         public override void _Process(double delta)
@@ -48,6 +50,16 @@ namespace GameJam
             }
 
             TimeSinceLastDecision = 0;
+        }
+
+        public void OnTradeDayStarted()
+        {
+            //
+        }
+
+        public void OnTradeDayEnded()
+        {
+            Listings.Clear();
         }
 
         public void OnListingPurchase(Trader tr, Listing ls)

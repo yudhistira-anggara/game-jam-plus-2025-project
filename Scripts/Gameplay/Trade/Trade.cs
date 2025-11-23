@@ -5,17 +5,17 @@ using System.Linq;
 
 namespace GameJam
 {
-	public partial class Trade : GodotObject
-	{
-		public int Index { get; set; }
-		public string ID { get; set; }
-		public string Title { get; set; }
-		public string Desc { get; set; }
-		public double BaseDuration { get; set; }
-		public double Duration { get; set; }
-		public List<TradeOption> Options { get; set; }
-		public List<string> Tags { get; set; }
-		public List<string> Flags { get; set; }
+    public partial class Trade : GodotObject
+    {
+        public int Index { get; set; }
+        public string ID { get; set; }
+        public string Title { get; set; }
+        public string Desc { get; set; }
+        public double BaseDuration { get; set; }
+        public double Duration { get; set; }
+        public List<TradeOption> Options { get; set; }
+        public List<string> Tags { get; set; }
+        public List<string> Flags { get; set; }
 
 		public Trade(TradeSerializable ts)
 		{
@@ -55,12 +55,12 @@ namespace GameJam
 			GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeModified, this);
 		}
 
-		public void UpdateTrend()
-		{
-			foreach (var op in Options)
-			{
-				var modMin = 0;
-				var min = -2 + modMin;
+        public void UpdateTrend()
+        {
+            foreach (var op in Options)
+            {
+                var modMin = 0;
+                var min = -2 + modMin;
 
 				var modMax = 0;
 				var max = 2 + modMax;
@@ -71,9 +71,9 @@ namespace GameJam
 			}
 		}
 
-		public void AddRandomShares()
-		{
-			decimal tShares = Options.Sum(t => t.Shares);
+        public void AddRandomShares()
+        {
+            decimal tShares = Options.Sum(t => t.Shares);
 
 			foreach (var op in Options)
 			{
