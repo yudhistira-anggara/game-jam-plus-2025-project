@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace GameJam
 {
@@ -40,6 +41,32 @@ namespace GameJam
         public void PlayMusic(AudioStream soundEffect)
         {
             //
+        }
+
+        public List<string> LoadFromDirectory(string path)
+        {
+            List<string> allPaths = [];
+            var dir = DirAccess.Open(path);
+
+            foreach (string file in dir.GetFiles())
+            {
+                string fullPath = $"{path}/{file}";
+                if (Utils.IsValidAudioExtension(fullPath))
+                {
+                    allPaths.Add(fullPath);
+                }
+            }
+
+            foreach (string sub in dir.GetDirectories())
+            {
+                string subPath = $"{path}/{sub}";
+                if (Utils.IsValidAudioExtension(subPath))
+                {
+                    allPaths.AddRange(LoadFromDirectory(subPath));
+                }
+            }
+
+            return allPaths;
         }
 
         public void LoadSFX(string path)
