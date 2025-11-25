@@ -300,7 +300,7 @@ namespace GameJam
 					}
 				}
 			}
-		}
+		}/*
 		private void DestroyListing(Listing ls, int index)
 		{
 			var listingBar = _listingContainers[index];
@@ -314,7 +314,7 @@ namespace GameJam
 					}
 				}
 
-		}
+		}*//*
 		private void DestroyListingBar(ListingContainer listingBar)
 		{
 			if (listingBar is not null)
@@ -323,6 +323,6 @@ namespace GameJam
 				_listingContainers.Remove(listingBar);
 				listingBar.QueueFree();
 			}
-		}
+		}*/
 	}
 }
