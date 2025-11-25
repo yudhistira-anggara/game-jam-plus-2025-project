@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://ckdug0iubjbvv"]
+[gd_scene load_steps=23 format=3 uid="uid://ckdug0iubjbvv"]
 
 [ext_resource type="Script" uid="uid://c6dkb8iwoi3ll" path="res://Scripts/UI/Tests/PanelShake.cs" id="1_4iuik"]
+[ext_resource type="Script" uid="uid://bdu431m6jr8ln" path="res://Scripts/UI/Tests/TradeContainer.cs" id="1_8e4jf"]
 [ext_resource type="Theme" uid="uid://c2e0le61neu4q" path="res://Resources/Fonts/PixelFont.tres" id="2_5puxu"]
 [ext_resource type="StyleBox" uid="uid://dkxadpnv71cax" path="res://Resources/Sprites/DarkPanel.tres" id="3_23te5"]
 [ext_resource type="Texture2D" uid="uid://bkg8m8tldo4ec" path="res://Resources/Sprites/Smoke.png" id="4_4iuik"]
@@ -61,6 +62,7 @@ theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
+script = ExtResource("1_8e4jf")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(198, 117.5)
@@ -266,7 +268,7 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 66
-text = "3"
+text = "0"
 
 [connection signal="mouse_entered" from="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/TeamButton" to="Node2D" method="_on_button_mouse_entered"]
 [connection signal="mouse_entered" from="Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/TeamButton2" to="Node2D" method="_on_button_mouse_entered"]

@@ -218,6 +218,7 @@ namespace GameJam
 
 				Listings.Add(ls);
 				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewListing, ls);
+				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.AddListing, ls, trade);
 			}
 		}
 	}

@@ -15,6 +15,7 @@ namespace GameJam
 		private PackedScene _listingContainer { get; set; }
 		private List<TradeContainer> _tradeContainers { get; set; } = new List<TradeContainer>();
 		private List<ListingContainer> _listingContainers { get; set; } = new List<ListingContainer>();
+		private List<ListingContainer> _garbageContainers { get; set; } = new List<ListingContainer>();
 		private ListingManager _listingManager { get; set; }
 		public override void _Ready()
 		{
@@ -41,10 +42,10 @@ namespace GameJam
 			_globalSignals.TradeModified += UpdateTrade;
 
 			_listingManager = ListingManager.Instance;
-			_globalSignals.NewListing += CreateListing;
+			_globalSignals.AddListing += CreateListing;
 			_globalSignals.KillListing += DestroyListing;
-			//_globalSignals.TestSignal += ClearLabel;
 		}
+		/*
 		public override void _Process(double delta)
 		{
 			//for (int i = 0; i < _tradeManager.Trades.Count; i++)
@@ -57,7 +58,7 @@ namespace GameJam
 
 			//var p = 1 - (wt - tl) / wt;
 			//Value = p;
-		}
+		}*/
 		private async void NullCheck()
 		{
 			foreach (var panel in this.GetChildren())
@@ -67,6 +68,7 @@ namespace GameJam
 				}
 			}
 			await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
+			NullCheck();
 		}
 		public void CreateTrade(Trade trade)
 		{
@@ -85,7 +87,12 @@ namespace GameJam
 
 		private void CreateContainer(TradeContainer container, Trade trade)
 		{
-			container.SetIndex(trade.Index);
+			if (container is null)
+			{
+				GD.PushError($"[{GetType().Name}]");
+				return;
+			}
+			container.SetTrade(trade);
 			GetEmptyPanel()?.AddChild(container);
 			_tradeContainers.Add(container);
 			ProgressBar progressBar = container.GetNode<ProgressBar>("Node2D/PanelContainer/ProgressBar");
@@ -108,53 +115,61 @@ namespace GameJam
 		{
 			foreach (var tradeContainer in _tradeContainers)
 			{
-				var tr = tradeContainer.Trade;
-				Node vBoxContainer = tradeContainer.GetNode<Node>("Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer");
-				if (tr.Tags.Contains("Sports") && _sportContainer is not null)
+				if (tradeContainer.Trade == trade)
 				{
-					Node total = vBoxContainer.GetNode<Node>("../../HBoxContainer/Total");
-					total.Set("text", $"$ {tr.Options[0].Shares}");
-					Node teamButton = vBoxContainer.GetNode<Node>("HBoxContainer/TeamButton");
-					Node teamButton2 = vBoxContainer.GetNode<Node>("HBoxContainer/TeamButton2");
-					teamButton.Set("text", tr.Options[0].Option);
-					teamButton2.Set("text", tr.Options[1].Option);
-				}
-				else
-				{
-					Node foldableContainer = vBoxContainer.GetNode<Node>("FoldableContainer");
-					foldableContainer.Set("title", tr.Title);
+					var tr = tradeContainer.Trade;
+					Node vBoxContainer = tradeContainer.GetNode<Node>("Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer");
+					if (tr.Tags.Contains("Sports") && _sportContainer is not null)
+					{
+						Node total = vBoxContainer.GetNode<Node>("../../HBoxContainer/Total");
+						total.Set("text", $"$ {tr.Options[0].Shares}");
+						Node teamButton = vBoxContainer.GetNode<Node>("HBoxContainer/TeamButton");
+						Node teamButton2 = vBoxContainer.GetNode<Node>("HBoxContainer/TeamButton2");
+						teamButton.Set("text", tr.Options[0].Option);
+						teamButton2.Set("text", tr.Options[1].Option);
+					}
+					else
+					{
+						Node foldableContainer = vBoxContainer.GetNode<Node>("FoldableContainer");
+						foldableContainer.Set("title", tr.Title);
 
-					Node total = vBoxContainer.GetNode<Node>("../../Total");
-					total.Set("text", $"$ {tr.Options[0].Shares}");
-				}
+						Node total = vBoxContainer.GetNode<Node>("../../Total");
+						total.Set("text", $"$ {tr.Options[0].Shares}");
+					}
 
-				ProgressBar progressBar = tradeContainer.GetNode<ProgressBar>("Node2D/PanelContainer/ProgressBar");
-				progressBar.Value = tr.Duration;
-				Node panelContainer = vBoxContainer.GetNode<Node>("PanelContainer");
-				Node hBoxContainer = panelContainer.GetNode<Node>("HBoxContainer");
-				Node Option = hBoxContainer.GetNode<Node>("Option");
-				Label Odds = hBoxContainer.GetNode<Label>("Odds");
+					ProgressBar progressBar = tradeContainer.GetNode<ProgressBar>("Node2D/PanelContainer/ProgressBar");
+					progressBar.Value = tr.Duration;
+					Node panelContainer = vBoxContainer.GetNode<Node>("PanelContainer");
+					Node hBoxContainer = panelContainer.GetNode<Node>("HBoxContainer");
+					Node Option = hBoxContainer.GetNode<Node>("Option");
+					Label Odds = hBoxContainer.GetNode<Label>("Odds");
 
-				Node panelContainer2 = vBoxContainer.GetNode<Node>("PanelContainer2");
-				Node hBoxContainer2 = panelContainer2.GetNode<Node>("HBoxContainer");
-				Node Option2 = hBoxContainer2.GetNode<Node>("Option");
-				Label Odds2 = hBoxContainer2.GetNode<Label>("Odds");
+					Node panelContainer2 = vBoxContainer.GetNode<Node>("PanelContainer2");
+					Node hBoxContainer2 = panelContainer2.GetNode<Node>("HBoxContainer");
+					Node Option2 = hBoxContainer2.GetNode<Node>("Option");
+					Label Odds2 = hBoxContainer2.GetNode<Label>("Odds");
 
-				Option.Set("text", tr.Options[0].Option);
-				Option2.Set("text", tr.Options[1].Option);
-				if (tr.Options[0].Odds < 50)
-				{
-					Odds.AddThemeColorOverride("font_color", new Color(1, 0, 0));
-					Odds2.AddThemeColorOverride("font_color", new Color(0, 1, 0));
+					VBoxContainer vBoxListingContainer = vBoxContainer.GetNode<VBoxContainer>("FoldableContainer/VBoxContainer");
+					Label notification = tradeContainer.GetNode<Label>("Node2D/Notification");
+					notification.Text = $"{vBoxListingContainer.GetChildCount()}";
+
+					Option.Set("text", tr.Options[0].Option);
+					Option2.Set("text", tr.Options[1].Option);
+					if (tr.Options[0].Odds < 50)
+					{
+						Odds.AddThemeColorOverride("font_color", new Color(1, 0, 0));
+						Odds2.AddThemeColorOverride("font_color", new Color(0, 1, 0));
+					}
+					else
+					{
+						Odds.AddThemeColorOverride("font_color", new Color(0, 1, 0));
+						Odds2.AddThemeColorOverride("font_color", new Color(1, 0, 0));
+					}
+					Odds.Set("text", tr.Options[0].Odds.ToString() + "%");
+					Odds2.Set("text", tr.Options[1].Odds.ToString() + "%");
 				}
-				else
-				{
-					Odds.AddThemeColorOverride("font_color", new Color(0, 1, 0));
-					Odds2.AddThemeColorOverride("font_color", new Color(1, 0, 0));
-				}
-				Odds.Set("text", tr.Options[0].Odds.ToString() + "%");
-				Odds2.Set("text", tr.Options[1].Odds.ToString() + "%");
 			}
+			UpdateListingContainer();
 		}
 
 		public async void RemoveTrade(Trade trade, TradeOption option)
@@ -169,46 +184,107 @@ namespace GameJam
 				}
 			}
 		}
-		private void CreateListing(Listing ls)
+		private void CreateListing(Listing ls, Trade tr)
 		{
 			var instancedContainer = _listingContainer.Instantiate() as ListingContainer;
-			CreateContainer(instancedContainer, ls);
+			CreateListingContainer(instancedContainer, ls, tr);
 		}
-		private void CreateContainer(ListingContainer container, Listing ls)
+		private void CreateListingContainer(ListingContainer container, Listing ls, Trade trade)
 		{
-			foreach (var panel in this.GetChildren())
+			if (container.GetParent() == null)
 			{
-				if (panel.GetChildCount() > 0)
+				foreach (var panel in this.GetChildren())
 				{
-					Debug.Print(panel.GetChildren()[0].Name);
-					if (panel.GetChildren()[0].Name == "Hi " + $"{ls.Index}")
+					if (panel.GetChildCount() > 0)
 					{
+						if (panel.GetChildren()[0] is TradeContainer)
+						{
+							var tradeContainer = panel.GetChildren()[0] as TradeContainer;
 
-						VBoxContainer vBoxContainer = panel.GetChildren()[0].GetNode<VBoxContainer>("Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer");
-						vBoxContainer.AddChild(container);
-						_listingContainers.Add(container);
-						container.MaxValue = ls.Duration;
-						//UpdateListing(ls);
+							// Check if the casting succeeded and the TradeContainer is not null
+							if (tradeContainer != null)
+							{
+								// Now you can safely access the Trade property
+								if (tradeContainer.Trade == trade)
+								{
+									VBoxContainer vBoxContainer = tradeContainer.GetNode<VBoxContainer>("Node2D/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer");
+									container.SetListing(ls);
+									vBoxContainer.AddChild(container);
+									_listingContainers.Add(container);
+									container.MaxValue = ls.Duration;
+									UpdateListingContainer();
+									UpdateTrade(trade);
+								}
+							}
+						}
 					}
+					//UpdateTrade(ls);
 				}
 			}
-			//UpdateTrade(trade);
 		}/*
 		private void UpdateListing(Listing ls)
 		{
-			var lis = _listingManager.Listings[i];
-			var listingBar = _listingContainers[i];
+			foreach (var listingBar in _listingContainers)
+			{
+				if (listingBar is not null)
+				{
+					if (listingBar.Listing == ls)
+					{
+						var ts = TimeSpan.FromSeconds(ls.Duration);
+						var st = ts.ToString(@"mm\:ss");
+						listingBar.Value = ls.Duration;
+						Button button = listingBar.GetNode<Button>("Button");
+						button.Set("text", $"{ls.Index}.{st} [{ls.Target.Option}] -> Shares: {ls.Shares}, Offer: ${ls.PriceOffer}");
 
-			listingBar.Value = lis.Duration;
-			Debug.Print("hi");
-			Debug.Print(lis.Duration.ToString());
-			Button button = listingBar.GetNode<Button>("Button");
-			button.Set("text", $"{lis.Index}.{lis.Target.ID} [{lis.Target.Option}] -> Shares: {lis.Shares}, Offer: ${lis.PriceOffer}");
-
-
-			//Text += $"\n{lis.Index}.{lis.Target.ID} [{lis.Target.Option}] -> Shares: {lis.Shares}, Offer: ${lis.PriceOffer}";
-
+						break;
+					}
+				}
+			}
 		}*/
+		private void UpdateListingContainer()
+		{
+			foreach (var listingBar in _listingContainers)
+			{
+				if (listingBar is not null)
+				{
+					if (_listingManager.Listings.Contains(listingBar.Listing))
+					{
+						var ls = listingBar.Listing;
+						listingBar.Value = ls.Duration;
+						Button button = listingBar.GetNode<Button>("Button");
+						var ts = TimeSpan.FromSeconds(ls.Duration);
+						var st = ts.ToString(@"mm\:ss");
+						button.Set("text", $"{ls.Index}.{st} [{ls.Target.Option}] -> Shares: {ls.Shares}, Offer: ${ls.PriceOffer}");
+					}
+				}
+			}
+			CollectGarbage();
+		}
+		private void CollectGarbage()
+		{
+			foreach (var listingBar in _listingContainers)
+			{
+				if (listingBar is not null)
+				{
+					if (!_listingManager.Listings.Contains(listingBar.Listing))
+					{
+						_garbageContainers.Add(listingBar);
+					}
+				}
+			}
+			CleanGarbage();
+		}
+		private void CleanGarbage()
+		{
+			foreach (var listingBar in _garbageContainers)
+			{
+				if (listingBar is not null)
+				{
+					DestroyListing(listingBar.Listing);
+				}
+			}
+			_garbageContainers.Clear();
+		}
 		private void DestroyListing(Listing ls)
 		{
 			foreach (var listingBar in _listingContainers)
@@ -217,6 +293,7 @@ namespace GameJam
 				{
 					if (listingBar.Listing == ls)
 					{
+						listingBar.GetParent().RemoveChild(listingBar);
 						_listingContainers.Remove(listingBar);
 						listingBar.QueueFree();
 						break;
@@ -224,18 +301,28 @@ namespace GameJam
 				}
 			}
 		}
-	}
-	public partial class TradeContainer : MarginContainer
-	{
-		public Trade Trade { get; set; }
-		public int Index { get; set; }
-		public void SetIndex(int index)
+		private void DestroyListing(Listing ls, int index)
 		{
-			Index = index;
+			var listingBar = _listingContainers[index];
+				if (listingBar is not null)
+				{
+					if (listingBar.Listing == ls)
+					{
+						listingBar.GetParent().RemoveChild(listingBar);
+						_listingContainers.Remove(listingBar);
+						listingBar.QueueFree();
+					}
+				}
+
 		}
-	}
-	public partial class ListingContainer : ProgressBar
-	{
-		public Listing Listing { get; set; }
+		private void DestroyListingBar(ListingContainer listingBar)
+		{
+			if (listingBar is not null)
+			{
+				listingBar.GetParent().RemoveChild(listingBar);
+				_listingContainers.Remove(listingBar);
+				listingBar.QueueFree();
+			}
+		}
 	}
 }

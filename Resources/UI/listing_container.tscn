@@ -1,8 +1,15 @@
-[gd_scene format=3 uid="uid://c2o0ld77xhaq1"]
+[gd_scene load_steps=3 format=3 uid="uid://c2o0ld77xhaq1"]
+
+[ext_resource type="Script" uid="uid://cof2ccb4bryd6" path="res://Scripts/UI/Tests/ListingContainer.cs" id="1_gqror"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gqror"]
+bg_color = Color(1, 1, 1, 0.49019608)
 
 [node name="ListingContainer" type="ProgressBar"]
 custom_minimum_size = Vector2(100, 30)
+theme_override_styles/fill = SubResource("StyleBoxFlat_gqror")
 show_percentage = false
+script = ExtResource("1_gqror")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
