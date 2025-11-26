@@ -43,6 +43,18 @@ namespace GameJam
             return false;
         }
 
+        public static bool IsValidAudioExtension(string path)
+        {
+            string[] validExtensions = { ".mp3", ".ogg", ".wav" };
+            string ext = Path.GetExtension(path).ToLower();
+            foreach (var e in validExtensions)
+            {
+                if (ext == e)
+                    return true;
+            }
+            return false;
+        }
+
         public static T ParseJson<T>(string path)
         {
             var content = LoadFromFile(path);
