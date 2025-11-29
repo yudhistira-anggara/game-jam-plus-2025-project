@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://btvxv85t2topa"]
+[gd_scene load_steps=56 format=3 uid="uid://btvxv85t2topa"]
 
 [ext_resource type="Texture2D" uid="uid://dxm3mpbuayalv" path="res://Resources/Sprites/Window_HighRes.png" id="1_0hro5"]
 [ext_resource type="Theme" uid="uid://c2e0le61neu4q" path="res://Resources/Fonts/PixelFont.tres" id="1_bkoup"]
@@ -17,10 +17,12 @@
 [ext_resource type="StyleBox" uid="uid://wdeeaq11ngk0" path="res://Resources/Sprites/Gray2Panel.tres" id="13_i54xj"]
 [ext_resource type="StyleBox" uid="uid://dhbtsmik4cq4f" path="res://Resources/Sprites/GrayDisabled.tres" id="14_565cx"]
 [ext_resource type="StyleBox" uid="uid://dkxadpnv71cax" path="res://Resources/Sprites/DarkPanel.tres" id="14_gcaf5"]
+[ext_resource type="Texture2D" uid="uid://clf2mix70k247" path="res://Resources/Sprites/Panel_GrayDark.png" id="15_op4ab"]
 [ext_resource type="Texture2D" uid="uid://bddtuysr6324q" path="res://Resources/Sprites/House_of_Pals_Mini.png" id="17_565cx"]
 [ext_resource type="Texture2D" uid="uid://bfndkcwcqxu52" path="res://Resources/Sprites/Ads_MAXXLOANSmini.png" id="18_0h6qt"]
 [ext_resource type="Texture2D" uid="uid://b23ihxs87e6ju" path="res://Resources/Sprites/Scroll_Vertical.png" id="19_pn4ro"]
 [ext_resource type="Script" uid="uid://df03c1dug0j5n" path="res://Scripts/UI/Tests/TradesGridContainer.cs" id="20_4ipcm"]
+[ext_resource type="Script" uid="uid://bsgutg814j735" path="res://Scripts/UI/Tests/TradersLabel.cs" id="20_p2ui4"]
 [ext_resource type="Script" uid="uid://b34i2g6sy31i7" path="res://Scripts/UI/Tests/TradeHistoryLabel.cs" id="21_p2ui4"]
 [ext_resource type="Script" uid="uid://brle1iq2je27d" path="res://Scripts/Tests/TestProgress.cs" id="25_op4ab"]
 [ext_resource type="Script" uid="uid://cyhebphn84ubx" path="res://Scripts/Tests/TimerLabel.cs" id="26_p2ui4"]
@@ -134,9 +136,19 @@ texture_margin_right = 15.0
 texture_margin_bottom = 15.0
 modulate_color = Color(0, 1.4160296, 1.1836394, 1)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p2ui4"]
+texture = ExtResource("15_op4ab")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+modulate_color = Color(2.184344, 0.50748926, 0.53543645, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ol2gm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2ui4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_axj6s"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0h6qt"]
 texture = ExtResource("17_565cx")
@@ -363,10 +375,10 @@ offset_top = 25.0
 offset_right = 1795.0
 offset_bottom = 715.0
 theme = SubResource("Theme_txx6u")
-scroll_vertical_custom_step = 10.0
+scroll_vertical = 846
 
 [node name="FullPageContainer" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer"]
-custom_minimum_size = Vector2(0, 1024)
+custom_minimum_size = Vector2(0, 1536)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -409,8 +421,9 @@ theme_override_constants/margin_bottom = 4
 
 [node name="RetardMarketTM" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/MarginContainer"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("13_i54xj")
-text = "RetardMarket™"
+theme_override_colors/font_color = Color(0.88480914, 0.5519577, 0.02141857, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_p2ui4")
+text = "PredictAVerdict™"
 
 [node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
 layout_mode = 2
@@ -422,9 +435,9 @@ theme_override_constants/margin_bottom = 4
 [node name="US" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_styles/normal = ExtResource("13_i54xj")
-text = "US"
+text = "USD"
 
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
+[node name="WealthContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 8
@@ -432,13 +445,10 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/MarginContainer3"]
+[node name="Label" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/WealthContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_styles/normal = ExtResource("13_i54xj")
-theme_override_styles/read_only = ExtResource("13_i54xj")
-text = "🔎 Search RetardMarket™"
-editable = false
 
 [node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
 layout_mode = 2
@@ -594,30 +604,54 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_p2ui4")
 
-[node name="PanelContainer" type="ScrollContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TradersContainer" type="ScrollContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1210, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("14_gcaf5")
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradersContainer"]
+custom_minimum_size = Vector2(900, 330)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_axj6s")
+
+[node name="Traders List" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradersContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Traders List: "
+
+[node name="TradersLabel" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradersContainer/PanelContainer/Traders List"]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 88.0
+offset_bottom = 46.0
+script = ExtResource("20_p2ui4")
+
+[node name="EmptySpace2" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p2ui4")
+
+[node name="TradeHistoryContainer" type="ScrollContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1210, 600)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = ExtResource("14_gcaf5")
 
-[node name="Trade History List" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="Trade History List" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradeHistoryContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.0
 text = "Trade History:"
 
-[node name="TradeHistoryLabel" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/Trade History List"]
+[node name="TradeHistoryLabel" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradeHistoryContainer/Trade History List"]
 layout_mode = 0
 offset_top = 23.0
 offset_right = 88.0
 offset_bottom = 46.0
 script = ExtResource("21_p2ui4")
-
-[node name="EmptySpace2" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_p2ui4")
 
 [node name="Ads" type="Node2D" parent="PanelContainer/TabContainer/PredictAVerdict"]
 
