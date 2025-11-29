@@ -17,7 +17,7 @@ namespace GameJam
 				return;
 			}
 
-			if (ListingManager.Instance is null)
+			if (TradeManager.Instance is null)
 			{
 				GD.PushError($"[{GetType().Name}]");
 				return;
@@ -33,7 +33,7 @@ namespace GameJam
 		public void UpdateTrade(Trade t)
 		{
 			Text = "\n";
-			foreach (var tr in _tradeManager.Trades)
+			foreach (var tr in _tradeManager.ActiveTrades)
 			{
 				Text += $"{tr.Index}.{tr.Title}\n";
 				foreach (var o in tr.Options)
@@ -53,7 +53,7 @@ namespace GameJam
 		public void UpdateTrade(Trade trade, TradeOption option)
 		{
 			Text = "\n";
-			foreach (var tr in _tradeManager.Trades)
+			foreach (var tr in _tradeManager.ActiveTrades)
 			{
 				Text += $"{tr.Index}.{tr.Title}\n";
 				foreach (var o in tr.Options)

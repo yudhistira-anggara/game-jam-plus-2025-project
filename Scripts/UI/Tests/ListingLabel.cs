@@ -6,7 +6,7 @@ namespace GameJam
     public partial class ListingLabel : Label
     {
         private GlobalSignals _globalSignals { get; set; }
-        private ListingManager _listingManager { get; set; }
+        private TradeManager _tradeManager { get; set; }
 
         public override void _Ready()
         {
@@ -16,14 +16,14 @@ namespace GameJam
                 return;
             }
 
-            if (ListingManager.Instance is null)
+            if (TradeManager.Instance is null)
             {
                 GD.PushError($"[{GetType().Name}]");
                 return;
             }
 
             _globalSignals = GlobalSignals.Instance;
-            _listingManager = ListingManager.Instance;
+            _tradeManager = TradeManager.Instance;
             _globalSignals.NewListing += UpdateListing;
             _globalSignals.KillListing += UpdateListing;
             _globalSignals.TestSignal += ClearLabel;
@@ -37,9 +37,12 @@ namespace GameJam
         public void UpdateListing(Listing ls)
         {
             Text = "";
-            foreach (var lis in _listingManager.Listings)
+            foreach (var t in _tradeManager.ActiveTrades)
             {
-                Text += $"\n{lis.Index}.{lis.Target.ID} [{lis.Target.Option}] -> Shares: {lis.Shares}, Offer: ${lis.PriceOffer}";
+                foreach (var lis in t.Listings)
+                {
+                    Text += $"\n{lis.Index}.{lis.TargetID} [{lis.TargetOption}] -> Shares: {lis.Shares}, Offer: ${lis.PriceOffer}";
+                }
             }
         }
     }

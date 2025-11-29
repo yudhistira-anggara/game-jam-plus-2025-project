@@ -8,9 +8,13 @@ namespace GameJam
     {
         public static GlobalSignals Instance { get; private set; }
 
+        // Generic
         [Signal]
         public delegate void TestSignalEventHandler();
+        [Signal]
+        public delegate void DurationLeftEventHandler(double duration);
 
+        // GameManager
         [Signal]
         public delegate void TradeDayStartEventHandler();
         [Signal]
@@ -18,18 +22,17 @@ namespace GameJam
         [Signal]
         public delegate void GameEndEventHandler();
 
-        [Signal]
-        public delegate void DurationLeftEventHandler(double duration);
-
+        // Listing
         [Signal]
         public delegate void NewListingEventHandler(Listing listing);
         [Signal]
-        public delegate void AddListingEventHandler(Listing listing, Trade trade);
+        public delegate void AddListingEventHandler(Trade trade, Listing listing);
         [Signal]
         public delegate void KillListingEventHandler(Listing listing);
         [Signal]
         public delegate void BuyListingEventHandler(Trader trader, Listing listing);
 
+        // Trade
         [Signal]
         public delegate void NewTradeEventHandler(Trade trade);
         [Signal]
@@ -39,14 +42,19 @@ namespace GameJam
         [Signal]
         public delegate void TradeModifiedEventHandler(Trade trade);
 
+        // Trader
         [Signal]
         public delegate void NewTraderEventHandler(Trader trader);
         [Signal]
+        public delegate void KillTraderEventHandler(Trader trader);
+        [Signal]
         public delegate void TraderUpdateEventHandler(Trader trader);
 
+        // Trade History
         [Signal]
         public delegate void TradeHistoryUpdateEventHandler(TradeHistory th);
 
+        // Trade Request
         [Signal]
         public delegate void NewTradeRequestEventHandler(TradeRequest request);
         [Signal]

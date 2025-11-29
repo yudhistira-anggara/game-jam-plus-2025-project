@@ -9,14 +9,15 @@ namespace GameJam
 	{
 		public static TradeManager Instance { get; private set; }
 
-		public List<Trade> Trades { get; set; } = [];
+		private List<TradeSerializable> _tradeQueue = [];
+		private Dictionary<string, TradeSerializable> _trades = [];
+
+		public List<Trade> ActiveTrades { get; set; } = [];
 		public List<TradeRequest> TradeRequests { get; set; } = [];
 		public List<TradeHistory> TradeHistory { get; set; } = [];
 		public List<TradeHistory> OldTradeHistory { get; set; } = [];
 
-		public List<string> TradeFiles { get; set; } = [];
-
-		public int TradeCount { get; set; } = 0;
+		public int TradeIndex { get; set; } = 0;
 		public int MaxTrades { get; set; } = 6;
 
 		public double DecisionInterval { get; set; } = 1;
@@ -25,12 +26,14 @@ namespace GameJam
 		public override void _Ready()
 		{
 			Instance = this;
-			ModifyTradeFile("res://Resources/Trade/trades.json");
+			LoadFromDirectory("res://Data/Trade/");
 			GlobalSignals.Instance.NewTradeRequest += HandleTradeRequest;
 			GlobalSignals.Instance.TradeExpire += UpdateTradeManager;
 			GlobalSignals.Instance.BuyListing += UpdateTradeHistory;
 			GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
 			GlobalSignals.Instance.TradeDayEnd += OnTradeDayEnded;
+
+			GenerateTrade();
 		}
 
 		public override void _Process(double delta)
@@ -40,7 +43,7 @@ namespace GameJam
 			if (!GameManager.Instance.IsGameActive)
 				return;
 
-			foreach (var t in Trades.ToList())
+			foreach (var t in ActiveTrades.ToList())
 			{
 				t.UpdateTrade(delta);
 			}
@@ -58,10 +61,10 @@ namespace GameJam
 			if (TimeSinceLastDecision < DecisionInterval)
 				return;
 
-			if (Trades.Count < MaxTrades)
+			if (ActiveTrades.Count < MaxTrades)
 				GenerateTrade();
 
-			foreach (var t in Trades.ToList())
+			foreach (var t in ActiveTrades.ToList())
 			{
 				t.AddRandomShares();
 				t.UpdateOdds();
@@ -82,9 +85,9 @@ namespace GameJam
 			{
 				OldTradeHistory.Add(t);
 			}
+
 			TradeHistory.Clear();
-			TradeCount = 0;
-			Trades.Clear();
+			ActiveTrades.Clear();
 		}
 
 		public void UpdateTradeHistory(Trader t, Listing l)
@@ -93,8 +96,8 @@ namespace GameJam
 			{
 				Purchaser = t.ID,
 				Index = l.Index,
-				Target = l.Target.ID,
-				Option = l.Target.Option,
+				Target = l.TargetID,
+				Option = l.TargetOption,
 				Shares = l.Shares,
 				Money = l.PriceOffer
 			};
@@ -104,86 +107,113 @@ namespace GameJam
 
 		public void UpdateTradeManager(Trade t)
 		{
-			TradeCount--;
-			Trades.Remove(t);
+			ActiveTrades.Remove(t);
 		}
 
 		public void HandleTradeRequest(TradeRequest request)
 		{
-			// Maybe a task? HANDLE TRADE REFUNDS
-
-			/*
-			if (1 == 1)
-				EmitSignal(GlobalSignals.SignalName.Refund, request);
-			*/
-
 			TradeRequests.Add(request);
 		}
 
-		public void ModifyTradeFile(string filePath, bool addFile = true)
+		public List<string> LoadFromDirectory(string path)
 		{
-			if (!FileAccess.FileExists(filePath))
+			List<string> allPaths = [];
+			var dir = DirAccess.Open(path);
+
+			foreach (string file in dir.GetFiles())
 			{
-				GD.PushError($"[{GetType().Name}]");
+				string fullPath = $"{path}/{file}";
+
+				if (Utils.ValidateJson<TradeSerializable>(path, out var parsed))
+				{
+					foreach (var tr in parsed)
+					{
+						_trades[tr.ID] = tr;
+						allPaths.Add(fullPath);
+					}
+				}
+			}
+
+			foreach (string sub in dir.GetDirectories())
+			{
+				string subPath = $"{path}/{sub}";
+				allPaths.AddRange(LoadFromDirectory(subPath));
+			}
+
+			return allPaths;
+		}
+
+		public void CreateTrade()
+		{
+			foreach (var q in _tradeQueue)
+			{
+				if (ActiveTrades.Count >= MaxTrades)
+					return;
+
+				if (GD.Randf() < 0.3)
+					return;
+
+				_tradeQueue.Remove(q);
+
+				double dur = q.Duration + GD.RandRange(0, 10d);
+
+				if (dur >= GameManager.Instance.GameTimer.TimeLeft)
+					dur = q.Duration;
+
+				if (q.Duration > GameManager.Instance.GameTimer.TimeLeft)
+					return;
+
+				Trade trade = new(q)
+				{
+					Index = TradeIndex,
+					Duration = dur
+				};
+
+				GlobalSignals.Instance.BuyListing += trade.OnListingPurchase;
+				GlobalSignals.Instance.KillListing += trade.OnListingDie;
+				ActiveTrades.Add(trade);
+				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, trade);
+				TradeIndex++;
+			}
+		}
+
+		public void CreateSpecificTrade(string id, double duration = 0)
+		{
+			if (!_trades.TryGetValue(id, out TradeSerializable value))
+			{
+				GD.PushError("Trader not found!");
 				return;
 			}
 
-			if (addFile)
+			if (duration != 0)
+				value.Duration = duration;
+
+			if (value.Duration > GameManager.Instance.GameTimer.TimeLeft)
 			{
-				TradeFiles.Add(filePath);
+				GD.PushError("Duration is more than remaining game time!");
 				return;
 			}
 
-			if (!TradeFiles.Contains(filePath))
-			{
-				GD.PushError($"[{GetType().Name}]");
-				return;
-			}
-
-			TradeFiles.Remove(filePath);
+			_tradeQueue.Add(value);
 		}
 
 		public void GenerateTrade()
 		{
-			foreach (var tf in TradeFiles)
+			List<TradeSerializable> tList = [.. _trades.Values];
+			tList.Shuffle();
+
+			foreach (var tf in tList)
 			{
-				List<TradeSerializable> parsed = Utils.ParseJsonList<TradeSerializable>(tf);
+				if (GD.Randf() < 0.3)
+					break;
 
-				parsed.Shuffle();
+				if (tf.Flags.Contains("Disabled"))
+					break;
 
-				foreach (var t in parsed)
-				{
-					if (Trades.Count >= MaxTrades)
-						return;
+				if (ActiveTrades.Exists(x => x.ID == tf.ID) && tf.Flags.Contains("Unique"))
+					break;
 
-					if (Trades.Exists(x => x.ID == t.ID) && t.Flags.Contains("Unique"))
-					{
-						//
-					}
-					else
-					{
-						var dur = t.Duration + GD.RandRange(-2d, 9d);
-
-						if (dur > GameManager.Instance.GameTimer.TimeLeft)
-							dur = t.Duration;
-
-						if (t.Duration > GameManager.Instance.GameTimer.TimeLeft)
-							return;
-
-						if (GD.Randf() < 0.3)
-							return;
-
-						Trade nt = new(t)
-						{
-							Index = TradeCount,
-							Duration = dur
-						};
-
-						Trades.Add(nt);
-						GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrade, nt);
-						TradeCount++;
-					}
-				}
+				_tradeQueue.Add(tf);
 			}
 		}
 	}

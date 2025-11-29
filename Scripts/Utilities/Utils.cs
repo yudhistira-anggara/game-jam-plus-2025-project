@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 namespace GameJam
@@ -25,9 +26,7 @@ namespace GameJam
             {
                 n--;
                 int k = Random.Shared.Next(n + 1);
-                T value = list[k];
-                list[k] = list[n];
-                list[n] = value;
+                (list[n], list[k]) = (list[k], list[n]);
             }
         }
 
@@ -53,6 +52,50 @@ namespace GameJam
                     return true;
             }
             return false;
+        }
+
+        public static bool ValidateJson<T>(string path, out List<T> result)
+        {
+            result = default;
+            string content;
+
+            if (!Godot.FileAccess.FileExists(path))
+            {
+                GD.PushError($"{path} not found!");
+                return false;
+            }
+
+            try
+            {
+                content = LoadFromFile(path);
+            }
+            catch (Exception e)
+            {
+                GD.PushError($"Failed to read file: {path}\n{e.Message}");
+                return false;
+            }
+
+            try
+            {
+                result = JsonSerializer.Deserialize<List<T>>(content);
+
+                var assembly = typeof(JsonSerializerOptions).Assembly;
+                var updateHandlerType = assembly.GetType("System.Text.Json.JsonSerializerOptionsUpdateHandler");
+                var clearCacheMethod = updateHandlerType?.GetMethod("ClearCache", BindingFlags.Static | BindingFlags.Public);
+                clearCacheMethod?.Invoke(null, [null]);
+
+                return result != null;
+            }
+            catch (JsonException e)
+            {
+                GD.PushError($"JSON format error: {path}\n{e.Message}");
+                return false;
+            }
+            catch (Exception e)
+            {
+                GD.PushError($"Unexpected error: {path}\n{e.Message}");
+                return false;
+            }
         }
 
         public static T ParseJson<T>(string path)
@@ -89,6 +132,11 @@ namespace GameJam
             clearCacheMethod?.Invoke(null, [null]);
 
             return parsed;
+        }
+
+        public static double WeightDecay(int count, double baseWeight = 1f, double decayRate = 1f)
+        {
+            return baseWeight / (1 + count * decayRate);
         }
     }
 }

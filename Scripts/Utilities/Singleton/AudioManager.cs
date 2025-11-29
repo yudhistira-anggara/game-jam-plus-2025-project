@@ -9,10 +9,11 @@ namespace GameJam
     {
         public static AudioManager Instance { get; private set; }
 
+        private Dictionary<string, AudioStream> _loadedAudio { get; set; } = [];
+
         private AudioStreamPlayer2D _musicPlayer;
         private AudioStreamPlayer2D _audioPlayer;
 
-        private Dictionary<string, AudioStream> _loadedAudio = [];
         private AudioStream _currentStream { get; set; }
 
         public float GlobalVolume { get; set; } = 0;
@@ -27,6 +28,13 @@ namespace GameJam
 
             _musicPlayer = new AudioStreamPlayer2D();
             _audioPlayer = new AudioStreamPlayer2D();
+
+            LoadFromDirectory("res://Resources/Audio/");
+
+            foreach (var e in _loadedAudio)
+            {
+                GD.Print(e.Key);
+            }
 
             _musicPlayer.VolumeDb = MusicVolumeReal;
             _musicPlayer.Autoplay = true;
@@ -51,19 +59,27 @@ namespace GameJam
             foreach (string file in dir.GetFiles())
             {
                 string fullPath = $"{path}/{file}";
+                
                 if (Utils.IsValidAudioExtension(fullPath))
                 {
-                    allPaths.Add(fullPath);
+                    AudioStream audio = ResourceLoader.Load<AudioStream>(fullPath);
+
+                    if (audio == null)
+                    {
+                        GD.PushError("Audio is null!");
+                    }
+                    else
+                    {
+                        _loadedAudio[file] = audio;
+                        allPaths.Add(fullPath);
+                    }
                 }
             }
 
             foreach (string sub in dir.GetDirectories())
             {
                 string subPath = $"{path}/{sub}";
-                if (Utils.IsValidAudioExtension(subPath))
-                {
-                    allPaths.AddRange(LoadFromDirectory(subPath));
-                }
+                allPaths.AddRange(LoadFromDirectory(subPath));
             }
 
             return allPaths;
@@ -78,7 +94,7 @@ namespace GameJam
             if (audio != null)
                 _loadedAudio[path] = audio;
             else
-                GD.PrintErr();
+                GD.PushError("SFX doesn't exist or is not loaded!");
         }
 
         public void LoadAndPlaySFX(string path)
@@ -93,7 +109,7 @@ namespace GameJam
                 if (audio != null)
                     _loadedAudio[path] = audio;
                 else
-                    GD.PrintErr();
+                    GD.PushError("SFX doesn't exist or is not loaded!");
             }
 
             PlaySFX(audio);
@@ -101,9 +117,9 @@ namespace GameJam
 
         public void PlaySFX(string name)
         {
-            if (_loadedAudio.ContainsKey(name))
+            if (_loadedAudio.TryGetValue(name, out AudioStream value))
             {
-                _audioPlayer.Stream = _loadedAudio[name];
+                _audioPlayer.Stream = value;
                 _audioPlayer.Play();
             }
             else

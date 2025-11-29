@@ -16,7 +16,7 @@ namespace GameJam
                 return;
             }
 
-            if (ListingManager.Instance is null)
+            if (TradeManager.Instance is null)
             {
                 GD.PushError($"[{GetType().Name}]");
                 return;
@@ -30,7 +30,7 @@ namespace GameJam
         public void UpdateTimer(double d)
         {
             Text = "";
-            foreach (var tr in _tradeManager.Trades)
+            foreach (var tr in _tradeManager.ActiveTrades)
             {
                 var ts = TimeSpan.FromSeconds(tr.Duration);
                 var st = ts.ToString(@"mm\:ss");

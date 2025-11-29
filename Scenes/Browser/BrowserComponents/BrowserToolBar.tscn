@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://c56rjvdpkvyek"]
+
+[node name="ToolBarContainer" type="HBoxContainer"]
+
+[node name="ReverseMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ReverseButton" type="Button" parent="ReverseMargin"]
+layout_mode = 2
+text = "<"
+
+[node name="ForwardMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ForwardButton" type="Button" parent="ForwardMargin"]
+layout_mode = 2
+text = ">"
+
+[node name="RefreshMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RefreshButton" type="Button" parent="RefreshMargin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "Refresh"
+icon_alignment = 1
+
+[node name="AddressMargin" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="AddressMargin"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="AddressMargin"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddressMargin/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddressMargin/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MenuButton" type="MenuButton" parent="AddressMargin/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "🛡"
+item_count = 3
+popup/item_0/text = "New Tab"
+popup/item_0/id = 0
+popup/item_1/text = "Settings"
+popup/item_1/id = 1
+popup/item_2/text = "Exit"
+popup/item_2/id = 2
+
+[node name="MenuButton2" type="MenuButton" parent="AddressMargin/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "🔒"
+item_count = 3
+popup/item_0/text = "New Tab"
+popup/item_0/id = 0
+popup/item_1/text = "Settings"
+popup/item_1/id = 1
+popup/item_2/text = "Exit"
+popup/item_2/id = 2
+
+[node name="LineEdit" type="LineEdit" parent="AddressMargin/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "https://www.predictaverdict.cash/uXw23uppC"
+editable = false
+flat = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MenuButton" type="MenuButton" parent="MarginContainer4"]
+layout_mode = 2
+text = ". . ."
+flat = false
+item_count = 3
+popup/item_0/text = "New Tab"
+popup/item_0/id = 0
+popup/item_1/text = "Settings"
+popup/item_1/id = 1
+popup/item_2/text = "Exit"
+popup/item_2/id = 2

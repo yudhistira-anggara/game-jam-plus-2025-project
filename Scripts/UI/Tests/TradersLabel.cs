@@ -32,7 +32,7 @@ namespace GameJam
 		public void UpdateTrader(Trader trader)
 		{
 			Text = "\n";
-			foreach (var tr in _traderManager.Traders)
+			foreach (var tr in _traderManager.ActiveTraders)
 			{
 				Text += $"{tr.Name}\n";
 				Text += $"${tr.Wealth}\n\n";
@@ -42,7 +42,7 @@ namespace GameJam
 		public void UpdateTrader(Trader trader, Listing listing)
 		{
 			Text = "\n";
-			foreach (var tr in _traderManager.Traders)
+			foreach (var tr in _traderManager.ActiveTraders)
 			{
 				Text += $"{tr.Name}\n";
 				Text += $"${tr.Wealth}\n\n";

@@ -7,10 +7,11 @@ namespace GameJam
     public partial class Listing : GodotObject
     {
         public int Index { get; set; }
-        public ListingTarget Target { get; set; }
+        public string TargetID { get; set; }
+        public string TargetOption { get; set; }
         public int Size { get; set; }
         public decimal Shares { get; set; }
-        public decimal PriceOffer { get; set; } // Per shares
+        public decimal PriceOffer { get; set; }
         public double Duration { get; set; }
         public double RandomDie { get; set; } = 0.1;
 
@@ -18,7 +19,6 @@ namespace GameJam
         {
             GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.KillListing, this);
             GlobalSignals.Instance.ResolveTrade -= OnTradeResolved;
-            // Free();
         }
 
         public void UpdateListing(double delta)
@@ -29,19 +29,7 @@ namespace GameJam
             {
                 GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.KillListing, this);
                 GlobalSignals.Instance.ResolveTrade -= OnTradeResolved;
-                // Free();
             }
-        }
-    }
-    public partial class ListingTarget
-    {
-        public string ID { get; set; }
-        public string Option { get; set; }
-
-        public ListingTarget(string id, string op)
-        {
-            ID = id;
-            Option = op;
         }
     }
 }

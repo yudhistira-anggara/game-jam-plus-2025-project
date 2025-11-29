@@ -25,7 +25,7 @@ namespace GameJam
 
             if (GameManager.Instance is null)
             {
-                GD.PushError($"[{GetType().Name}]");
+                GD.PushError(this, "GameManager doesn't exist!");
                 return;
             }
 
@@ -33,7 +33,7 @@ namespace GameJam
 
             if (GlobalSignals.Instance is null)
             {
-                GD.PushError($"[{GetType().Name}]");
+                GD.PushError(this, "GlobalSignals doesn't exist!");
                 return;
             }
 
@@ -97,8 +97,8 @@ namespace GameJam
             {
                 Purchaser = Name,
                 Index = list.Index,
-                Target = list.Target.ID,
-                Option = list.Target.Option,
+                Target = list.TargetID,
+                Option = list.TargetOption,
                 Shares = list.Shares,
                 Money = list.PriceOffer
             };

@@ -1,0 +1,698 @@
+[gd_scene load_steps=52 format=3 uid="uid://cuoduogyq3x0h"]
+
+[ext_resource type="Theme" uid="uid://c2e0le61neu4q" path="res://Resources/Fonts/PixelFont.tres" id="1_c8nqm"]
+[ext_resource type="Texture2D" uid="uid://dxm3mpbuayalv" path="res://Resources/Sprites/Window_HighRes.png" id="2_flgaf"]
+[ext_resource type="Texture2D" uid="uid://w5yvwporjjfx" path="res://Resources/Sprites/Tab_Default.png" id="3_neiin"]
+[ext_resource type="Texture2D" uid="uid://d0063udu7r1r0" path="res://Resources/Sprites/Tab_Hover.png" id="4_6g2qh"]
+[ext_resource type="Texture2D" uid="uid://ci7bcsb34wnim" path="res://Resources/Sprites/Tab_Selected.png" id="5_1m0ta"]
+[ext_resource type="Texture2D" uid="uid://de6hddejyyvte" path="res://Resources/Sprites/Back_Icon.png" id="6_4t87q"]
+[ext_resource type="Texture2D" uid="uid://d3jk5rc8fgcvi" path="res://Resources/Sprites/Forward_Icon.png" id="7_6okq6"]
+[ext_resource type="Texture2D" uid="uid://c2yn7olwj800e" path="res://Resources/Sprites/X_Red.png" id="7_hghya"]
+[ext_resource type="Script" uid="uid://c4lftlsklalum" path="res://Scripts/UI/Tests/ExitButton.cs" id="8_ka4x0"]
+[ext_resource type="Texture2D" uid="uid://c64hhyibfeowt" path="res://Resources/Sprites/Window_InnerSmall.png" id="8_svmkn"]
+[ext_resource type="Texture2D" uid="uid://bvrgvjrx7a1ar" path="res://Resources/Sprites/Protected.png" id="9_ladpd"]
+[ext_resource type="Script" uid="uid://brle1iq2je27d" path="res://Scripts/Tests/TestProgress.cs" id="9_ya3hn"]
+[ext_resource type="Texture2D" uid="uid://bghi6kudmwenf" path="res://Resources/Sprites/Secured.png" id="10_06e1y"]
+[ext_resource type="Script" uid="uid://cyhebphn84ubx" path="res://Scripts/Tests/TimerLabel.cs" id="10_v6cv8"]
+[ext_resource type="Texture2D" uid="uid://lwh1dykbfvcc" path="res://Resources/Sprites/Window_Inner.png" id="11_ldvwb"]
+[ext_resource type="Texture2D" uid="uid://b23ihxs87e6ju" path="res://Resources/Sprites/Scroll_Vertical.png" id="12_iib7g"]
+[ext_resource type="StyleBox" path="res://Resources/Sprites/DarkPanel.tres" id="13_1g1is"]
+[ext_resource type="Texture2D" uid="uid://suvu7s16vrvi" path="res://Resources/Sprites/Panel_Gray.png" id="14_ijoxr"]
+[ext_resource type="StyleBox" path="res://Resources/Sprites/Gray2Panel.tres" id="15_ylm34"]
+[ext_resource type="Script" uid="uid://k03ihd0usxrf" path="res://Scripts/Tests/TestButton.cs" id="16_qutok"]
+[ext_resource type="StyleBox" path="res://Resources/Sprites/GrayDisabled.tres" id="17_pu0b2"]
+[ext_resource type="Script" uid="uid://df03c1dug0j5n" path="res://Scripts/UI/Tests/TradesGridContainer.cs" id="18_y6hmv"]
+[ext_resource type="Script" uid="uid://b34i2g6sy31i7" path="res://Scripts/UI/Tests/TradeHistoryLabel.cs" id="19_mqgd0"]
+[ext_resource type="Texture2D" uid="uid://bddtuysr6324q" path="res://Resources/Sprites/House_of_Pals_Mini.png" id="20_soj3d"]
+[ext_resource type="Texture2D" uid="uid://bfndkcwcqxu52" path="res://Resources/Sprites/Ads_MAXXLOANSmini.png" id="21_8re26"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0hro5"]
+texture = ExtResource("2_flgaf")
+texture_margin_left = 50.0
+texture_margin_top = 135.0
+texture_margin_right = 50.0
+texture_margin_bottom = 50.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bkoup"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eesvp"]
+texture = ExtResource("3_neiin")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_13i77"]
+texture = ExtResource("4_6g2qh")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcaf5"]
+texture = ExtResource("5_1m0ta")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i54xj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_exbh6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_565cx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h6qt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_exbh6"]
+texture = ExtResource("8_svmkn")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ai0r5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hmo72"]
+texture = ExtResource("8_svmkn")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_damv2"]
+texture = ExtResource("11_ldvwb")
+texture_margin_left = 50.0
+texture_margin_top = 50.0
+texture_margin_right = 50.0
+texture_margin_bottom = 50.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pn4ro"]
+texture = ExtResource("3_neiin")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g5qrc"]
+texture = ExtResource("4_6g2qh")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q6116"]
+texture = ExtResource("4_6g2qh")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eh55v"]
+texture = ExtResource("12_iib7g")
+texture_margin_left = 15.0
+texture_margin_top = 30.0
+texture_margin_right = 15.0
+texture_margin_bottom = 30.0
+
+[sub_resource type="Theme" id="Theme_txx6u"]
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_pn4ro")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_g5qrc")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_q6116")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_eh55v")
+VScrollBar/styles/scroll_focus = ExtResource("13_1g1is")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tr7r1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0h6qt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_565cx"]
+texture = ExtResource("14_ijoxr")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+modulate_color = Color(0, 1.4160296, 1.1836394, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ol2gm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p2ui4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0h6qt"]
+texture = ExtResource("20_soj3d")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_txx6u"]
+texture = ExtResource("21_8re26")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txx6u"]
+
+[node name="Browser" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_c8nqm")
+theme_override_styles/panel = SubResource("StyleBoxTexture_0hro5")
+
+[node name="TabContainer" type="TabContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_colors/drop_mark_color = Color(0.23753911, 0.23753914, 0.23753911, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hovered_color = Color(0.21590146, 0.21590179, 0.21590227, 1)
+theme_override_colors/font_unselected_color = Color(0.30323282, 0.30323282, 0.30323282, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_bkoup")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_eesvp")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_13i77")
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_gcaf5")
+current_tab = 0
+
+[node name="PredictAVerdict" type="PanelContainer" parent="PanelContainer/TabContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_i54xj")
+metadata/_tab_index = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer/TabContainer/PredictAVerdict"]
+layout_mode = 2
+theme_override_styles/split_bar_background = SubResource("StyleBoxEmpty_exbh6")
+collapsed = true
+dragging_enabled = false
+dragger_visibility = 2
+drag_area_highlight_in_editor = true
+
+[node name="TopBarContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer"]
+layout_mode = 2
+
+[node name="BackContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/BackContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_565cx")
+icon = ExtResource("6_4t87q")
+flat = true
+
+[node name="ForwardContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/ForwardContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_0h6qt")
+icon = ExtResource("7_6okq6")
+flat = true
+
+[node name="RefreshContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/RefreshContainer"]
+custom_minimum_size = Vector2(141.275, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_exbh6")
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/RefreshContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.5
+offset_top = -17.5
+offset_right = 55.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.5019608)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ai0r5")
+text = "Refresh"
+icon_alignment = 1
+
+[node name="SearchBarContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 73.78)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/SearchBarContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_exbh6")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/SearchBarContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/SearchBarContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/SearchBarContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MenuButton" type="MenuButton" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/SearchBarContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("9_ladpd")
+item_count = 3
+popup/item_0/text = "New Tab"
+popup/item_0/id = 0
+popup/item_1/text = "Settings"
+popup/item_1/id = 1
+popup/item_2/text = "Exit"
+popup/item_2/id = 2
+
+[node name="MenuButton2" type="MenuButton" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/SearchBarContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("10_06e1y")
+item_count = 3
+popup/item_0/text = "New Tab"
+popup/item_0/id = 0
+popup/item_1/text = "Settings"
+popup/item_1/id = 1
+popup/item_2/text = "Exit"
+popup/item_2/id = 2
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/SearchBarContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_uneditable_color = Color(0, 0, 0, 0.5019608)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.6)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/selection_color = Color(0, 0, 0, 1)
+theme_override_colors/clear_button_color = Color(0, 0, 0, 1)
+theme_override_colors/clear_button_color_pressed = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
+text = "https://www.retardmarket.trade/uXw23uppC"
+editable = false
+flat = true
+
+[node name="OptionsContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MenuButton" type="MenuButton" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/TopBarContainer/HBoxContainer/OptionsContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.21590146, 0.21590179, 0.21590227, 1)
+theme_override_colors/font_pressed_color = Color(0.5609549, 0.5609549, 0.5609549, 1)
+theme_override_colors/font_hover_color = Color(0.26293218, 0.26293254, 0.26293305, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1584723, 0.15847233, 0.1584723, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_hmo72")
+text = ". . ."
+flat = false
+item_count = 3
+popup/item_0/text = "New Tab"
+popup/item_0/id = 0
+popup/item_1/text = "Settings"
+popup/item_1/id = 1
+popup/item_2/text = "Exit"
+popup/item_2/id = 2
+
+[node name="Page" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_damv2")
+
+[node name="Page" type="Node2D" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page"]
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page"]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 1795.0
+offset_bottom = 715.0
+theme = SubResource("Theme_txx6u")
+scroll_vertical_custom_step = 10.0
+
+[node name="FullPageContainer" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer"]
+custom_minimum_size = Vector2(0, 1024)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_tr7r1")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 256
+theme_override_constants/margin_right = 256
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0h6qt")
+
+[node name="Background" type="Panel" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_565cx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_c8nqm")
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="PageTopContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RetardMarketTM" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("15_ylm34")
+text = "RetardMarket™"
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="US" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("15_ylm34")
+text = "US"
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="LineEdit" type="LineEdit" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = ExtResource("15_ylm34")
+theme_override_styles/read_only = ExtResource("15_ylm34")
+text = "🔎 Search RetardMarket™"
+editable = false
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/MarginContainer4"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("15_ylm34")
+text = "ℹ Get Started"
+script = ExtResource("16_qutok")
+
+[node name="MarginContainer5" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="MenuButton" type="MenuButton" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PageTopContainer/MarginContainer5"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("15_ylm34")
+text = ". . ."
+flat = false
+item_count = 3
+popup/item_0/text = "Profile"
+popup/item_0/id = 0
+popup/item_1/text = "Earnings"
+popup/item_1/id = 1
+popup/item_2/text = "Payout"
+popup/item_2/id = 2
+
+[node name="TagsContainer" type="HBoxContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("15_ylm34")
+text = "↗ Trending 🔥🔥🔥 !"
+
+[node name="MarginContainer5" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer/MarginContainer5"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_styles/disabled = ExtResource("17_pu0b2")
+disabled = true
+text = "New !"
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer/MarginContainer3"]
+layout_mode = 2
+theme_override_styles/disabled = ExtResource("17_pu0b2")
+disabled = true
+text = "Ends Today !"
+
+[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="Button" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TagsContainer/MarginContainer4"]
+clip_contents = true
+layout_mode = 2
+theme_override_styles/normal = ExtResource("15_ylm34")
+theme_override_styles/disabled = ExtResource("17_pu0b2")
+disabled = true
+text = "Ends Within 3 Days !"
+autowrap_trim_flags = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 14.995)
+layout_mode = 2
+
+[node name="TradesContainer" type="GridContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 480)
+layout_mode = 2
+columns = 3
+script = ExtResource("18_y6hmv")
+
+[node name="Panel" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradesContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ol2gm")
+
+[node name="Panel2" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradesContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ol2gm")
+
+[node name="Panel3" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradesContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ol2gm")
+
+[node name="Panel4" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradesContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ol2gm")
+
+[node name="Panel5" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradesContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ol2gm")
+
+[node name="Panel6" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/TradesContainer"]
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ol2gm")
+
+[node name="EmptySpace" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p2ui4")
+
+[node name="PanelContainer" type="ScrollContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1210, 600)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = ExtResource("13_1g1is")
+
+[node name="Trade History List" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+text = "Trade History:"
+
+[node name="TradeHistoryLabel" type="Label" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/Trade History List"]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 88.0
+offset_bottom = 46.0
+script = ExtResource("19_mqgd0")
+
+[node name="EmptySpace2" type="PanelContainer" parent="PanelContainer/TabContainer/PredictAVerdict/VSplitContainer/Page/Page/ScrollContainer/FullPageContainer/MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_p2ui4")
+
+[node name="Ads" type="Node2D" parent="PanelContainer/TabContainer/PredictAVerdict"]
+
+[node name="Panel" type="Panel" parent="PanelContainer/TabContainer/PredictAVerdict/Ads"]
+custom_minimum_size = Vector2(234, 632)
+offset_left = 34.0
+offset_top = 131.0
+offset_right = 268.0
+offset_bottom = 763.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_0h6qt")
+
+[node name="Panel" type="Panel" parent="PanelContainer/TabContainer/PredictAVerdict/Ads/Panel"]
+layout_mode = 0
+offset_left = 1490.0
+offset_top = -2.0
+offset_right = 1724.0
+offset_bottom = 630.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_txx6u")
+
+[node name="ExitContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -131.08496
+offset_top = 7.705
+offset_right = -35.08496
+offset_bottom = 103.705
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+
+[node name="Button" type="Button" parent="ExitContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_txx6u")
+icon = ExtResource("7_hghya")
+flat = true
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("8_ka4x0")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="TestProgress" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(512, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -901.0
+offset_top = -496.0
+offset_right = -389.0
+offset_bottom = -464.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+show_percentage = false
+script = ExtResource("9_ya3hn")
+
+[node name="TimerLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 48.0
+offset_right = 155.0
+offset_bottom = 75.0
+theme = ExtResource("1_c8nqm")
+text = "00:00"
+script = ExtResource("10_v6cv8")
+
+[connection signal="pressed" from="ExitContainer/Button" to="ExitContainer/Button" method="_on_pressed"]

@@ -6,7 +6,7 @@ namespace GameJam
     public partial class ListingTimerLabel : Label
     {
         private GlobalSignals _globalSignals { get; set; }
-        private ListingManager _listingManager { get; set; }
+        private TradeManager _tradeManager { get; set; }
 
         public override void _Ready()
         {
@@ -16,25 +16,28 @@ namespace GameJam
                 return;
             }
 
-            if (ListingManager.Instance is null)
+            if (TradeManager.Instance is null)
             {
                 GD.PushError($"[{GetType().Name}]");
                 return;
             }
 
             _globalSignals = GlobalSignals.Instance;
-            _listingManager = ListingManager.Instance;
+            _tradeManager = TradeManager.Instance;
             _globalSignals.DurationLeft += UpdateTimer;
         }
 
         public void UpdateTimer(double d)
         {
             Text = "";
-            foreach (var ls in _listingManager.Listings)
+            foreach (var t in _tradeManager.ActiveTrades)
             {
-                var ts = TimeSpan.FromSeconds(ls.Duration);
-                var st = ts.ToString(@"mm\:ss");
-                Text += $"\n{st}";
+                foreach (var ls in t.Listings)
+                {
+                    var ts = TimeSpan.FromSeconds(ls.Duration);
+                    var st = ts.ToString(@"mm\:ss");
+                    Text += $"\n{st}";
+                }
             }
         }
     }

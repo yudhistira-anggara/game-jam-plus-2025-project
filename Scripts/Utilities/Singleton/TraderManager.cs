@@ -10,10 +10,12 @@ namespace GameJam
 	{
 		public static TraderManager Instance { get; private set; }
 
-		public List<Trader> Traders { get; set; } = [];
-		public List<string> TraderFiles { get; set; } = [];
+		private List<TraderSerializable> _traderQueue = [];
+		private Dictionary<string, TraderSerializable> _traders = [];
 
-		public int TraderCount { get; set; } = 0;
+		public List<Trader> ActiveTraders { get; set; } = [];
+
+		public int TraderIndex { get; set; } = 0;
 		public int MaxTraders { get; set; } = 3;
 
 		public double DecisionInterval { get; set; } = 3;
@@ -22,8 +24,10 @@ namespace GameJam
 		public override void _Ready()
 		{
 			Instance = this;
-			ModifyTraderFile("res://Resources/Trade/trader.json");
+			LoadFromDirectory("res://Data/Trader/");
 			GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
+
+			InitializeTraders();
 		}
 
 		public override void _Process(double delta)
@@ -36,40 +40,48 @@ namespace GameJam
 			if (TimeSinceLastDecision < DecisionInterval)
 				return;
 
-			foreach (var tr in Traders.ToList())
+			foreach (var tr in ActiveTraders.ToList())
 			{
 				// GD.Print($"{t.ID}, {tr.Name} - {tr.Activeness}");
 
-				foreach (var ls in ListingManager.Instance.Listings.ToList())
+				foreach (Trade at in TradeManager.Instance.ActiveTrades.ToList())
 				{
-					tr.DecideAction(ls);
+					foreach (Listing ls in at.Listings.ToList())
+					{
+						tr.DecideAction(ls);
+					}
 				}
 			}
 
 			TimeSinceLastDecision = 0;
 		}
 
-		public void ModifyTraderFile(string filePath, bool addFile = true)
+		public List<string> LoadFromDirectory(string path)
 		{
-			if (!FileAccess.FileExists(filePath))
+			List<string> allPaths = [];
+			var dir = DirAccess.Open(path);
+
+			foreach (string file in dir.GetFiles())
 			{
-				GD.PushError("Tradermanager.ModifyTraderFile; File does not exist.");
-				return;
+				string fullPath = $"{path}/{file}";
+
+				if (Utils.ValidateJson<TraderSerializable>(path, out var parsed))
+				{
+					foreach (var tr in parsed)
+					{
+						_traders[tr.ID] = tr;
+						allPaths.Add(fullPath);
+					}
+				}
 			}
 
-			if (addFile)
+			foreach (string sub in dir.GetDirectories())
 			{
-				TraderFiles.Add(filePath);
-				return;
+				string subPath = $"{path}/{sub}";
+				allPaths.AddRange(LoadFromDirectory(subPath));
 			}
 
-			if (!TraderFiles.Contains(filePath))
-			{
-				GD.PushError("Tradermanager.ModifyTraderFile; TraderFiles does not contain filePath.");
-				return;
-			}
-
-			TraderFiles.Remove(filePath);
+			return allPaths;
 		}
 
 		public void OnTradeDayStarted()
@@ -79,70 +91,90 @@ namespace GameJam
 
 		public void OnTradeDayEnded()
 		{
-			foreach (var tr in Traders)
+			foreach (var tr in ActiveTraders)
 			{
 				tr.Wealth += tr.Income;
 			}
 		}
 
+		public void CreateTrader()
+		{
+			if (ActiveTraders.Count >= MaxTraders)
+				return;
+
+			List<Trader> anons = ActiveTraders.FindAll(x => x.ID.StartsWith("anon_"));
+
+			if (anons.Count != 0)
+			{
+				anons[0].KillTrader();
+				anons.RemoveAt(0);
+			}
+
+			TraderSerializable queue = _traderQueue[0];
+			_traderQueue.RemoveAt(0);
+
+			Trader trader = new(queue)
+			{
+				Index = TraderIndex
+			};
+
+			GlobalSignals.Instance.ResolveTrade += trader.OnTradeResolved;
+			ActiveTraders.Add(trader);
+			GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, trader);
+			TraderIndex++;
+		}
+
 		public void CreateAnonymousTrader()
 		{
-			while (Traders.Count < MaxTraders)
+			while (ActiveTraders.Count < MaxTraders)
 			{
-				var trader = new Trader()
+				Trader trader = new()
 				{
-					Index = TraderCount,
-					ID = $"anon_{TraderCount}",
-					Name = $"Anon ({TraderCount})",
+					Index = TraderIndex,
+					ID = $"anon_{TraderIndex}",
+					Name = $"Anon ({TraderIndex})",
 					Wealth = 20,
 					Income = 20,
-					Activeness = 20
+					Personality = { { "Activeness", 20 } }
 				};
+
 				GlobalSignals.Instance.ResolveTrade += trader.OnTradeResolved;
-				Traders.Add(trader);
+				ActiveTraders.Add(trader);
 				GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, trader);
 
-				TraderCount++;
+				TraderIndex++;
 			}
 		}
 
-		public void CreateSpecificTrader(string filePath, string id)
+		public void CreateSpecificTrader(string id)
 		{
-			// Trader parsed = Utils.ParseJson<Trader>(filePath);
+			if (!_traders.TryGetValue(id, out TraderSerializable value))
+			{
+				GD.PushError("Trader not found!");
+				return;
+			}
+
+			_traderQueue.Add(value);
 		}
 
 		public void InitializeTraders()
 		{
-			foreach (var tf in TraderFiles)
+			List<TraderSerializable> trList = [.. _traders.Values];
+			trList.Shuffle();
+
+			foreach (var tf in trList)
 			{
-				List<TraderSerializable> parsed = Utils.ParseJsonList<TraderSerializable>(tf);
+				if (GD.Randf() < 0.3)
+					break;
 
-				foreach (var tr in parsed)
-				{
-					if (Traders.Count >= MaxTraders)
-						return;
+				if (tf.Flags.Contains("Disabled"))
+					break;
 
-					if (Traders.Exists(x => x.Name == tr.Name) && tr.Flags.Contains("Unique"))
-					{
-						//
-					}
-					else if (!tr.Flags.Contains("Disabled"))
-					{
-						Trader nt = new(tr)
-						{
-							Index = TraderCount,
-						};
+				if (ActiveTraders.Exists(x => x.Name == tf.Name) && tf.Flags.Contains("Unique"))
+					break;
 
-						GlobalSignals.Instance.ResolveTrade += nt.OnTradeResolved;
-						Traders.Add(nt);
-						GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.NewTrader, nt);
-						TraderCount++;
-					}
-				}
+				_traderQueue.Add(tf);
 			}
-
-			if (Traders.Count < MaxTraders)
-				CreateAnonymousTrader();
 		}
 	}
 }

@@ -13,7 +13,6 @@ namespace GameJam
 		public string Desc { get; set; }
 		public decimal Wealth { get; set; }
 		public decimal Income { get; set; }
-		public int Activeness { get; set; }
 		public Dictionary<string, int> Interests { get; set; } = [];
 		public Dictionary<string, int> Personality { get; set; } = [];
 		public List<string> Flags { get; set; } = [];
@@ -29,10 +28,21 @@ namespace GameJam
 			Desc = t.Desc;
 			Wealth = t.Wealth;
 			Income = t.Income;
-			Activeness = t.Activeness;
 			Interests = t.Interests;
 			Personality = t.Personality;
 			Flags = t.Flags;
+		}
+
+		public void HandleBankruptcy()
+		{
+			if (!(Wealth < 1))
+				return;
+		}
+
+		public void KillTrader()
+		{
+			GlobalSignals.Instance.ResolveTrade -= OnTradeResolved;
+			GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.KillTrader, this);
 		}
 
 		public bool CalculateWillingness(Listing list)
@@ -40,10 +50,10 @@ namespace GameJam
 			if (Wealth < list.PriceOffer)
 				return false;
 
-			var tr = TradeManager.Instance.Trades.Find(t => t.ID == list.Target.ID);
+			var tr = TradeManager.Instance.ActiveTrades.Find(t => t.ID == list.TargetID);
 			decimal tShares = tr.Options.Sum(t => t.Shares);
 
-			var op = tr.Options.Find(op => op.Option == list.Target.Option);
+			var op = tr.Options.Find(op => op.Option == list.TargetOption);
 
 			var ps = Personality;
 
@@ -139,7 +149,7 @@ namespace GameJam
 
 		public void DecideAction(Listing list)
 		{
-			var act = (double)Activeness / 100;
+			var act = (double)Personality["Activeness"] / 100;
 
 			if (!(Random.Shared.NextDouble() < act))
 				return;
@@ -161,8 +171,8 @@ namespace GameJam
 			{
 				Purchaser = Name,
 				Index = list.Index,
-				Target = list.Target.ID,
-				Option = list.Target.Option,
+				Target = list.TargetID,
+				Option = list.TargetOption,
 				Shares = list.Shares,
 				Money = list.PriceOffer
 			};

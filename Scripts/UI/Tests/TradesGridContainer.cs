@@ -10,13 +10,15 @@ namespace GameJam
 	{
 		private GlobalSignals _globalSignals { get; set; }
 		private TradeManager _tradeManager { get; set; }
+
 		private PackedScene _yesNoContainer { get; set; }
 		private PackedScene _sportContainer { get; set; }
 		private PackedScene _listingContainer { get; set; }
+
 		private List<TradeContainer> _tradeContainers { get; set; } = new List<TradeContainer>();
 		private List<ListingContainer> _listingContainers { get; set; } = new List<ListingContainer>();
 		private List<ListingContainer> _garbageContainers { get; set; } = new List<ListingContainer>();
-		private ListingManager _listingManager { get; set; }
+
 		public override void _Ready()
 		{
 			if (GlobalSignals.Instance is null)
@@ -25,7 +27,7 @@ namespace GameJam
 				return;
 			}
 
-			if (ListingManager.Instance is null)
+			if (TradeManager.Instance is null)
 			{
 				GD.PushError($"[{GetType().Name}]");
 				return;
@@ -37,14 +39,14 @@ namespace GameJam
 
 			_globalSignals = GlobalSignals.Instance;
 			_tradeManager = TradeManager.Instance;
+
 			_globalSignals.NewTrade += CreateTrade;
 			_globalSignals.ResolveTrade += RemoveTrade;
 			_globalSignals.TradeModified += UpdateTrade;
-
-			_listingManager = ListingManager.Instance;
 			_globalSignals.AddListing += CreateListing;
 			_globalSignals.KillListing += DestroyListing;
 		}
+
 		/*
 		public override void _Process(double delta)
 		{
@@ -58,7 +60,9 @@ namespace GameJam
 
 			//var p = 1 - (wt - tl) / wt;
 			//Value = p;
-		}*/
+		}
+		*/
+
 		private async void NullCheck()
 		{
 			foreach (var panel in this.GetChildren())
@@ -70,6 +74,7 @@ namespace GameJam
 			await ToSignal(GetTree().CreateTimer(0.3f), "timeout");
 			NullCheck();
 		}
+
 		public void CreateTrade(Trade trade)
 		{
 			NullCheck();
@@ -100,6 +105,7 @@ namespace GameJam
 			container.GetNode<PanelShake>("Node2D").SpawnEffect();
 			UpdateTrade(trade);
 		}
+
 		private Node GetEmptyPanel()
 		{
 			foreach (var panel in this.GetChildren())
@@ -111,6 +117,7 @@ namespace GameJam
 			}
 			return null;
 		}
+
 		private void UpdateTrade(Trade trade)
 		{
 			foreach (var tradeContainer in _tradeContainers)
@@ -184,11 +191,13 @@ namespace GameJam
 				}
 			}
 		}
-		private void CreateListing(Listing ls, Trade tr)
+
+		private void CreateListing(Trade tr, Listing ls)
 		{
 			var instancedContainer = _listingContainer.Instantiate() as ListingContainer;
 			CreateListingContainer(instancedContainer, ls, tr);
 		}
+		
 		private void CreateListingContainer(ListingContainer container, Listing ls, Trade trade)
 		{
 			if (container.GetParent() == null)
@@ -221,7 +230,8 @@ namespace GameJam
 					//UpdateTrade(ls);
 				}
 			}
-		}/*
+		}
+		/*
 		private void UpdateListing(Listing ls)
 		{
 			foreach (var listingBar in _listingContainers)
@@ -240,7 +250,9 @@ namespace GameJam
 					}
 				}
 			}
-		}*/
+		}
+		*/
+
 		private void UpdateListingContainer()
 		{
 			foreach (var listingBar in _listingContainers)
@@ -254,12 +266,13 @@ namespace GameJam
 						Button button = listingBar.GetNode<Button>("Button");
 						var ts = TimeSpan.FromSeconds(ls.Duration);
 						var st = ts.ToString(@"mm\:ss");
-						button.Set("text", $"{ls.Index}.{st} [{ls.Target.Option}] -> Shares: {ls.Shares}, Offer: ${ls.PriceOffer}");
+						button.Set("text", $"{ls.Index}.{st} [{ls.TargetOption}] -> Shares: {ls.Shares}, Offer: ${ls.PriceOffer}");
 					}
 				}
 			}
 			CollectGarbage();
 		}
+
 		private void CollectGarbage()
 		{
 			foreach (var listingBar in _listingContainers)
@@ -274,6 +287,7 @@ namespace GameJam
 			}
 			CleanGarbage();
 		}
+
 		private void CleanGarbage()
 		{
 			foreach (var listingBar in _garbageContainers)
@@ -285,6 +299,7 @@ namespace GameJam
 			}
 			_garbageContainers.Clear();
 		}
+
 		private void DestroyListing(Listing ls)
 		{
 			foreach (var listingBar in _listingContainers)
@@ -300,7 +315,9 @@ namespace GameJam
 					}
 				}
 			}
-		}/*
+		}
+		
+		/*
 		private void DestroyListing(Listing ls, int index)
 		{
 			var listingBar = _listingContainers[index];
@@ -314,7 +331,8 @@ namespace GameJam
 					}
 				}
 
-		}*//*
+		}
+
 		private void DestroyListingBar(ListingContainer listingBar)
 		{
 			if (listingBar is not null)
@@ -323,6 +341,7 @@ namespace GameJam
 				_listingContainers.Remove(listingBar);
 				listingBar.QueueFree();
 			}
-		}*/
+		}
+		*/
 	}
 }
