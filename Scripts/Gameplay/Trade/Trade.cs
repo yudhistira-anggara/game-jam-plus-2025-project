@@ -197,25 +197,26 @@ namespace GameJam
 
 		public void OnListingDie(Listing ls)
 		{
-			//
+			Listings.Remove(ls);
+			ls.Dispose();
 		}
 
 		public void CreateListing()
 		{
 			foreach (var e in Options)
 			{
-				int listingCount = Listings.Count(d => d.TargetID == ID && d.TargetOption == e.Option);
+				int listingCount = Listings.Count(d => d.TargetOption == e.Option);
 
 				if (listingCount >= MaxListingPerTradeOptions)
-					return;
+					break;
 
-				double listDur = Duration + GD.RandRange(-1d, 4d);
+				double listDur = BaseListingDuration + GD.RandRange(-1d, 4d);
 
 				if (listDur > GameManager.Instance.GameTimer.TimeLeft)
 					listDur = Duration;
 
 				if (listDur > Duration || listDur > GameManager.Instance.GameTimer.TimeLeft)
-					return;
+					break;
 
 				decimal tShares = Options.Sum(t => t.Shares);
 
@@ -306,7 +307,7 @@ namespace GameJam
 					Size = tSize,
 					Shares = sellAmount,
 					PriceOffer = priceOffer,
-					Duration = BaseListingDuration
+					Duration = listDur
 				};
 
 				GlobalSignals.Instance.ResolveTrade += ls.OnTradeResolved;
@@ -368,7 +369,7 @@ namespace GameJam
 	{
 		public string Purchaser { get; set; }
 		public int Index { get; set; }
-		public string Target { get; set; }
+		public string ID { get; set; }
 		public string Option { get; set; }
 		public decimal Shares { get; set; }
 		public decimal Money { get; set; }

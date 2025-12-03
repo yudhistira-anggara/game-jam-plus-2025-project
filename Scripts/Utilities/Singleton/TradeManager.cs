@@ -32,8 +32,6 @@ namespace GameJam
 			GlobalSignals.Instance.BuyListing += UpdateTradeHistory;
 			GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
 			GlobalSignals.Instance.TradeDayEnd += OnTradeDayEnded;
-
-			GenerateTrade();
 		}
 
 		public override void _Process(double delta)
@@ -47,22 +45,25 @@ namespace GameJam
 			{
 				t.UpdateTrade(delta);
 			}
-
+			
 			if (TradeHistory.Count > 10)
 			{
 				while (TradeHistory.Count > 10)
 				{
 					var th = TradeHistory[0];
-					TradeHistory.RemoveAt(0);
+					OldTradeHistory.Add(th);
+					TradeHistory.Remove(th);
 					GlobalSignals.Instance.EmitSignal(GlobalSignals.SignalName.TradeHistoryUpdate, th);
 				}
 			}
-
+			
 			if (TimeSinceLastDecision < DecisionInterval)
 				return;
 
 			if (ActiveTrades.Count < MaxTrades)
 				GenerateTrade();
+
+			CreateTrade();
 
 			foreach (var t in ActiveTrades.ToList())
 			{
@@ -96,7 +97,7 @@ namespace GameJam
 			{
 				Purchaser = t.ID,
 				Index = l.Index,
-				Target = l.TargetID,
+				ID = l.TargetID,
 				Option = l.TargetOption,
 				Shares = l.Shares,
 				Money = l.PriceOffer
@@ -124,7 +125,7 @@ namespace GameJam
 			{
 				string fullPath = $"{path}/{file}";
 
-				if (Utils.ValidateJson<TradeSerializable>(path, out var parsed))
+				if (Utils.ValidateJson<TradeSerializable>(fullPath, out var parsed))
 				{
 					foreach (var tr in parsed)
 					{
@@ -145,12 +146,15 @@ namespace GameJam
 
 		public void CreateTrade()
 		{
-			foreach (var q in _tradeQueue)
+			foreach (var q in _tradeQueue.ToList())
 			{
 				if (ActiveTrades.Count >= MaxTrades)
 					return;
 
 				if (GD.Randf() < 0.3)
+					return;
+
+				if (_tradeQueue.Count == 0)
 					return;
 
 				_tradeQueue.Remove(q);
@@ -211,6 +215,15 @@ namespace GameJam
 					break;
 
 				if (ActiveTrades.Exists(x => x.ID == tf.ID) && tf.Flags.Contains("Unique"))
+					break;
+
+				if (_tradeQueue.Exists(x => x.ID == tf.ID) && tf.Flags.Contains("Unique"))
+					break;
+
+				if (TradeHistory.Exists(x => x.ID == tf.ID) && tf.Flags.Contains("Unique"))
+					break;
+
+				if (OldTradeHistory.Exists(x => x.ID == tf.ID) && tf.Flags.Contains("Unique"))
 					break;
 
 				_tradeQueue.Add(tf);

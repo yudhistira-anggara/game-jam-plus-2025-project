@@ -21,10 +21,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1367.0
-offset_top = 105.0
-offset_right = 1431.0
-offset_bottom = 137.0
+offset_left = 1387.0
+offset_top = 1035.0
+offset_right = 1451.0
+offset_bottom = 1067.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -39,10 +39,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1367.0
-offset_top = 61.0
-offset_right = 1879.0
-offset_bottom = 93.0
+offset_left = 1387.0
+offset_top = 991.0
+offset_right = 1899.0
+offset_bottom = 1023.0
 grow_horizontal = 2
 grow_vertical = 2
 max_value = 1.0
@@ -50,18 +50,18 @@ show_percentage = false
 script = ExtResource("3_rgh2o")
 
 [node name="TimerLabel" type="Label" parent="."]
-offset_left = 1367.0
-offset_top = 26.0
-offset_right = 1408.0
-offset_bottom = 49.0
+offset_left = 1387.0
+offset_top = 956.0
+offset_right = 1428.0
+offset_bottom = 979.0
 text = "00:00"
 script = ExtResource("4_pbw6q")
 
 [node name="Trade Timer List" type="Label" parent="."]
-offset_left = 28.0
-offset_top = 26.0
-offset_right = 128.0
-offset_bottom = 49.0
+offset_left = 10.0
+offset_top = 15.0
+offset_right = 110.0
+offset_bottom = 38.0
 text = "Timer: "
 
 [node name="TradeTimerLabel" type="Label" parent="Trade Timer List"]
@@ -72,10 +72,10 @@ offset_bottom = 46.0
 script = ExtResource("7_bmxlf")
 
 [node name="Trades List" type="Label" parent="."]
-offset_left = 84.0
-offset_top = 26.0
-offset_right = 177.0
-offset_bottom = 49.0
+offset_left = 66.0
+offset_top = 15.0
+offset_right = 159.0
+offset_bottom = 38.0
 text = "Trades List: "
 
 [node name="TradesLabel" type="Label" parent="Trades List"]
@@ -86,10 +86,10 @@ offset_bottom = 46.0
 script = ExtResource("7_jw32o")
 
 [node name="Traders List" type="Label" parent="."]
-offset_left = 300.0
-offset_top = 26.0
-offset_right = 400.0
-offset_bottom = 49.0
+offset_left = 379.0
+offset_top = 15.0
+offset_right = 479.0
+offset_bottom = 38.0
 text = "Traders List: "
 
 [node name="TradersLabel" type="Label" parent="Traders List"]
@@ -99,25 +99,11 @@ offset_right = 88.0
 offset_bottom = 46.0
 script = ExtResource("8_50glp")
 
-[node name="Listing List" type="Label" parent="."]
-offset_left = 489.0
-offset_top = 26.0
-offset_right = 582.0
-offset_bottom = 49.0
-text = "Listing List:"
-
-[node name="ListingLabel" type="Label" parent="Listing List"]
-layout_mode = 0
-offset_top = 23.0
-offset_right = 88.0
-offset_bottom = 46.0
-script = ExtResource("9_vy5pj")
-
 [node name="Listing Timer" type="Label" parent="."]
-offset_left = 437.0
-offset_top = 26.0
-offset_right = 537.0
-offset_bottom = 49.0
+offset_left = 516.0
+offset_top = 15.0
+offset_right = 616.0
+offset_bottom = 38.0
 text = "Timer: "
 
 [node name="ListingTimerLabel" type="Label" parent="Listing Timer"]
@@ -127,11 +113,25 @@ offset_right = 88.0
 offset_bottom = 46.0
 script = ExtResource("11_4kpch")
 
+[node name="Listing List" type="Label" parent="."]
+offset_left = 568.0
+offset_top = 15.0
+offset_right = 661.0
+offset_bottom = 38.0
+text = "Listing List:"
+
+[node name="ListingLabel" type="Label" parent="Listing List"]
+layout_mode = 0
+offset_top = 23.0
+offset_right = 88.0
+offset_bottom = 46.0
+script = ExtResource("9_vy5pj")
+
 [node name="Trade History List" type="Label" parent="."]
-offset_left = 892.0
-offset_top = 26.0
-offset_right = 1001.0
-offset_bottom = 49.0
+offset_left = 1033.0
+offset_top = 15.0
+offset_right = 1142.0
+offset_bottom = 38.0
 text = "Trade History:"
 
 [node name="TradeHistoryLabel" type="Label" parent="Trade History List"]

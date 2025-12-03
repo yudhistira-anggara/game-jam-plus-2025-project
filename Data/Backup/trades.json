@@ -1,0 +1,975 @@
+[
+	{
+		"ID": "t_pol_01",
+		"Title": "Will John Biben get elected?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": ["Unique"]
+	},
+	{
+		"ID": "t_pol_02",
+		"Title": "Will Ronald Crumb get elected?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": ["Unique"]
+	},
+	{
+		"ID": "t_pol_03",
+		"Title": "Is John Biben Preganante?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+	  {
+		"ID": "t_pol_04",
+		"Title": "Will Ronald Crumb take a shit?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+		  {
+		"ID": "t_pol_05",
+		"Title": "Will Vlad Pudding leave office this year?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": ["Unique"]
+	},
+			  {
+		"ID": "t_pol_06",
+		"Title": "Will Maindra Moody be moody today?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+				  {
+		"ID": "t_pol_07",
+		"Title": "Will Maindra Moody be moody today?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+	 {
+		"ID": "t_pol_08",
+		"Title": "Will Manual Macron ever hate baguette?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+		 {
+		"ID": "t_pol_09",
+		"Title": "When will Xia Jimying [REDACTED]?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+		 {
+		"ID": "t_pol_10",
+		"Title": "Will Xia Jimying blush at the sight of Vlad Pudding during the world summit?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": ["Unique"]
+	},
+		 {
+		"ID": "t_pol_11",
+		"Title": "Is Kere Stinger's breath stinky?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+		 {
+		"ID": "t_pol_12",
+		"Title": "Is Maindra Moody a certified stink lover?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+		 {
+		"ID": "t_pol_13",
+		"Title": "Will Manual Macron ever hate baguette?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+		 {
+		"ID": "t_pol_14",
+		"Title": "Can I kiss Vlad Pudding's shiny head?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+		 {
+		"ID": "t_pol_15",
+		"Title": "Will Vlad Pudding win the election again?",
+		"Desc": "",
+		"Duration": 30,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Populism",
+                    "Nationalism"
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 50,
+				"Trend": 1,
+				"Tags": [
+					"Communism",
+                    "Globalism"
+				]
+			}
+		],
+		"Tags": [
+			"Politics",
+            "Democracy"
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_spo_01",
+		"Title": "Who Will Win?",
+		"Desc": "",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Heartpool FC",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "FC Cafelona",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Sports"
+		],
+		"Flags": []
+	},
+		{
+		"ID": "t_spo_02",
+		"Title": "Who will win the next Rally Car Championship?",
+		"Desc": "",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "MR Moyota",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "Tonda Racing",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Sports"
+		],
+		"Flags": []
+	},
+		{
+		"ID": "t_spo_03",
+		"Title": "Will Tonda return to Algoritm 1?",
+		"Desc": "",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Sports"
+		],
+		"Flags": []
+	},
+		{
+		"ID": "t_spo_04",
+		"Title": "Will Oniisan ever return to racing?",
+		"Desc": "",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Sports"
+		],
+		"Flags": []
+	},
+		{
+		"ID": "t_corpotech_01",
+		"Title": "?",
+		"Desc": "Graham Bell stock will fall!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+			{
+		"ID": "t_corpotech_02",
+		"Title": "?",
+		"Desc": "Will Emon Tusk take a shit today?",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+			{
+		"ID": "t_corpotech_03",
+		"Title": "?",
+		"Desc": "Inteligence stock will fall!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+		{
+		"ID": "t_corpotech_04",
+		"Title": "?",
+		"Desc": "Sahara stock will fall!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_corpotech_05",
+		"Title": "?",
+		"Desc": "Advanced Computer Device stock will fall!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_corpotech_06",
+		"Title": "?",
+		"Desc": "Sahara stock will rise!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_corpotech_07",
+		"Title": "?",
+		"Desc": "Graham Bell stock will rise!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_corpotech_08",
+		"Title": "?",
+		"Desc": "Inteligence stock will rise!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_corpotech_09",
+		"Title": "?",
+		"Desc": "Advanced Computer Device stock will rise!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_corpotech_10",
+		"Title": "?",
+		"Desc": "Will Emon Tusk make a chirp about poop?",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+	{
+		"ID": "t_corpotech_04",
+		"Title": "?",
+		"Desc": "Sahara stock will fall!",
+		"Duration": 15,
+		"Options": [
+			{
+				"Option": "Yes",
+				"Odds": 50,
+				"Shares": 25,
+				"Trend": 4,
+				"Tags": [
+					
+				]
+			},
+			{
+				"Option": "No",
+				"Odds": 50,
+				"Shares": 75,
+				"Trend": 1,
+				"Tags": [
+					
+				]
+			}
+		],
+		"Tags": [
+            "Corporations"
+		],
+		"Flags": []
+	},
+		{
+		"ID": "t_corpopharma_01",
+		"Title": "Who will lose?",
+		"Desc": "",
+		"Duration": 10,
+		"Options": [
+			{
+				"Name": "John Biben",
+				"Odds": 30,
+				"Trend": 3,
+				"Tags": [
+                    "Team_A"
+				]
+			},
+			{
+				"Name": "Ronald Crumb",
+				"Odds": 1,
+				"Trend": -2,
+				"Tags": [
+                    "Team_B"
+				]
+			}
+		],
+		"Tags": [
+            "Sports"
+		],
+		"Flags": []
+	}
+]

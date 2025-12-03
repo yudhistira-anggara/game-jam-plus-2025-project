@@ -33,7 +33,7 @@ namespace GameJam
 
             foreach (var e in _loadedAudio)
             {
-                GD.Print(e.Key);
+                // GD.Print(e.Key);
             }
 
             _musicPlayer.VolumeDb = MusicVolumeReal;

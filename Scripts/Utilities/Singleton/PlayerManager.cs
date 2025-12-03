@@ -50,7 +50,7 @@ namespace GameJam
 
         public void OnTradeResolved(Trade trade, TradeOption option)
         {
-            var allTrade = TradeHistory.FindAll(d => d.Index == trade.Index && d.Target == trade.ID);
+            var allTrade = TradeHistory.FindAll(d => d.Index == trade.Index && d.ID == trade.ID);
 
             decimal money = 0;
 
@@ -97,7 +97,7 @@ namespace GameJam
             {
                 Purchaser = Name,
                 Index = list.Index,
-                Target = list.TargetID,
+                ID = list.TargetID,
                 Option = list.TargetOption,
                 Shares = list.Shares,
                 Money = list.PriceOffer

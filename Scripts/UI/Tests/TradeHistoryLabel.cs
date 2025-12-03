@@ -32,7 +32,7 @@ namespace GameJam
             Text = "\n";
             foreach (var th in _tradeManager.TradeHistory)
             {
-                Text += $"{th.Index}.{th.Target}\n";
+                Text += $"{th.Index}.{th.ID}\n";
                 Text += $"{th.Purchaser} bought {th.Shares}x [{th.Option}] for ${th.Money}\n\n";
             }
         }

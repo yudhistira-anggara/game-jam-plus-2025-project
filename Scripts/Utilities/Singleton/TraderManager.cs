@@ -16,7 +16,7 @@ namespace GameJam
 		public List<Trader> ActiveTraders { get; set; } = [];
 
 		public int TraderIndex { get; set; } = 0;
-		public int MaxTraders { get; set; } = 3;
+		public int MaxTraders { get; set; } = 4;
 
 		public double DecisionInterval { get; set; } = 3;
 		public double TimeSinceLastDecision { get; set; } = 0;
@@ -26,8 +26,6 @@ namespace GameJam
 			Instance = this;
 			LoadFromDirectory("res://Data/Trader/");
 			GlobalSignals.Instance.TradeDayStart += OnTradeDayStarted;
-
-			InitializeTraders();
 		}
 
 		public override void _Process(double delta)
@@ -39,6 +37,9 @@ namespace GameJam
 
 			if (TimeSinceLastDecision < DecisionInterval)
 				return;
+
+			InitializeTraders();
+			CreateTrader();
 
 			foreach (var tr in ActiveTraders.ToList())
 			{
@@ -65,7 +66,7 @@ namespace GameJam
 			{
 				string fullPath = $"{path}/{file}";
 
-				if (Utils.ValidateJson<TraderSerializable>(path, out var parsed))
+				if (Utils.ValidateJson<TraderSerializable>(fullPath, out var parsed))
 				{
 					foreach (var tr in parsed)
 					{
@@ -99,16 +100,19 @@ namespace GameJam
 
 		public void CreateTrader()
 		{
-			if (ActiveTraders.Count >= MaxTraders)
-				return;
-
 			List<Trader> anons = ActiveTraders.FindAll(x => x.ID.StartsWith("anon_"));
 
-			if (anons.Count != 0)
+			if (_traderQueue.Count == 0)
+				return;
+
+			if (_traderQueue.Count > 0 && anons.Count != 0)
 			{
 				anons[0].KillTrader();
 				anons.RemoveAt(0);
 			}
+
+			if (ActiveTraders.Count >= MaxTraders)
+				return;
 
 			TraderSerializable queue = _traderQueue[0];
 			_traderQueue.RemoveAt(0);
@@ -171,6 +175,9 @@ namespace GameJam
 					break;
 
 				if (ActiveTraders.Exists(x => x.Name == tf.Name) && tf.Flags.Contains("Unique"))
+					break;
+
+				if (_traderQueue.Exists(x => x.ID == tf.ID) && tf.Flags.Contains("Unique"))
 					break;
 
 				_traderQueue.Add(tf);

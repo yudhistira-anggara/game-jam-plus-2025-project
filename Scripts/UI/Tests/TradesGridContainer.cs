@@ -8,6 +8,7 @@ namespace GameJam
 {
 	public partial class TradesGridContainer : GridContainer
 	{
+		/*
 		private GlobalSignals _globalSignals { get; set; }
 		private TradeManager _tradeManager { get; set; }
 
@@ -47,7 +48,7 @@ namespace GameJam
 			_globalSignals.KillListing += DestroyListing;
 		}
 
-		/*
+		//
 		public override void _Process(double delta)
 		{
 			//for (int i = 0; i < _tradeManager.Trades.Count; i++)
@@ -61,7 +62,7 @@ namespace GameJam
 			//var p = 1 - (wt - tl) / wt;
 			//Value = p;
 		}
-		*/
+		//
 
 		private async void NullCheck()
 		{
@@ -231,7 +232,7 @@ namespace GameJam
 				}
 			}
 		}
-		/*
+		//
 		private void UpdateListing(Listing ls)
 		{
 			foreach (var listingBar in _listingContainers)
@@ -251,7 +252,7 @@ namespace GameJam
 				}
 			}
 		}
-		*/
+		//
 
 		private void UpdateListingContainer()
 		{
@@ -317,7 +318,7 @@ namespace GameJam
 			}
 		}
 		
-		/*
+		//
 		private void DestroyListing(Listing ls, int index)
 		{
 			var listingBar = _listingContainers[index];
@@ -342,6 +343,7 @@ namespace GameJam
 				listingBar.QueueFree();
 			}
 		}
+		//
 		*/
 	}
 }
