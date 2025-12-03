@@ -9,10 +9,10 @@ using System.Collections.Generic;
 namespace GameJam
 {
 	public enum DialogueType
-    {
-        Talk,
+	{
+		Talk,
 		Select
-    }
+	}
 
 	public partial class DialogueSystem : Control
 	{
@@ -46,10 +46,10 @@ namespace GameJam
 				return;
 
 			var scriptResource = ResourceLoader.Load<Script>(conditions);
-            var scriptNodeInstance = new Node
-            {
-                Name = "DialogueScriptNode"
-            };
+			var scriptNodeInstance = new Node
+			{
+				Name = "DialogueScriptNode"
+			};
 			AddChild(scriptNodeInstance);
 			scriptNodeInstance.SetScript(scriptResource);
 			scriptNodeInstance = GetNode("DialogueScriptNode");

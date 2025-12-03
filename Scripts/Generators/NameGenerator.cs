@@ -18,7 +18,6 @@ public partial class NameGenerator : Node
 		FileAccess file = FileAccess.Open("res://dictionary/text_data.json", FileAccess.ModeFlags.Read);
 		json.Parse(file.GetAsText());
 		data = json.Data.AsGodotDictionary();
-		GD.Print(GenerateText());
 	}
 
 	public string GenerateText()

@@ -16,7 +16,7 @@ namespace GameJam
         public int TradeCount { get; set; } = 0;
         public int MaxTrades { get; set; } = 6;
 
-        public double DecisionInterval { get; set; } = 3;
+        public double DecisionInterval { get; set; } = 1;
         public double TimeSinceLastDecision { get; set; } = 0;
 
         public override void _Ready()

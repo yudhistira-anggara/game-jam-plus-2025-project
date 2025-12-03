@@ -22,6 +22,12 @@ namespace GameJam
         public int Shares { get; set; }
         public int Value { get; set; }
 
+        public override void _Ready()
+        {
+            NameGenerator name = new();
+            this.Title = name.GenerateText();
+        }
+
         public void ModifyTrend(string name, int value)
         {
             if (!Options.Exists(x => x.Name == name))

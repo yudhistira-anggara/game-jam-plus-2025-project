@@ -123,7 +123,6 @@ offset_bottom = 46.0
 script = ExtResource("7_jw32o")
 
 [node name="Trade Request List" type="Label" parent="."]
-visible = false
 offset_left = 538.0
 offset_top = 64.0
 offset_right = 631.0
@@ -131,7 +130,6 @@ offset_bottom = 87.0
 text = "Trade Request List:"
 
 [node name="TradeRequestsLabel" type="Label" parent="Trade Request List"]
-visible = false
 layout_mode = 0
 offset_top = 23.0
 offset_right = 88.0
